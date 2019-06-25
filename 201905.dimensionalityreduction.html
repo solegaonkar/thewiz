@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dimensionality Reduction - Discard the Redundant</title>
+    <meta name="description" content="Dimensionality reduction is an important step in the model training life cycle. It makes the data more manageable; reducing the risk of overfitting.">
+    <meta name="keywords" content="AI, Machine Learning, Dimensionality Reduction, Overfitting">
+
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Vikas K. Solegaonkar">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+    <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="body">
+
+        <h1>Dimensionality Reduction - Discard the Redundant</h1>
+        <hr />
+        <p>For an efficient training process, it is improtant that we use only what is required. Dimensionality reduction is an important step in ensuring that.</p>
+        <p>We all understand that more data means better AI. That sounds great! But, with the recent blast of information, we often end in a problem of too much data! We need all that data. But it
+            turns out to be too much for our processing. Hence we need to look into ways of streamlining the available data so that it can be compressed without losing value. Dimensionality reduction
+            is an important technique that achieves this end.</p>
+        <p>Consider the simple case of predicting medical expenses based on several parameters. The data may include different parameters related to all the negative habits of a person - excessive
+            intake of tobacco, alcohol, caffine, narcotics, etc. It may be great to accumulate each of these parameters independently. But does that really add value? are these independent parameters?
+            One can guess there is a lot of correlation between each of them. For example, someone who is high on alcohol or someone who consumes narcotics, is quite likely to be liberal about tobacco
+            and caffine.</p>
+        <p>One can easily see that we really do not need all these parameters. But, is there a way to choose only two or three of these? That is not so intuitive either. Dimensionality reduction can
+            help us extract a couple of independent parameters from these. That can simplify our prediction model.</p>
+        <p>This was a trivial example. But, in a real life scenario, it is common to have hundreds or thousands of features in the input. Dimensionality reduction is a major aid when working on such a
+            problem.</p>
+        <p>There are two approaches to dimensionality reduction. These are the two different paradigms for addressing the problem. There is no good or bad way - we need to choose one of them based on
+            the problem at hand.</p>
+        <ul>
+            <li>Feature Selection - If the impact of a particular feature is almost redundant, we can just drop it, selecting the significant features that independently impact the outcome.</li>
+            <li>Feature Combination - This is a bit more complex. When we have a N different features that carry information worth M features, we need to create a way to map the N features into a new
+                set of M features. This is true dimensionality reduction.</li>
+        </ul>
+        <h2>Missing Values</h2>
+        <hr />
+        <p>This is one of the simplest Dimensionality Reduction technique. This may sound trivial. But it is a lot more helpful than one would expect. It should be the first that we consider when we
+            look for dimensionality reduction of some kind. In essence, this technique advises us to drop the features that do not have enough data.</p>
+        <p>Sounds good. But how do we decide if there is enough data? In a practical scenario, we look into the available data, to get a feel of what is in there. That requires software code to
+            identify which features have missing data. Then, based on the domain and scenario, we need to identify a threshold that can help us identify if we can really gain anything out of the data
+            available for the given parameter.</p>
+        <p>With all this processing, we can then drop some of the features and we have data that is more manageable.</p>
+        <h3>Python Code</h3>
+        <hr />
+        <p>Once we know what we want, the Python code is not complex. We just need to loop over the list of columns in the data set; checking for the fraction of missing values. As we do this, we drop
+            off the columns that are have more missing values that the defined threshold.</p>
+        <pre><code class='python'>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+train=pd.read_csv("train_data.csv")
+
+a = 100 * train.isnull().sum()/len(train)
+c = []
+
+for x in train.columns:
+    if a[x] < 10:
+    c.append(x)</code></pre>
+        <p>Considering the threshold as 10%, this code chooses only those columns that have at least 90% of good data. Of course, this threshold is configurable and we can play around with it
+            depending upon the amount of data available.</p>
+        <h2>Low Variance Filter</h2>
+        <hr />
+        <p>Low Variance Filter is a useful dimensionality reduction algorithm. To understand it conceptually, we can look at the worldly equivalent of this concept. In raw words, your opinion counts
+            only if it changes. It you are too consistent, nobody needs to ask your choice! The same holds for input parameters. An input parameter is important only if its value changes
+            significantly. If all the data we have shows the same value of a particular parameter, we really do not need to consider it.</p>
+        <p>A more formal way of doing this is to use the low variance filter. The variance is a statistical measure of the amount of variation in the given variable. If the variance is too low, it
+            means that it does not change much and hence it can be ignored.</p>
+        <h3>Python Code</h3>
+        <hr />
+        <p>We can implement this in Python using the method var(). But, before we start, we need to pull out the numeric fields in the data set. We can have unchanging non-numeric parameters; but the
+            variance filter makes sense only for the numeric data.</p>
+        <pre><code class='python'>numeric = train[['Numeric_1', 'Numeric_2', 'Numeric_3', 'Numeric_4']]
+variance = numeric.var()
+numeric_columns = numeric.columns
+
+c = [ ]
+
+for i in range(0, len(variance)):
+    if variance[i]>=10: 
+    c.append(numeric[i+1])</code></pre>
+        <p>This selects only the columns that have a variance higher than 10. This threshold has to be chosen based on the problem at hand.</p>
+        <h2>High Correlation Filter</h2>
+        <hr />
+        <p>This dimensionality reduction algorithm tries to discard inputs that are very similar to others. In simple words, if your opinion is same as your boss, one of you is not required. If the
+            value of two input parameters is always the same, it means they represent the same entity. Then we do not need two parameters there. Just one should be enough.</p>
+        <p>In technical words, if there is a very high correlation between two input variables, we can safely drop one of them.</p>
+        <h3>Python Code</h3>
+        <hr />
+        <p>The corr() method can be used to identify the correlation between the fields. Ofcourse, before we start we have to choose only the numeric fields as the corr() method works only with the
+            numeric fields. We can have a high correlation between non-numeric fields. But this method works only on numeric fields.</p>
+        <pre><code class='python'>numeric = train[['Numeric_1', 'Numeric_2', 'Numeric_3', 'Numeric_4']]
+correlation = numeric.corr()
+numeric_columns = numeric.columns
+
+high_corr = [ ]
+
+for c1 in numeric_columns:
+    for c2 in numeric_columns:
+    if c1 != c2 and c2 not in high_corr and correlation[c1][c2] > 0.9:
+        high_corr.append(c1)</code></pre>
+        <p>This gives us a list of columns that can be dropped.</p>
+        <h2>Backward & Forward Selection</h2>
+        <hr />
+        <p>This dimensionality reduction algorithm may not seem very exciting. It is the hard way of doing things. Here, we take a very small subset of the training data and try to use it for feature
+            selection. We try to train the model using only a few of the available features and identify the amount of impact a given feature makes.</p>
+        <p>In forward selection, we start with just one feature - identifying upward which features makes most impact. In backward selection, we go the other way - eliminating features one by one to
+            identify features that make almost no difference.</p>
+        <p>These seem to be mere academic methods. But they can be quite useful if we have a huge data that is reasonably represented by a small subset. It may not offer a major contribution in
+            building the model. But certainly helps in identifying parameters that can be dropped from the prediction and continuous training implementations.</p>
+        <h2>Factor Analysis</h2>
+        <hr />
+        <p>Factor Analysis performs dimensionality reduction on principles similar to high correlation filter. But it is more efficient. If the correlation between two parameters is too high, we can
+            just skip one of them. But often, we end up with a scenario where the correlation is quite good, but not so high that we can just discard one of them.</p>
+        <p>Consider for example, the four parameters - education, experience, salary and bank balance. These are certainly not independent. But each of them contributes some information. We can not
+            just discard any of them. Factor Analysis is a statistical technique that identifies the underlying hidden parameters that are independent (hence lesser in number).</p>
+        <p>These hidden parameters may not have any particular significance in the real world. But they can be combined to generate the set of correlated parameters that we have.</p>
+        <p>Of course, the mathematical implementation is not as simple as the concept. But we really don't have to worry about it. SktLearn and many other Python libraries provide us a simple
+            implementation for it.</p>
+        <h3>Python Code</h3>
+        <hr />
+        <p>SktLearn has a module FactorAnalysis that provides a simple implementation. We can configure it to specify the number of components we want from the available data.</p>
+        <pre><code class='python'>from sklearn.decomposition import FactorAnalysis
+FA = FactorAnalysis(n_components = 3).fit_transform(df[feat_cols].values)</code></pre>
+        <p>That is all we need. It will extract and pass on the components to the FA data frame.</p>
+        <h2>Principle Component Analysis</h2>
+        <hr />
+        <p>PCA is an interesting algorithm for dimensionality reduction. It is based on several of the techniques we discussed above. The various different parameters available to us are normally not
+            orthogonal. That means, there is a considerable correlation between them. Yet, they are not close enough to discard one. For such a problem, Factor Analysis tries to identify lesser number
+            of latent parameters that can carry almost all the information.</p>
+        <p>On the other hand, PCA tries to generate a large number of parameters with decreasing significance.</p>
+        <p>A principal component is a linear combination of the available features. The first principle component explains most of the variance in the data set. The second principle component tries to
+            explain the variance that was not explained by the first. The third tries to explain the variance that was not explained by the previous two.. and so on.</p>
+        <p>Once we have discovered these components, we can be sure of the order of importance. And we also know that are each of these components is orthogonal. It is a lot easier to work with them.
+        </p>
+        <h3>Python Code</h3>
+        <hr />
+        <p>Thanks to the utilities provided by libraries like SktLearn, implementing PCA is not a big deal.</p>
+        <pre><code class='python'>from sklearn.decomposition import PCA
+pca = PCA(n_components=4)
+pca_result = pca.fit_transform(df[feat_cols].values)</code></pre>
+        <p>The number of components we choose depends upon how accurate we want it to be. It is another hyperparameter that we need to optimize in the process of training.</p>
+        <h2>Independent Component Analysis</h2>
+        <hr />
+        <p>ICA is a dimensionality reduction algorithm similar to the PCA. But, it borrows from information theory more than statistics. PCA tries to generate components that are orthogonal. But ICA
+            focuses on identifying components that are independent.</p>
+        <p>To illustrate with an example, there is a significant correlation between the age of a person and the number of calories he burns in a day. They are not orthogonal. Yet they are
+            independent. Just as PCA tries to identify latent variables that are orthogonal, ICA proposes that all the parameters are a linear mixture of latent parameters that are independent.</p>
+        <p>It makes a lot more sense to look for independent parameters instead of orthogonal parameters. Independent variables are the ones that change independently. Although their values move
+            together (implying they are not orthogonal), if one variable changes independent of the other, they are independent.</p>
+        <p>Independent parameters are sure to give us a better models. Because independent variation is what matters most.</p>
+        <h3>Python Code</h3>
+        <hr />
+        <p>It is quite easy to implement the Independent component analysis using Python code. SktLearn provides us a simple functions to do it.</p>
+        <pre><code class='python'>from sklearn.decomposition import FastICA 
+ICA = FastICA(n_components=3, random_state=12) 
+X=ICA.fit_transform(df[feat_cols].values)</code></pre>
+        <h2>Non-Linear Techniques</h2>
+        <hr />
+        <p>As one would expect, the Non-Linear techniques are more effective and expensive compared to the linear techniques.</p>
+        <h2>t-SNE</h2>
+        <hr />
+        <p>The Dimensionality Reduction algorithm t-SNE (t-Distributed Stochastic Neighbor Embedding) can be thought of as an extension of PCA, that attempts to identify patterns and not just
+            components. There are two major approaches for achieving this</p>
+        <ul>
+            <li>Local approaches : They maps nearby points on the manifold to nearby points in the low dimensional representation.</li>
+            <li>Global approaches : They attempt to preserve geometry at all scales, i.e. mapping nearby points on manifold to nearby points in low dimensional representation as well as far away
+                points to far away points.</li>
+        </ul>
+        <p>Essentially, it calculates the probability similarity of points in high dimensional as well as low dimensional spaces. Then, it tries to minimize the gap between the two. Thus, it tries to
+            put together points that were together in high dimensional space. That is essentially what we need in dimensionality reduction.</p>
+        <p>Understanding the concept is the major task - Python code is not a big deal</p>
+        <pre><code class='python'>from sklearn.manifold import TSNE 
+tsne = TSNE(n_components=3, n_iter=300).fit_transform(df[feat_cols][:6000].values)</code></pre>
+        <h2>UMAP</h2>
+        <hr />
+        <p>Dimensionality Reduction using UMAP (Uniform Manifold Approximation and Projection) can be thoughtof as an extension of the PCA. It works towards a similar goal. But is a lot more efficient
+            and accurate</p>
+        <p>Let us try to get an intuitive understanding of UMAP. It uses the concept of k-nearest neighbor and optimizes the results using stochastic gradient descent. It first calculates the distance
+            between the points in high dimensional space, projects them onto the low dimensional space, and calculates the distance between points in this low dimensional space. It then uses
+            Stochastic Gradient Descent to minimize the difference between these distances.</p>
+        <p>If we understand the concept, the Python implementation is trivial</p>
+        <pre><code class='python'>import umap
+umap_data = umap.UMAP(n_neighbors=5, min_dist=0.3, n_components=3).fit_transform(df[feat_cols][:6000].values)</code></pre>
+
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlight/highlight.pack.js"></script>
+    <script src="scripts/blog.js"></script>
+</body>
+
+</html>

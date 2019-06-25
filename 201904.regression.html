@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Regression based Supervised Learning</title>
+    <meta name="description" content="Introduction to different Regression algorithms for Supervised Learning">
+    <meta name="keywords" content="AI,Machine Learning,Supervised Learning,Regression">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Vikas K. Solegaonkar">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+    <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="body">
+
+        <h1>Regression based Supervised Learning</h1>
+        <hr />
+
+        <p>Regression provides one of the oldest and most fundamental concepts in Supervised Learning and Machine Learning as a whole. As the name suggests, Regression algorithms are based on
+            iteratively
+            pushing closer to the desired model. Among the different regression algorithms, Linear Regression is the simplest to understand. Other forms of regression extend this concept to get
+            enhanced
+            outcomes.</p>
+        <h2>Linear Regression</h2>
+        <hr />
+        <p>Linear Regression is the most basic implementation of Regression. It is too simple to be of any real use in the modern age machine learning applications. But is the best way to understand
+            the
+            concepts. This is how it works:</p>
+        <p>Consider a very simple world, where the salary of a person is related to the years of experience and performance. If someone wants to understand this relation, this is what one would do:
+        </p>
+        <p>Essentially it involves five steps:</p>
+        <ol>
+            <li>Collect information across the industry - about various samples of salary and experience and the performance measured in terms of successful deliveries.</li>
+            <li>Try to identify the relation in these,</li>
+            <li>Test this relation with some more data and make required changes</li>
+            <li>Repeat step 3 till you are satisfied with the results.</li>
+            <li>Conclude that the relation is established and use it going forward, for making predictions about expected salary.</li>
+        </ol>
+        <p>Now let's check this process in more detail. Assume you have successfully gathered the required data as follows. This is the first step. Now Linear Regression helps you with steps 2/3/4.
+            You
+            start with assuming some 'Linear' relation.</p>
+        <pre><code class='python'>Salary = a * experience + b * performance + c</code></pre>
+        <p>Here, the Salary is the output, Experience and Performance are the inputs. a, b, c are the parameters. Now, the question boils down to identifying the values of a, b and c. We all know that
+            there is some relation between the inputs and outputs. But identifying such relation using logical deduction is almost an impossible task - because it requires extreme analysis. Regression
+            helps you identify this relation - not through logic, but by learning.</p>
+        <p>Learning begins with a hypothesis. Propose a particular solution to the problem - based on what you already know, or just a random guess. Naturally, hypothesis based on previous knowledge
+            helps
+            speed up things. But, when you know nothing about the topic, a random guess is not bad either. A better word for this random guess is hypothesis. So, we start with some hypothesis</p>
+        <pre><code class='python'>Salary = a0 * experience + b0 * performance + c0</code></pre>
+        <p>Here, a0, b0 and c0 are arbitrary random numbers that we start with. We choose random numbers instead of 0's because that helps us begin better, with more relevant initialization. Ofcourse,
+            this is not the correct solution. It is just a hypothesis - that we will verify and refine as we move on. In fact, any real life problem will never find a perfect solution in a numerical
+            equation. We call it a good solution if the error is minimal or perhaps, just less than a given threshold - that is good enough for our purpose. Now, we test this hypothesis. There are may
+            ways to test a hypothesis. Brute force is the easiest to understand. So we will start with that. We validate each records in the 'Training Set', to identify the error. Then we find out the
+            'Mean Square Error' - that is a measure of how good or bad is our hypothesis. The Cost of a hypothesis is a cumulative function of the errors. It could be a simple numeric mean. As we
+            progress
+            to higher algorithms, the derivation of cost gets more and more complex. </p>
+        <pre><code class='python'>Cost = Sum((a0 * e(i) + b0 * p(i) + c(0) - s(i))**2) / (number of samples)</code></pre>
+        <p>This is the most basic formula to calculate the error. A you go along, you will come across more meaningful and complicated ways of calculating the error.</p>
+        <p>This error tells us how bad is our hypothesis. If we are extremely lucky, this could be 0 right away. But, Murphy says that is not the case. So we have to adjust our parameters - a, b, c -
+            to
+            a1, b1, c1. We go through this correction again and then get a2, b2, c2 and so on... till we get values of a, b, c such that the error is within the threshold that we need - and the
+            problem is
+            solved! That sounds too simple. But how do we get a1,b1,c1 or a2,b2,c2 ...? The error that we get, tells us our hypothesis is not correct. Not just that, it guides us with the direction
+            and
+            amount of the change required to each parameter. This is identified using partial derivatives. Remember high school calculus? Machine Learning is full of calculus and linear algebra. Check
+            out
+            this Calculus Tutorial if you would like a refresher.</p>
+        <p>The derivative shows us the way in which we need to move and the amount. Higher the derivative, further away is the ideal and we need to take larger steps towards the end. The ideal point
+            is
+            where the derivatives are 0. That is the point where error is at the minimum possible level. Obviously, the mean square error is extremely high if the values of a,b,c are very low and also
+            if
+            these values are very high. So the optimum is between the two. Since our hypothesis is a linear equation, the mean square error would be a quadratic equation - having a single minimum.
+            That
+            simplifies our task of finding the minimum. We calculate the partial derivatives of the error expression with respect to a, b and c - Call them da, db and dc. Based on these we pick the
+            next
+            values:</p>
+        <pre><code class='python'>a1 = a0 - alpha * da
+b1 = b0 - alpha * db
+c1 = c0 - alpha * dc</code></pre>
+        <p>Here alpha is the learning rate. It is some positive number, that we choose based on our experience about machine learning. We can see many such Hyper Paramteres in the machine learning
+            domain.
+            Choosing the right hyperparameter is very important in machine learning. The hyperparameters differentiate successful and unsuccessful machine learning projects. Partial derivative of f(x,
+            y,
+            z) with respect to x can be calculated as</p>
+        <pre><code class='python'>(f(x + d, y, z) - f(x - d, y, z)) / 2d    # for very small values of d.</code></pre>
+        <p>According to this,</p>
+        <pre><code class='python'>da = (2a * sum(e) + b ( sum(e) * sum(p) ) + c ( sum(e)) - sum(s) ) / N
+   = (sum(e) * (2a + b * sum(p) + c - sum(s))) / N</code></pre>
+        <p>Thus,</p>
+        <pre><code class='python'>a(i) = a(i-1) - alpha * (sum(e) * (2a(i-1) + b(j-i) * sum(p) + c(i-1) - sum(s))) / N</code></pre>
+        <p>The process of predicting the salary set based on the current set of parameters is called forward propagation. And the process of correcting the parameters based on the error is called
+            backward
+            propagation. One complete cycle of forward and backward propagation is called an epoch. Each epoch should take us closer to the optimal if the hyperparameters are correctly chosen. This
+            process is called Regression. Since we used a linear hypothesis, we call it Linear Regression. As we train the parameters through several epochs, the error level can go below the
+            threshold.
+            But this is only the beginning. We need to do a lot more to get things working. We can have problems like overfitting, underfitting or local optimum.</p>
+        <p>Obviously very few real life applications are simple enough to fit in a straight line. Most of them will need a lot more than this. For these, we have Polynomial Regression, Logistic
+            Regression, Neural Networks and many other types of input - output relations that can used as a model for the hypothesis. But core the concept of regression remains the same. Ofcourse, the
+            calculations get more and more complex along with the hypothesis. </p>
+        <h2>Polynomial Regression</h2>
+        <hr />
+        <p>Linear Regression is a good for understanding the concept. But, one can easily guess that it is too simple for anything meaningful. Polynomial regression was the next best approach for
+            researchers. As the computational power developed, people started trying out polynomial regression. </p>
+        <p>As the name suggests, Polynomial Regression is based on a polynomial hypothesis function rather than a linear hypothesis. The process of regression thus involves identification of multiple
+            weights rather than just two.</p>
+        <h3>Local Minimum</h3>
+        <hr>
+        <p>The process of regression requires identifying the minimum value of the cost function. This minimum is defined by the derivative of the function. When the derivative is 0 or near 0, we
+            consider
+            that point to be the minimum. But, we have one major problem in polynomial regression. As the polynomial order increases, the cost function gets more and more complicated. </p>
+        <p>As the complication and order of the cost function increases, we can have multiple points where the derivative is 0. Only one of these is the real minimum. The others are called Local
+            Minimum -
+            because the cost function is less than the values around it. But not less than all the values. If the gradient descent lands on one of these local minimum, we get into trouble!</p>
+        <p>There are different ways to implement the cost function and error values and the gradient descent functionality in order to reduce the possibility of getting trapped in a local minimum. But
+            should always be careful of this problem.</p>
+        <h3>Overfitting</h3>
+        <hr>
+        </hr>
+        <p>This has been a major problem in supervised learning. If the model underfits the data, you can identify it rather quickly. But if it overfits the data, the situation can be really tricky.
+        </p>
+        <p>In polynomial regression, it can be observed that the possibility of overfitting is much higher when any particular weight is too high or if the weights of the higher order coefficients are
+            too
+            high. </p>
+        <p>Regularization is one of the common approaches to avoid overfitting - by preventing any particular weight from growing too high. There are two main types of Regularization based on how the
+            weights are penalized:</p>
+        <h4>L1 Regularization</h4>
+        <hr />
+        <p>Here, the weights are penalized based on the absolute values of the weights. (L1 because it uses the values and not their squares as in L2). L1 Regularization tends to produce a sparce
+            model by
+            discarding a lot of weights that are not so important. This may not result in a model as good as L2; but the performance is a lot better.</p>
+        <h4>L2 Regularization</h4>
+        <hr />
+        <p>Here, the weights are penalized based on the sum of squares rather than the absolute values. (L2 because it uses the squares rather than the value). L2 Regularization tends to produce a
+            dense
+            model by lowering the weights. Hence the model is a lot better but the performance is not so good.</p>
+        <h2>Logistic Regression</h2>
+        <hr />
+        <p>Logistic Regression is a very important concept in Supervised Machine Learning - because it helps you use the powerful techniques of Regression based learning to the Classification
+            problems.
+            Typically Regression algorithms deals with data where input as well as output are continuous. Logistic Regression extends the same algorithms to binary classification.</p>
+        <p>This is done by mapping the output of the matrix product into a binary output. This is done using an activation function. An activation function is a simple function that compares the input
+            value with some threshold and generates a near binary, differentiable output. Not just linear regression, the activation function can be used to map any regression model over to a logistic
+            model.</p>
+        <p>There are several different types of activation functions - Sigmoid, Tanh and Relu are the most popular ones. Essentially, these are continuous functions that generate "near binary" output.
+            That is, the output is similar for input values much less than 0 and also for values much more than 0. And there is a strong gradient around 0. This approximates very well to a binary
+            classifier - although mathematically, the function is continuous. Thus, we can use the powerful techniques of Regression.</p>
+        <h3>Activation Function</h3>
+        <hr>
+        <p>The activation function forms a major component of logistic regression. There are different types of activation functions for different kinds of needs. Sigmoid, Tanh, Relu are some.</p>
+        <h4>Sigmoid</h4>
+        <hr />
+        <p>The sigmoid function is very close to 0 for large negative numbers, and very close to 1 for large positive numbers. The gradient is steep around 0. That makes sigmoid a very good activation
+            function.</p>
+        <pre><code class='python'>sigmoid(x) = 1 / (1 + e**(-x))</code></pre>
+        <p>The value of e**(-x)) is very high for negative values of x and very low for positive values of x. Hence 1 / (1 + e**(-x)) is almost 0 for negative numbers and almost 1 for positive
+            numbers.
+            The gradient is very high around 0. At 0, its value is 1/2.</p>
+        <p>Thus, the sigmoid function can be used for classification - making it a good candidate for activation.</p>
+        <h4>Tanh</h4>
+        <hr />
+        <p>In principle, Tanh is quite similar to the Sigmoid function. But its value ranges between -1 and 1.</p>
+        <pre><code class='python'>tanh(x) = (e**x - e**(-x)) / (e**x + e**(-x))</code></pre>
+        <p>For negative values of x, e**x is close to 0, so the value is close to -e**(-x) / e**(-x). That is -1. And for positive values of x, e**(-x) is close to 0. So the value is close to e**(x) /
+            e**(x). That is 1. The gradient is steep around 0.</p>
+        <h4>Relu</h4>
+        <hr />
+        <p>This is a bit different from Sigmoid and Tanh. Arithmetically it is a lot simpler than them.</p>
+        <pre><code class='python'>relu(x) = x &gt; 0 ? x : 0      # Value is x if x &gt; 0 and 0 if x &lt;= 0.</code></pre>
+        <p>It's application is not so simple for final classification. But it is very good for intermediate phases. We will check that when we look at the implementations.</p>
+
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlight/highlight.pack.js"></script>
+    <script src="scripts/blog.js"></script>
+</body>
+
+</html>

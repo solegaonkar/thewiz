@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>A Quick Introduction Python</title>
+    <meta name="description" content="A Quick Introduction Python">
+    <meta name="keywords" content="Python">
+
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Vikas K. Solegaonkar">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+    <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="body">
+
+        <h1>A Quick Introduction Python</h1>
+        <hr />
+        <p>This series of blogs on Python were compiled as I was trying to learn the language. I will present them here, for someone who might want a quick introduction to the language, without
+            digging through all the manuals. This is not a 'Complete Reference' nor is it a 'Python for Dummies'. It is meant for someone who understands development and wants to peep into the world
+            of Python. There are several books and tutorials on Python. But, in terms of completeness and clarity, I have not come across anything better than the <a
+                href="https://docs.python.org/3/tutorial" target="_blank">Python Tutorial</a> provided by the Python community</p>
+        <h2>Getting Started with Python</h2>
+        <hr />
+        <p>There are several books and tutorials on Python. But, in terms of completeness and clarity, I have not come across anything better than the <a
+                href="https://docs.python.org/3/tutorial">Python Tutorial</a> provided by the Python community</p>
+        <h3>Installing Python</h3>
+        <hr />
+        <p>There are many different sources and distributions of Python. Foremost is available on their own site <a href="https://www.python.org/downloads">Install Python</a>. This page has everything
+            you need. Download the version you like. We also have other distributions like <a href="https://www.anaconda.com/download/">Anaconda</a> that package a good amount of useful stuff along
+            with the base Python. This is what most enthusiasts use. And then there are other commercial distributions of Python like ActiveState Python that charge you for support and packaging. That
+            is meant for <a href="https://stackoverflow.com/questions/1352528/why-does-activepython-exist">people who prefer to spend money</a>.</p>
+        <p>Python comes with its own editor (IDLE) that provides syntax highlighting. It is good for developing and running minor scripts and also for testing single commands. But, for doing anything
+            more complex and useful, you will need a better IDE. Several open source IDE's are available on the net. The list keeps growing. Just lookup one you like from Google and you should be
+            ready to go. I liked Pycharm, Spider and Atom. If you don't like these, just search for one on the net and let me know if you find something useful.</p>
+        <h3>Traditions</h3>
+        <hr />
+        <p>We often put in a lot of effort on Traditions. We do a lot of things we don't really know why, but we do them because "that is the way"! The "Hello World" is another such tradition. None
+            knows what is so magical about those two words. But there is something so magical that everyone wants to use just that phrase. </p>
+        <p>Anyway, let's do the same here - announcing to the world that we have started learning Python.Open your IDE and create a new Project - Learn Python or HelloWorld; Create a new file with the
+            appropriate extension (.py).</p>
+        <p>If you are running on Windows, the extension should be enough. But if you are fond of Linux, the extension has no meaning. You need to explicitly indicate the interpreter using the shabang
+            on the first line of the script. After that, add the following one line in the new script.</p>
+        <pre><code class='python'>#!/bin/python
+    print("Hello World")</code></pre>
+        <p>(The shabang would point to python or python3 depending upon the Python distribution that you use.)</p>
+        <p>That is all we need in order to start. The code prints the two words - Hello World - Nothing much for the world, but it does tell you that you have started well!</p>
+        <h2>Syntax and Datatypes</h2>
+        <hr />
+        <p>Python provides for most normal functionality like data types and normal code flow structures that any normal programming language can provide.</p>
+        <h3>Comments</h3>
+        <hr />
+        <p>Comments are the most important (and the most ignored) part of any programming language. Everyone knows they are required. Everyone knows why they are required. Everyone curses the
+            developer when they see a code without comments. But, very few are gracious enough to comment their own code. For these generous minded developers, Python provides a simple syntax for
+            adding comments to their code - #. Any text that follows a # - till the end of line, is ignored by the interpreter - as a comment. A # inside quotes is treated simply as a part of the
+            string, and hence does not mark any comment.</p>
+        <h3>Numbers</h3>
+        <hr />
+        <p>Computing started with numbers. Today, it has covered several data types. But, numbers still form a major chunk of tasks. Python provides for different types of numbers. It also provides
+            huge functionality for processing them. We have integers, floats, Try out the below code to check out the various numeric functions:</p>
+        <pre><code class='python'>a = 10
+    b = 3
+    c = a + b       # 13
+    print(c)
+    
+    c = a - b       # 7
+    print(c)
+    
+    c = a * b       # 30
+    print(c)
+    
+    c = a / b       # 3.3333333333333335
+    print(c)
+    
+    c = a // b      # 3
+    print(c)
+    
+    c = a % b       # 1
+    print(c)
+    
+    c = a ** b      # 1000
+    print(c)</code></pre>
+        <p>In addition to the integer and floating point numbers described above, Python also supports Decimal / Fraction / Complex numbers - that provide a lot more functionality. We will have a look
+            at them later.</p>
+        <h3>Strings</h3>
+        <hr />
+        <p>The other most commonly used data type is that of strings. Python provides for a huge functionality to work with and manipulate strings. Strings can be defined in single quotes as well as
+            in double quotes. Special characters need to be escaped with a '\'. There is no particular difference between a string defined in single quotes and one defined in double quotes. Naturally,
+            they have to be consistent and a string defined in single quotes should escape a single quote character within the string and a double quoted string should escape a double quote character
+            in the string. Python defines several useful functions for Strings. Check out the code below</p>
+        <pre><code class='python'>s = 'Single quoted String'
+    print(s)
+    
+    s = "Double quoted String"
+    print(s)
+    
+    s = 'Single quoted string needs to escape \' character not "'
+    print(s)
+    
+    s = "Double quoted string needs to escape \" character not '"
+    print(s)
+    
+    s = r'use r if you \\ do not like the escape \ '
+    print(s)
+    
+    s = """\
+    A
+    Multi
+    Line
+    String
+    """
+    print(s)</code></pre>
+        <p>A feature rich language like Python naturally has the basic functionality to split / join / append / substring, and a lot more that you can explore with the auto suggest in any sensible
+            IDE, or by looking up the manuals. Try the below code to check out the basics.</p>
+        <pre><code class='python'>s = "lEaRnInG"
+    
+    # Append
+    s = s.__add__(" PyThOn")
+    #split
+    print(s.split())
+    print(s.split(sep="t"))
+    
+    # Splicing
+    print(s[:])
+    print(s[1:])
+    print(s[1:-1])
+    print(s[5:-5])
+    print(s[16:0])
+    
+    # Casing
+    print(s.lower())
+    print(s.upper())
+    print(s.title())</code></pre>
+        <h3>Booleans</h3>
+        <hr />
+        <p>Booleans are logical variables - used in decision making. Python defines two values True and False for Boolean variables. Although these two values are predefined in the language, Python is
+            a bit loose about Booleans. Internally, True is just the number 1 and False is the number 0. You can verify these by adding True + True, or if you are adventurous, by dividing True/False -
+            Don't blame me for the exception! Most other datatypes can be used in a 'Boolean context' - and they have a criteria for when they should be considered False and when True. Any non-zero
+            number is True. Any non-empty string is True, and so on.</p>
+        <h2>Compound Types</h2>
+        <hr />
+        <p>Compound data types in Python are quite similar to collections in Java.</p>
+        <h3>Lists</h3>
+        <hr />
+        <p>Python provides for several compound data types - that can be used to process data in groups. A list is the simplest of these. A list can contain a collection of any type of data, including
+            other lists. To define a list, the variables need to be placed sequentially in square brackets. The code below describes the definition of a list and how its elements can be accessed.</p>
+        <pre><code class='python'>l = [1, 'Hello', "World", True, [2, 'Learn', "Python", False]]
+    print(l)          # [1, 'Hello', 'World', True, [2, 'Learn', 'Python', False]]
+    print(l[0])       # 1
+    print(l[4])       # [2, 'Learn', 'Python', False]
+    print(l[4][0])    # 2
+    print(l[4][3])    # False
+    print(l[-3])      # World</code></pre>
+        <p>Lists also support splicing, and provide several utility functions to add / remove / change data in the list. Check out the code below:</p>
+        <pre><code class='python'>letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    
+    print(letters)            # ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    print(letters[:])         # ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    
+    letters[2:5] = ['C', 'D', 'E']
+    print(letters)            # ['a', 'b', 'C', 'D', 'E', 'f', 'g']
+    
+    letters[2:5] = []
+    print(letters)            # ['a', 'b', 'f', 'g']
+    
+    letters[2:2] = ['c', 'd', 'e']
+    print(letters)            # ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    
+    letters.append('h')
+    print(letters)            # ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    print(len(letters))       # 8
+    
+    letters.remove('a')
+    print(letters)            # ['b', 'c', 'd', 'e', 'f', 'g', 'h']
+    
+    letters.pop()
+    print(letters)            # ['b', 'c', 'd', 'e', 'f', 'g']
+    
+    del letters[2]
+    print(letters)            # ['b', 'c', 'e', 'f', 'g']
+    
+    del letters[2:4]
+    print(letters)            # ['b', 'c', 'g']
+    
+    letters.reverse()
+    print(letters)            # ['g', 'c', 'b']</code></pre>
+        <p>Notice that the output of print(letters) is same as that of print(letters[:]). There is a minor difference. The letters[:] is not the same object as letters. It is a copy of the original -
+            a shallow copy.</p>
+        <h3>Tuples</h3>
+        <hr />
+        <p>Tuples are similar to lists but, have one marked difference. Tuples are immutable. They cannot be changed once they are defined. Naturally, tuples provide most of the methods that lists
+            provide - except any method that would modify the list. You might ask, what is the advantage of forcing such a restriction? It is speed! Due to its immutability, a tuple can be implemented
+            differently from lists - with more focus on speed of execution. As mentioned before, Python being an interpreted language has to lag in speed. But, optimizations like these take it far
+            ahead of others. Tuples are much faster than Lists and are used where we know that the data in the list is not going to change - this is a common scenario.</p>
+        <p>One major syntactical difference between List and Tuple is that a tuple is enclosed in circular brackets '(. . .)', while List is enclosed in square brackets '[. . .]'. You can convert a
+            list to tuple and tuple to list by typecasting. Python also allows you to define a tuple without any brackets - because it is the most natural sequence for Python. A tuple can be converted
+            to a list and a list can be converted to a tuple. Check out the code below for more.</p>
+        <pre><code class='python'>t = (1, 2, 3)
+    print(t)         # (1, 2, 3)
+    
+    t = 1, 2, 3
+    print(t)         # (1, 2, 3)
+    
+    t = (1, 2, 'String', (3, 4, "String 2"), [1, 2, 3])
+    print(t)         # (1, 2, 'String', (3, 4, 'String 2'), [1, 2, 3])
+    
+    print(t[4])      # [1, 2, 3]
+    
+    t[4].extend([2, 3, 4])
+    print(t)         # (1, 2, 'String', (3, 4, 'String 2'), [1, 2, 3, 2, 3, 4])
+    
+    l = list(t)
+    print(l)         # [1, 2, 'String', (3, 4, 'String 2'), [1, 2, 3, 2, 3, 4]]
+    
+    t = tuple(l)
+    print(t)         # (1, 2, 'String', (3, 4, 'String 2'), [1, 2, 3, 2, 3, 4])</code></pre>
+        <p>Note that although the tuple is immutable, a list contained in the tuple can be modified - because the tuple just contains the reference to the list object. The reference should not change.
+            The list itself may be modified.</p>
+        <h3>Sets</h3>
+        <hr />
+        <p>Sets are similar to their counterparts in other languages. As the name suggests, they ensure a distinct set of elements. Any duplicates are ignored. Sets do not have any order of elements.
+            They are defined by data enclosed in curly braces - '{. . .}'. A set can be typecast to and from lists or tuples. Sets define various methods for manipulation.</p>
+        <pre><code class='python'>s = {1, "String", ('1', 'Tuple'), 1, 2}
+    print(s)        # {1, 'String', 2, ('1', 'Tuple')}
+    
+    s.add(1)
+    print(s)        # {1, 'String', 2, ('1', 'Tuple')}
+    
+    s.add(3)
+    print(s)        # {1, 'String', 3, 2, ('1', 'Tuple')}
+    
+    s.remove(1)
+    print(s)        # {'String', 3, 2, ('1', 'Tuple')}
+    
+    # remove throws an exception and discard just ignores any attempt to remove non existent element
+    s.discard("Strings")
+    print(s)        # {'String', 3, 2, ('1', 'Tuple')}
+    
+    s.pop()
+    print(s)        # {3, 2, ('1', 'Tuple')}
+    
+    s.clear()
+    print(s)        # set()</code></pre>
+        <p>Sets are choosy about the elements that they allow. For example, you cannot have a list inside a set. The elements have to be immutable and "hashable".</p>
+        <h3>Dictionaries</h3>
+        <hr />
+        <p>Dictionaries are a special set of keys with a value associated with each key. You can work with a dictionary as below:</p>
+        <pre><code class='python'>d = {'key1': 'value1', 'key2': 'value2', 'key3': 'value3'}
+    print(d)           # {'key1': 'value1', 'key2': 'value2', 'key3': 'value3'}
+    
+    print(d['key1'])   # value1
+    
+    d['key7'] = 'value7'
+    print(d)           # {'key1': 'value1', 'key2': 'value2', 'key3': 'value3', 'key7': 'value7'}
+    
+    del d['key7']
+    print(d)           # {'key1': 'value1', 'key2': 'value2', 'key3': 'value3'}
+    
+    d['key1'] = 'New Value 1'
+    print(d)           # {'key1': 'New Value 1', 'key2': 'value2', 'key3': 'value3'}</code></pre>
+        <p>The above code describes the most common functionalities of a dictionary.</p>
+        <h2>Code Flow</h2>
+        <hr />
+        <p>Programming is all about data and decisions. In the above section, we saw a few ways data can be stored an processed in Python. Now, let us check out how decisions can be made, how code can
+            be made to flow from one line to another. Then we will see a small code snippet to demonstrate basics of code flow.</p>
+        <h3>Indentation</h3>
+        <hr />
+        <p>One major point where Python improves over most other languages is that it forces the developers to write readable code. It forces developers to indent the code; making it more readable.
+            There are some developers who just have to write unreadable code - and they do find ways around Python as well.</p>
+        <p>Python does not use the curly braces {. . .} to define a block of code. A block of code is defined by its indentation. Consider the two blocks of code below:</p>
+        <pre><code class='python'>a = 0
+    while a<10:
+         a = a+1
+         print(a)
+    
+    a = 0
+    while a<10:
+         a = a+1
+    
+    print(a)</code></pre>
+        <p>They show a typical while loop in Python. Note the ':' after the condition, followed by code that is indented. In the first block, both lines of code are indented, while the second block
+            has print(a) outside the block. That made a big difference to the code flow. The print(a) when indented, was considered as a part of the while loop - hence executed 10 times. But, the same
+            when not indented, is executed only once at the end of the loop.</p>
+        <p>This holds true for any block of code - if / elif / else / for / while / def (function) / class - anything that is appropriately indented is part of the block. Else, it is not.</p>
+        <p>Python does not insist on any specifics about space/tab indentation, number of spaces, etc. But the convention - that everyone follows - dictates that it should be 4 spaces.</p>
+        <p>I am not going to bore you (and myself) with the details of if / elif / else / while / for... We know them too well already. There are some subtle improvements in Python and we will see
+            them as we go. Suffices here to say - Python provides for them. We will start with syntax of the basics and then move further.</p>
+        <p>I plan to just brush through the basics and jump to something more interesting. The code snippet below covers the basics of control flow. Check it out on your IDE!</p>
+        <h3>Example</h3>
+        <hr />
+        <pre><code class='python'># Define an empty list
+    primes = []
+    
+    # Define an empty set / map
+    divisors = {}
+    
+    # Loop through all the numbers from 2 to 100.
+    for n in range(2, 100):
+         divisors[n] = []
+         # Loop through all values in list of primes
+         for p in primes:
+             # Break out of the loop if the number is
+             # divisible by any of the primes
+             if (not(n % p)):
+                 divisors[n].append(p)
+    
+         # This else block will be executed only if the
+         # above for loop exits normally without a break
+         # - implying that the number is prime.
+         else:
+             primes.append(n)
+    
+    # Print the list of prime numbers and divisors
+    print(primes)
+    print(divisors)</code></pre>
+        <p>That shows you a list of prime numbers as well as the list of all numbers from 2-100 with their divisors. It was achieved in Python with just a few lines of code!</p>
+        <h2>Functions Modules & Packages</h2>
+        <hr />
+        <p>Now, let's move on to another basic component of any language - Modularity. Any decent language - be it a low level assembly language or a 4G language that generates code, has to provide
+            some mechanism that allows us to reuse what we have done once. It provides for some way of extracting common functionality and hiding its complexity. Of course, Python adds its own flavor
+            to this. Let us see how.</p>
+        <p>Python provides modularity in three forms - Functions (or Methods), Modules, and Classes.</p>
+        <h3>Functions</h3>
+        <hr />
+        <pre><code class='python'>'Demonstrate Python Functions'
+    def getFunction(full=True):
+         'Outer Function'
+         print(getFunction.__doc__)
+         def p(frm=0, to=1, step=1):
+             'Inner Function'
+             print(p.__doc__)
+             return (x ** 3 for x in range(frm, to, step))
+    
+         if (full):
+             return p
+         else:
+             return lambda frm = 0, to = 1, step = 1: (x ** 3 \
+                  for x in range(frm, to, step))
+    
+    print(__doc__)
+    
+    t = getFunction()
+    
+    print("Check the elaborate function")
+    for v in t(step=1, to=10):
+         print(v)
+    
+    t = getFunction(False)
+    print("Check the lambda function")
+    
+    for v in t(1, 5):
+        print(v)</code></pre>
+        <p>As shown above, functions can be abbreviated using lambda functions. That saves the lines of code and can be used to improve performance - so long as it is readable.</p>
+        <p>Python provides for a concept similar to Java Docs. The first line in a function - if a single quoted string, is considered the function doc. But, Python takes this a step further. It is
+            possible to use this value in code!</p>
+        <h3>Modules</h3>
+        <hr />
+        <p>Modules provide a way to reuse code. A module is simply a file containing python code that we can 'import' into our code.</p>
+        <pre><code class='python'>import re
+    
+    def plural(noun):
+         if re.search('[sxz]$', noun):
+             return re.sub('$', 'es', noun)
+         elif re.search('[^aeioudgkprt]h$', noun):
+             return re.sub('$', 'es', noun)
+         elif re.search('[^aeiou]y$', noun):
+             return re.sub('y$', 'ies', noun)
+         else:
+             return noun + 's'
+    
+    if __name__ == '__main__':
+         print (plural('abc'))
+         print (plural('def'))
+         print (plural('des'))
+         print (plural('xyz'))</code></pre>
+        <p>Check out the code above. The first line imports a module re - that is built into Python. As the name suggests, it is meant for regular expressions. It has several methods related to
+            regular expression search, replace, etc. All the methods / objects inside this module are invoked with the prefix of re.</p>
+        <p>You can also notice the line</p>
+        <pre><code class='python'>if __name__ == '__main__':</code></pre>
+        <p>before the main code starts. This is a useful construct in any code that your write. It helps anyone who might import this code as a module. When you run this code as a standalone code, it
+            will execute the code under this if clause. But, if anyone imports this module, it is most likely that he just wants the methods in this module, he does not want to run the code outside
+            these methods. This construct prevents such an accident.</p>
+        <p>The built in dir() function can be used to identify at runtime, the list of names defined within a given module. If you like, you can import only a part of the module by using the (from
+            module import method) construct.</p>
+        <h3>Packages</h3>
+        <hr />
+        <p>Packages are a common means of avoiding name clashes. You can import a module from a package using the (from package import module) construct. Python packages are similar to Java. Each
+            package should have its own folder. You can have sub packages in subfolders.</p>
+        <p>One additional requirement that Python imposes for packages is that a package folder should have the init.py file. Python will consider a folder as a package only if it has this script.
+            This file could be empty, or it can define the value of all. The all is the list of modules defined in the package - that would be imported if the user invokes (from package import *).</p>
+        <p>This is a helpful construct - something like the main inside a module file. It prevents unwanted execution of any additional code that is saved in the package folder - it allows you to save
+            additional code in the package folder.</p>
+        <p>The init.py script can also execute any initialization code for the package.</p>
+        <h2>Object Oriented Python</h2>
+        <hr />
+        <p>After reading the simple scripts we have seen so far, one might wonder why is it called an object oriented language. Yes, Python does not come in way of plain functional code, and allows
+            you to write simple script to do small chunks of tasks. But Python is object oriented to its core! Everything in Python is an object - everything including the code itself!</p>
+        <p>Before we jump into the Python implementation of classes, and object orientation in general. Let's introspect to ask ourselves, what exactly do we mean by object oriented code? What is good
+            or bad about object oriented code? Why is it more maintainable and when is it not efficient?</p>
+        <p>What is an object? In software, an object is defined as "something that has a defined behavior influenced by some information related to it". Any software, whether it is functional or
+            object oriented, implements some functionality for objects. What matters is the point of focus - whether the functionality is in focus or the object itself? A functional code would have
+            all the functionality separated from the information, whereas a good object oriented code should have the information clubbed with the behavior.</p>
+        <p>The language used to do this is not so important. You can have Java code that is functional in essence and also have C code that is object oriented in essence. What matters is the spirit of
+            clubbing together the information with the behavior of the object. There is no good or bad about functional or object oriented code. Both are equally good in their own context. What is
+            important is identifying which one is required in the current scenario and then applying it appropriately. Most often it is a mixture. For example, a properties file used to configure the
+            system pulls out the information - thus adding a functional flavor to it. Or a function static variables in a C code clubs the behavior with the data - making it object oriented.</p>
+        <p>With that, let us get into the details of object oriented coding in Python. From the point of view of semantics, Python provides for class definition, inheritance, constructor, destructor
+            and member variables. For some strange reason, they forgot to add private members. Python allows you all the freedom, but provides guidelines for discipline with conventions. Python does
+            not let you enforce private members, but it is a universally accepted convention that any member variable with name starting with _ or __ has a special meaning and should not be touched by
+            'outsiders'. Developers use this for adding private members.</p>
+        <p>Python provides two special member methods - init and del. These are similar to the constructor and destructor. Needless to say that constructor is invoked when the object is created and
+            can be used to initialize any members, while destructor is invoked in the cleanup process and is used to perform any cleanup activity.</p>
+        <p>A class can define several member methods and variables. One peculiar point about member functions is that they all must have one first parameter - self. Python compiler does not enforce
+            the name "self". But, convention dictates it. Don't use any other word there if you feel that someone somewhere might ever peek into your code. This parameter is not passed to the method
+            when calling it in the context of an object. But, the runtime takes care of passing a reference to the particular object in there.</p>
+        <h3>Example</h3>
+        <hr />
+        <h3>Let's check out this example code that gives basic details:</h3>
+        <hr />
+        <pre><code class='python'># A Sample Base Class to demostrate basic semantics
+    
+    class Base:
+         "A Sample Base Class"
+         def __init__(self):
+             print("Base Class Constructor")
+             self._base_member_variable_ = 0
+    
+         def __del__(self):
+             print("Base Class Constructor")
+    
+         def printBaseValue(self):
+             print("Base Class: " + str(self._base_member_variable_))
+    
+    # A Sample Derrived Class to demostrate basic semantics
+    
+    class Derrived(Base):
+         "A Sample Derrived Class"
+         def __init__(self):
+             super(Derrived, self).__init__()
+             print("Derrived Class Constructor")
+             self._derrived_member_variable_ = 1
+    
+         def __del__(self):
+             print("Derrived Class Constructor")
+             super(Derrived, self).__del__()
+    
+         def printDerrivedValue(self):
+             print("Derrived Class: " + str(self._derrived_member_variable_))
+             print("Derrived Class: " + str(self._base_member_variable_))
+    
+    # A Python method to check out the classes defined above.
+    def checkout():
+         o = Derrived()
+         print(o.__class__)
+         print(o.__doc__)
+         o.printBaseValue()
+         o.printDerrivedValue()
+    
+    checkout();</code></pre>
+        <p>The output of this code looks like this:</p>
+        <pre><code class='python'>Base Class Constructor
+    Derrived Class Constructor
+    
+    A Sample Derrived Class
+    Base Class: 0
+    Derrived Class: 1
+    Derrived Class: 0
+    Derrived Class Destructor
+    Base Class Destructor</code></pre>
+        <h3>Points to Note</h3>
+        <hr />
+        <p>Notice the following points in the code above:</p>
+        <p>A derived class id defined with the base class as a parameter in its definition. Python allows for Multiple Inheritance. In case of Multiple Inheritance, we can have clashes in method
+            names. Python takes care of this by giving higher priority to the first parent in the list.</p>
+        <p>All the methods in the class are defined with one minimum parameter (self). This is not passed to the methods when they are invoked in the context of the object. The interpreter takes care
+            of passing a reference of the object in this parameter.</p>
+        <p>A unique feature in Python is the support for code documentation. The line immediately after the class keyword is the class document. This can be a multiline or single line string. This is
+            not just a code comment that is used for better readability, but Python allows you to use this documentation at runtime. What more, you can also modify this at runtime!</p>
+        <p>Note that the member variables in the class are not explicitly declared anywhere. They are just assigned values in the code. And they are available after that. Since the variables are not
+            private, we can always create new variables in an object - at runtime. Thus, the variables are not really member variables - they are not tied to the class definition - they are just
+            associated with the given instance. But, Python reflection code is powerful enough to show us this association and lets us manipulate them.</p>
+        <p>The object is created by invoking the constructor. We do not need a new keyword while creating objects in Python. The destructor is called when the object goes out of scope and needs to be
+            destroyed. If the parent class constructor and destructor should be invoked, we need to call them explicitly.</p>
+        <p>The method 'super' is part of the reflection API, that lets you identify the superclass of the given child class.</p>
+        <p>This short structure of Python's Object Oriented code allows for infinite possibilities.</p>
+        <h2>Python Iterators</h2>
+        <hr />
+        <p>In a previous sections, we saw loops on lists, tuples, etc.</p>
+        <pre><code class='python'>for element in (1, 2, 3):
+         print(element)</code></pre>
+        <p>Python does not limit these iterations to its built-in collection types. Any class that implements the required methods can be used as an iterable. For example, you want to iterate over the
+            first n elements of Fibonacci series, you can create a simple iterator for that:</p>
+        <pre><code class='python'>class Fib:
+         def __init__(self, n):
+             self.max = n
+             self.last = 0
+             self.secondlast = 0
+    
+        def __iter__(self):
+             return self
+    
+        def __next__(self):
+             if self.last:
+                 self.secondlast, self.last = self.last, self.last + self.secondlast
+             else:
+                 self.last = 1
+             if self.last > self.max:
+                 raise StopIteration
+             return self.last
+    
+    for x in Fib(100):
+         print(x)</code></pre>
+        <p>In fact, you need not implement the next method in the object that you are working with. All you need is the iter() method. This method should return an object which implements the next()
+        </p>
+        <pre><code class='python'>def fib(n):
+         i, j = 0, 1
+         while j <= n:
+             yield(j)
+             i, j = j, i+j
+    
+    for x in Fib(100):
+         print(x)</code></pre>
+        <p>This is all you need! Note that keyword 'yield'. It is not return. The method does not return anything. It yields one value at a time. Of course, internally this translates to an iterator
+            of some sort. But, the code certainly looks much better and much easier to manage. Since we have lesser script, it means there is lesser effort on interpretation and more of the C code
+            doing the job. Naturally the performance is better.</p>
+        <h3>Generator Expressions</h3>
+        <hr />
+        <p>The folks who made Python were not satisfied with simple Generators. They wanted to go one step further. Why do we have to create a new class or method for something that can be done by
+            just one line of code? Generator expressions do just that! Naturally they are not as versatile as iterators and generators. But there are times when we really do not need all that.</p>
+        <p>For example, if you want the list of first 10 cubes, you just need a single line of code!</p>
+        <pre><code class='python'>print([x**3 for x in range(10)])</code></pre>
+        <h2>Exceptions in Python</h2>
+        <hr />
+        <p>Everything in Python is an object - so is an exception. Any exception is an instance of a class that extends the common base class - Exception. You can 'raise' an exception, using an object
+            of the Exception class. Or else, you can just give the class name as a parameter to the 'raise' command. Python will take care of creating an object for it.</p>
+        <pre><code class='python'>class B(Exception):
+         pass
+    
+    class C(B):
+         pass
+    
+    class D(C):
+         pass
+    
+    for cls in [B, C, D]:
+         try:
+             raise cls()
+         except D:
+             print("D")
+         except C:
+             print("C")
+         except B:
+             print("B")</code></pre>
+        <p>Note that if the except clauses were reversed (with except B first), it would have printed B, B, B - the first matching except clause is triggered. The concept of Exceptions is not new in
+            Python. Exceptions have been used in several other languages in the past, and most developers are very familiar with them. But the interesting twist that Python provides is because of the
+            flexibility of Python classes and objects. Now you can pass in any damn information with any exception. All you need to do is to create the instance of the exception object, set the object
+            attributes and then raise it!</p>
+        <pre><code class='python'>try:
+        e = Exception('Additional information')
+        e.more_info = 'Some more information'
+        raise e
+    except Exception as e:
+        print(type(e))
+        print(e.args)
+        print(e.more_info)</code></pre>
+        <p>This prints the type of the Exception (Exception), followed by a tuple containing the one argument that was passed in while creating the exception. You can have multiple arguments there.
+            Next line prints 'Some more information' about the exception. This opens infinite possibilities for passing data from the exception to the catch block. You can send out not just strings,
+            but any object that could be useful to the catch block.</p>
+        <p>Such minor flexibilities in Python open up infinite possibilities when you design and code!</p>
+
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlight/highlight.pack.js"></script>
+    <script src="scripts/blog.js"></script>
+</body>
+
+</html>

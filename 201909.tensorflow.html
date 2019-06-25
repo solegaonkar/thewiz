@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Introduction to TensorFlow</title>
+    <meta name="description" content="An introduction to the core concepts of TensorFlow">
+    <meta name="keywords" content="AI, Machine Learning, Neural Networks, TensorFlow">
+
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Vikas K. Solegaonkar">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+    <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="body">
+
+        <h1>Introduction to TensorFlow</h1>
+        <hr />
+
+        <p>TensorFlow is an open-source software library from Google. It was meant for dataflow programming across a range of tasks. It is a symbolic math library, and is largely used for machine
+            learning applications such as neural networks. Originally it was developed by the Google Brain team for internal Google use. As the AI research community got more and more collaborative,
+            TensorFlow was released under the Apache 2.0 open source license.</p>
+        <p>TensorFlow and its component Keras, are vastly used in implementing Deep Learning algorithms. Like most machine learning libraries, TensorFlow is "concept-heavy and code-lite". The syntax
+            is not very difficult to learn. But its concepts are very important.</p>
+        <h2>What is a Tensor?</h2>
+        <hr />
+        <p>According to the Wikipedia, "A tensor is a geometric object that maps in a multi-linear manner geometric vectors, scalars, and other tensors to a resulting tensor. Thereby, vectors and
+            scalars themselves, often used already in elementary physics and engineering applications, are considered as the simplest tensors. Additionally, vectors from the dual space of the vector
+            space, which supplies the geometric vectors, are also included as tensors. Geometric in this context is chiefly meant to emphasize independence of any selection of a coordinate system."
+        </p>
+        <p>Don't worry it is not that complicated. When working on a problem with multiple variables, it is often convenient to collect them together in form of a vector or a matrix, so that it is
+            easier to perform linear operations on them. Most of machine learning is based on such matrix operations - where a set of input values is processed together to get a set of output values.
+        </p>
+        <p>For example, in the good old loan sanction problem, we consider several parameters of the subject (amount of loans taken in past, time taken to return, etc.) and sum them up with
+            appropriate weights - to get an output number called the credit rating. This is implemented using simple matrix multiplication.</p>
+        <p>Such matrix multiplication gives us the result for just one case. When we want to train a neural network with data for a million such cases, we cannot multiply them one by one. That is
+            where Tensors are used. Tensor is a data structure that represents a collection of matrices or vectors that allows us to perform operation on all the data samples at the same time. This
+            gives us a great performance improvement.</p>
+        <p>Tensors could be an input value, a constants, a variables or just a reference to a mathematical operation on some other tensors.</p>
+        <p>Tensor may be 3D (collection of matrices) or 2D (collection of vectors) or 1D (collection of numbers) or even 0D (a single number). The number of dimensions do not make a Tensor - what is
+            important is the concept of simultaneous operations on multiple entities.</p>
+        <h3>Rank of a Tensor</h3>
+        <hr />
+        <p>The number of dimensions of the Tensor, is called the Rank of the Tensor. Hence we have several ranks possible.</p>
+        <table>
+            <tr>
+                <th>Rank</th>
+                <th>Math entity</th>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>Scalar (magnitude only)</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Vector (magnitude and direction)</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Matrix (table of numbers)</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>3-Tensor (cube of numbers)</td>
+            </tr>
+            <tr>
+                <td>n</td>
+                <td>n-Tensor (n dimensional structure)</td>
+            </tr>
+        </table>
+        <h3>Constant Tensor</h3>
+        <hr />
+        <p>The simplest Tensor is one with a constant value. We can define with the explicit values or using methods defined for the frequently used ones.</p>
+        <pre><code class='python'>t1 = tf.constant(1729)        # Constant Tensor with one element with value 1729
+t2 = tf.constant([1,8,27,64])         # Constant Tensor of shape 4 with the given values 
+
+t3 = tf.zeros([10,20], tf.float32)    # Constant Tensor of shape [10,20] - with each element set to 0
+t4 = tf.zeros_like(t2)                # Constant Tensor of shape and datatype same as t2, with all elements set to 0
+
+t5 = tf.ones([5,6], tf.int32)   # Constant Tensor of shape [5,6] with each value set to 1
+t6 = tf.ones_like(t3)           # Constant Tensor of shape and datatype same as t3, with each element set to 1
+
+t7 = tf.eye(10)                 # Identity matrix of size 10
+
+t8 = tf.linspace(1.0, 3.0,5)    # [1.0, 1.5, 2.0, 2.5, 3.0] - Constant tensor with 5 equally spaced values from 1.0 to 3.0
+t9 = tf.range(1.0,3.5, 0.5)     # [1.0, 1.5, 2.0, 2.5, 3.0] - Same as Python range. Note that Range excludes last element
+
+t11 = tf.random_normal([4,5], mean = 5.0, stddev = 4, seed=1)   # Constant Tensor of shape [4,5] with random values of defined normal distribution
+t12 = tf.random_uniform([4,5], maxval = 4.0, seed = 1)          # Constant Tensor with random values with defined uniform distribution.</code></pre>
+        <p>Note that this does not assign the constant values to the Tensor. It only creates the Tensor that can be evaluated when required.</p>
+        <h3>Variable Tensors</h3>
+        <hr />
+        <p>Constants allow us to create a predefined values that can be used in computations. But no computation is complete without variables. Training a neural network requires variables that can
+            represent weights to be learnt in the process. These variables can be generated using the class tf.Variable.</p>
+        <pre><code class='python'>weights = tf.Variable(tf.random_normal([10,10], stddev=1))</code></pre>
+        <p>This generates a Variable Tensor - weights - that can be trained. But, we can also have Variable Tensors that cannot be altered - just like a constant.</p>
+        <pre><code class='python'>constant = tf.Variable(tf.zeros([10,10]), trainable=False)</code></pre>
+        <p>What is the use of doing something like that? Why not just define a constant? For a Tensor of 10x10, it makes more sense to create a constant Tensor. But when working with huge sizes, one
+            should prefer variables. That is because variables are a lot more efficiently managed.</p>
+        <h3>Placeholders</h3>
+        <hr />
+        <p>Constant Tensors and Variable Tensors are intuitively similar to constants and variables in any programming language. That does not take time to understand. The placeholders define Tensors
+            that would get a value just before the code runs. In that sense, a placeholder can be compared to an input parameter.</p>
+        <pre><code class='python'>x = tf.placeholder(tf.int32)</code></pre>
+        <p>This generates a Tensor x - with an assurance that its value will be provided just before the code actually runs.</p>
+        <h2>Lazy Execution</h2>
+        <hr />
+        <p>By design, TensorFlow is based on lazy execution (though we can force eager execution). That means, it does not actually process the data available till it has to. It just gathers all the
+            information that we feed into it. It processes only when we finally ask it to process.</p>
+        <p>Such laziness (ironically) provides a huge improvement in the processing speed. To understand how, we need to understand the Nodes and Graphs of TensorFlow.</p>
+        <h3>Nodes</h3>
+        <hr />
+        <div class='center'><img src='img/mlp_one_hidden_layer.png' /></div>
+        <p>This is the textbook view of a neural network. As we can see, we have several inputs X1 - Xn. These form the first layer of the network. The second (hidden) layer is obtained as a dot
+            product of each of these with the weight matrix, followed by the activation function like sigmoid or relu.</p>
+        <p>The third layer is just one value that is obtained as a dot product of its weight matrix with the output of the second layer.</p>
+        <p>For TensorFlow, each of these individual entities is a Node. The the first layer has n+1 nodes (n inputs and 1 constant). The second layer has k+1 nodes and the third layer has 1 node. Each
+            of these nodes is represented by a Tensor.</p>
+        <h3>Graph</h3>
+        <hr />
+        <p>We can see that some nodes have a constant value (e.g. the bias 1). Some of them have variable values like the weight matrix - we start with a random initialization and tune it through the
+            process. And we have some nodes whose value is just based on some computation on the other nodes - these are dependent nodes - we cannot get their values until we have the values of the
+            previous nodes.</p>
+        <p>In this network, we have k nodes in the middle layer and 1 node in the last layer that depend on other nodes - we have k+1 dependent nodes and k variables that we need to tune.</p>
+        <h3>Compilation</h3>
+        <hr />
+        <p>When we create individual Tensors, we just create individual nodes and assign the define the relations - these relations are yet to be implemented. Once we are done with the definitions, we
+            initiate the compile() method, that identifies this graph connecting the nodes.</p>
+        <p>This is an important step in the whole process. If we have circular dependencies or any other reason that could break the graph, the error is identified at this point.</p>
+        <h3>Session</h3>
+        <hr />
+        <p>The TensorFlow computations are always executed in a "session". A Session is essentially an environment with a status of its own. Session is not a thread, but if we have two independent
+            computations that need to run together - without influencing each other, we can use sessions.</p>
+        <pre><code class='python'>sess1.run(A)
+sess2.run(B)
+sess1.run(C)
+sess2.run(D)</code></pre>
+        <p>Here, A and C will run under session 1, and will see one environment and B and D will run in the session 2 - and see another environment.</p>
+        <p>Once we have defined the nodes and compiled the graph, we can finally run the command to get value of a particular node in the graph. When we do so, TensorFlow looks back to check all the
+            nodes that are required for this requested node. Only those nodes are evaluated in the appropriate order. Thus, a node in the graph is evaluated only when needed; only if it is needed.</p>
+        <p>This has a great impact on the processing speed and is a major advantage of TensorFlow.</p>
+        <h2>TensorFlow Code Example</h2>
+        <hr />
+        <p>To understand TensorFlow it is very important to understand the core concepts of Constants, Variables, Placeholders and Sessions. Let us now work out an example that can display all of
+            these concepts at once.</p>
+        <ul>
+            <li>Ofcourse, we start by importing the TensorFlow module</li>
+        </ul>
+        <pre><code class='python'>import tensorflow as tf</code></pre>
+        <p>Now, let us define a few Tensors. Here, t1 and t2 are constants, t3 is a placeholder and t4 is a variable.</p>
+        <pre><code class='python'>t1 = tf.ones([4,5])
+t2 = tf.random_uniform([5,4], maxval = 4.0, seed = 2)
+t3 = tf.placeholder(tf.float32)
+t4 = tf.get_variable("t4", [4,4], initializer = tf.ones_initializer)</code></pre>
+        <p>Here, we define t1 as a Constant Tensor of size 4x5, with all the values set to 1. t2 is a Constant Tensor of size 5x4, with random values.</p>
+        <p>t3 is a placeholder with 0 dimensions - a single number with float32.</p>
+        <p>Along with this, we define a variable t4 of shape 4x4. The initializer is set to ones_initializer. That means, whenever we initialize the variable, its values will be set to 1. Note that
+            this will happen only when we initialize the variable - not now.</p>
+        <ul>
+            <li>Next, we can define the Tensor expression</li>
+        </ul>
+        <pre><code class='python'>exp = tf.assign(t4, tf.matmul(t1,t2) * t3 + t4)</code></pre>
+        <p>This code takes a dot product of t1 and t2, multiplies it with the scalar t3 and then adds it to t4. The outcome of this is then assigned to t4. Thus, the value of t4 changes on every
+            execution of this expression. Note that t3 is a placeholder, so we will have to provide the value of t3 when we want to process this expression.</p>
+        <p>Again, this code only defines the expression. It is not executed right away.</p>
+        <ul>
+            <li>With everything in place, we can now get the session and start working with the Tensors</li>
+        </ul>
+        <pre><code class='python'>with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+    print("Initialized variables\n----------------------------------------------")
+    print(t4.eval())
+
+    sess.run(exp, feed_dict = {t3:1})
+    print("\nAfter First Run\n--------------------------------------------------")
+    print(t4.eval())
+
+    sess.run(exp, feed_dict = {t3:1})
+    print("\nAfter Second Run\n-------------------------------------------------")
+    print(t4.eval())
+
+    sess.run(exp, feed_dict = {t3:1})
+    print("\nAfter Third Run\n--------------------------------------------------")
+    print(t4.eval())</code></pre>
+        <p>Here, we actually run the code. We start with initiating the session. We have to initialize the variables. So far, t4 was just declared, not initialized. Here, we actually initialize it.
+            The initialize code is executed. In this case, it happens to be "tf.ones_initializer". So, t4 starts as a 4x4 Tensor with all values set to 1.</p>
+        <p>Next, we run the expression along with the feed_dict. Remember that the expression has a placeholder t3. It will not evaluate unless we give it a value for t3. This value is passed through
+            feed_dict. Each run updates t4 and assigns a new value to it.</p>
+        <p>The above code generates this output:</p>
+        <pre><code class='python'>Initialized variables
+----------------------------------------------
+    [[1. 1. 1. 1.]
+    [1. 1. 1. 1.]
+    [1. 1. 1. 1.]
+    [1. 1. 1. 1.]]
+
+After First Run
+--------------------------------------------------
+    [[11.483105 10.39291  11.380319  9.601738]
+    [11.483105 10.39291  11.380319  9.601738]
+    [11.483105 10.39291  11.380319  9.601738]
+    [11.483105 10.39291  11.380319  9.601738]]
+
+After Second Run
+-------------------------------------------------
+    [[20.483215 16.11417  19.363663 15.015686]
+    [20.483215 16.11417  19.363663 15.015686]
+    [20.483215 16.11417  19.363663 15.015686]
+    [20.483215 16.11417  19.363663 15.015686]]
+
+After Third Run
+--------------------------------------------------
+    [[32.022038 26.227888 28.65984  23.72137 ]
+    [32.022038 26.227888 28.65984  23.72137 ]
+    [32.022038 26.227888 28.65984  23.72137 ]
+    [32.022038 26.227888 28.65984  23.72137 ]]</code></pre>
+        <p>One can evaluate the expression three times to assert the output is same as we expected.</p>
+
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlight/highlight.pack.js"></script>
+    <script src="scripts/blog.js"></script>
+</body>
+
+</html>

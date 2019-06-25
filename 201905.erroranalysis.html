@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Error Analysis</title>
+    <meta name="description" content="How do you analyze the error when building an AI model.">
+    <meta name="keywords" content="AI, Machine Learning, Best Practices, Error Analysis">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Vikas K. Solegaonkar">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+    <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="body">
+        <h1>Error Analysis</h1>
+        <hr />
+        <p>Things are easier said than done. A neural network model cannot be developed by merely passing a model through several iterations of training. A lot more is required. Error analysis is one
+            of the major steps in here.</p>
+        <p>Error analysis is the analysis of error. He he! You don't have to tell me that. In fact, the whole theory of error analysis is as intuitive. But, people tend to miss some points in real
+            projects. We can treat this as a kind of refresher that one can check out - when trouble makes us forget the basics.</p>
+        <p>Formally, error Analysis refers to the process of examining dev set examples that your algorithm misclassified, so that we can understand the underlying causes of the errors. This can help
+            us prioritize on which problem deserves attention and how much. It gives us a direction for handling the errors.</p>
+        <p>Error analysis is not just a final salvaging operation. It can be a part of the mainstream development. When we start building a model, we are advised to start off with a small model - that
+            is bound to have low accuracy (high error). We can then start evaluating this model and analyze the errors. As we analyze the errors, we can then grow with the model.</p>
+        <h2>Common Sources of Error</h2>
+        <hr />
+        <p>There could be several sources of these errors. Every model would have its own unique sources of errors. And we need to look at them individually. But, the typical causes are:</p>
+        <h3>Mislabeled Data</h3>
+        <hr />
+        <p>Most of the data labeling is traced back to humans. We may extract data from the net or surveys or various other sources. The basic inputs came from humans. And humans are error prone.
+            Thus, we should acknowledge the fact that all our train/dev/test data has some mislabeled records. If our model is well built and trained properly, then it should be able to overcome such
+            errors.</p>
+        <h3>Hazy Line of Demarcation</h3>
+        <hr />
+        <p>Classification algorithms work well when the positive and negative are clearly separated. For example, if we are trying to classify images of an ant and a human; the demarcation is pretty
+            good and that should help speed up the training process.</p>
+        <p>But, if we want to classify between a male and female hairstyle, it is not so simple. We know the extremes very well. The demarcation is not so clear. Such classification is naturally error
+            prone. In such a case, we have to work on a better training near this hazy line of demarcation.</p>
+        <h3>Overfitting or Underfitting a Dimension</h3>
+        <hr />
+        <p>Let us consider a trivial example just to understand the concept. Suppose we are working on an image classifier to distinguish between a crow and a parrot. Apart from the size, beak, tail,
+            wings.. the obvious differentiator is the color. But it is possible somehow the the model does not learn this difference. Thus, classifies a baby crow as a parrot.</p>
+        <p>That means, the model failed to learn a dimension from the available data. When we notice this, we should try to gather more data that can train the network to classify based on the color
+            more than other parameters.</p>
+        <p>Similarly, it is possible that the model overfits a particular dimension. Suppose in a Cat/Dog classifier, we notice in the error records that a lot of dark dogs were classified as cats and
+            light cats were classified as dogs. This means, the training data did not have enough records that could train the model against such misclassification.</p>
+        <h3>Many Others</h3>
+        <hr />
+        <p>These are just a few kinds of error sources. There could be many more - that one can discover on analyzing the error set. Let us not "Overfit" our understanding to limit our analysis to
+            these types of error. Every error analysis will show us a new set of problem sources.</p>
+        <h2>Eyeball Set</h2>
+        <hr />
+        <p>Now we know that our model has errors and there could be several sources of errors. But, how do we identify which one? We have millions of records in the training set, and atleast thousands
+            of records in the dev set. The test set is not in sight as yet!</p>
+        <p>We cannot evaluate every record in the training set. Nor can we evaluate each record in the dev set. In order to identify the kind of errors our model generates, we split the dev set into
+            two parts - the eyeball set and the blackbox set. The eyeball set is the sample set that we actually evaluate. We can check these records manually, to guess the source of errors. So the
+            eyeball set should be small enough that we can work manually and large enough to get a statistical representation of the whole dev set.</p>
+        <p>On analyzing the errors in the eyeball set, we can identify the different error sources and the contribution of each. With this information, we can start working on the major error sources.
+            As we make appropriate fixes, we can go on digging for more error sources.</p>
+        <p>Note that the analysis should be based on the eyeball set only. If we use the entire dev set for this analysis, we will end up overfitting the dev set. But if the dev set is not big enough,
+            we have to use the whole of it. Just note in that case that we have a good risk of overfitting the dev set - and plan the rest accordingly.</p>
+        <h2>Bias & Variance</h2>
+        <hr />
+        <p>As we work on error analysis, we identify a particular parameter or area of problems; or we notice that the error is pretty uniform. How do we go about from here? Do I get more data? It may
+            sound logical. But not always true. More data may not always help - beyond a point, the data could be just redundant. Do I need more data? Do I need a richer model? Just enriching the
+            model can greatly improve the numbers - by over-fitting. That is not right either! So how do we decide on the direction?</p>
+        <p>The bias and variance give us a good insight into this. In simple words, if the error is high in the training set as well as dev set, then we have high bias. While if the training set is
+            good but dev set is bad, we have high variance. Bias essentially implies that the output is bad for all data. Variance implies that the output is good for some data and bad for the rest.
+        </p>
+        <p>If we have a model with 70% accuracy on the training set. Naturally we call it a high bias. With this kind of accuracy, we may not even want to check up the dev set. But, if the training
+            set error is much better than our target, we can call it high variance. That is because, the behavior of the model varies heavily over the available data.</p>
+        <p>One can intuitively say that if we have a high bias, it means we are underfitting. This could be because a particular feature is not processed properly, or the model itself not rich enough.
+            Based on this, we can update the solution to improve the performance - by enhancing the particular feature or the model itself.</p>
+        <p>On the other hand, high variance means we are not training it enough. We need more data and we need to train it better.</p>
+        <h2>Reducing Bias</h2>
+        <hr />
+        <p>A machine learning model can only learn from the data available to it. Some errors are unavoidable in the input data. This are not human mistakes - but true limitations of humans who
+            classify or test the model. For example, if I cannot differentiate between a pair of identical twins, there is no way I can generate labeled data and teach a machine to do it!</p>
+        <p>Such a limitation is called unavoidable bias. The rest is avoidable bias - and we need to focus on that. So, when we perform an error analysis, when we try to we should consider the
+            avoidable bias instead of the bias as a whole.</p>
+        <h2>Reducing Avoidable Bias</h2>
+        <hr />
+        <p>If our error analysis tells us that the avoidable bias is the major source of error, we can try some of the following steps</p>
+        <h3>Increase the model size</h3>
+        <hr />
+        <p>High bias means the model is not able to learn all that it can learn from the data available to it. This happens when the model is not capable of learning enough. If the model has just two
+            parameters, it cannot learn more than what these two parameters can hold. Beyond that, any new training data will overwrite what it had learnt from the previous records. The model should
+            have enough parameters to learn - only then it can hold the information required to do the job required.</p>
+        <p>Hence the primary solution to high bias is to build a richer model.</p>
+        <h3>Allow more Features</h3>
+        <hr />
+        <p>One of the major steps in our data cleanup is to reduce all the redundant features. In fact, no feature is really redundant. But some are less meaningful than others. And feature reduction
+            essentially discards such features with lesser value.</p>
+        <p>That is good to begin with. But, when we notice that features we have are not able to carry the required information, we have to rework the feature reduction step and allow some more
+            features to pass through. That can make the model richer and give it more information to learn from.</p>
+        <h3>Reduce Model Regularization</h3>
+        <hr />
+        <p>All the regularization techniques essentially hold the model parameters closer to zero. That is, it prevents each parameter from "learning too much". That is a good technique for ensuring
+            the model remains balanced. But, when we realize that the model is not able to hold all the information we provide it, we should reduce the regularization levels - so that each node on the
+            network will be able to learn more from the data available for training.</p>
+        <h3>Better Network Architecture</h3>
+        <hr />
+        <p>Just increasing the neurons and layers does not necessarily improve the model. Using an appropriate network architecture can make sure the new layers actually add value to it.</p>
+        <p>Researchers have faced and worked these problems in past and provided us with good model architectures that can be used to give a better tradeoff between the bias and variance. Aligning to
+            such an architecture can help us prevent a lot of our problems.</p>
+        <h2>Reducing Variance</h2>
+        <hr />
+        <p>The error analysis can point out the major cause of the error. If high variance is the problem, we can use one of these techniques to reduce that.</p>
+        <h3>Add more training data</h3>
+        <hr />
+        <p>This is the primary solution. Variance is caused when we do not have enough data to train the network to its best performance. So the primary action point should be looking out for more
+            data. But this has its limits as the data is not always available.</p>
+        <h3>Add Regularization</h3>
+        <hr />
+        <p>L1 or L2 regularization are proven techniques for reducing the problem of overfitting - and thus avoiding high variance. Essentially, they hold each parameter closer to 0. That means, no
+            parameter is allowed to learn too much. If a single parameter holds a lot of information, the model gets imbalanced and leads to overfitting and high variance.</p>
+        <p>The L1 and L2 regularization techniques help prevent such problems.</p>
+        <h3>Early Stopping</h3>
+        <hr />
+        <p>As we train the model with the available training data, each iteration makes the model a little better for the data available. But, having excessive number iterations of this can cause
+            overfitting. One has to find the golden mean for this. The best way is to stop early - rather than realizing that we have already crossed the limits.</p>
+        <h3>Reduce Features</h3>
+        <hr />
+        <p>Lesser the number of features, lighter is the model and hence lesser the scope for overfitting. We have several feature selection algorithms like PCA that can help us identify minimal and
+            orthogonal features that can provide an easier way to train the models. Using the domain knowledge can also help us reduce the number of features. We can also use the insights from the
+            error analysis to identify how the feature set should be altered in order to get a better performance.</p>
+        <h3>Decrease the model size</h3>
+        <hr />
+        <p>High variance or Overfitting typically means that we have too many parameters to train. If we do not have enough data to train each of these parameters, the randomness of the initialization
+            values remains in the parameters - leading to incorrect results.</p>
+        <p>Reducing the model size has a direct impact on it.</p>
+        <h3>Use Sparse Model</h3>
+        <hr />
+        <p>Sometimes, we know that the model size is imperative and reducing the size would only reduce the functionality. In such a case, we can consider training a sparse model. That gives an good
+            combination of better model with lesser variance.</p>
+        <h3>Model Architecture</h3>
+        <hr />
+        <p>Researchers have faced and worked these problems in past and provided us with good model architectures that can be used to give a better tradeoff between the bias and variance. Aligning to
+            such an architecture can help us prevent a lot of our problems.</p>
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlight/highlight.pack.js"></script>
+    <script src="scripts/blog.js"></script>
+</body>
+
+</html>

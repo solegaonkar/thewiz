@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <title>A Quick Introduction R</title>
+        <meta name="description" content="A Quick Introduction R">
+        <meta name="keywords" content="R Language">
+
+        <meta http-equiv="x-ua-compatible" content="IE=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="author" content="Vikas K. Solegaonkar">
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+        <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+        <div id="body">
+
+                <h1>A Quick Introduction R</h1>
+                <hr />
+                <p>R is a programming language and free software environment for statistical computing and graphics that is supported by the R Foundation for Statistical Computing. The R language is
+                        widely used among statisticians and data miners for developing statistical software and data analysis. Polls, surveys of data miners, and studies of scholarly literature
+                        databases show that R's popularity has increased substantially in recent years. As of May 2018, R ranks 11th in the TIOBE index that measure of popularity of programming
+                        languages.</p>
+                <p>R is a GNU package. The source code for the R software environment is written primarily in C, Fortran, and R itself. R is freely available under the GNU General Public License, and
+                        pre-compiled binary versions are provided for various operating systems. While R has a command line interface, there are several graphical front-ends and integrated development
+                        environments available.</p>
+                <p>The following blogs give information about R gathered from various sources</p>
+                <h2>Introduction</h2>
+                <hr />
+                <p>R is an interpreted programming language and software environment for statistical analysis, graphics representation and reporting. R also allows integration with the procedures
+                        written in the C, C++, .Net, Python or FORTRAN languages for efficiency. R is named so after the creators Ross Ihaka and Robert Gentleman at the University of Auckland, New
+                        Zealand, and is currently developed by the R Development Core Team.</p>
+                <p>R-Studio is most commonly used for development. It provides features to run commands as well as scripts. You can install R and R-Studio from their website.</p>
+                <h3>R Command Prompt</h3>
+                <hr />
+                <p>Once you have R environment setup, then it’s easy to start your R command prompt by just typing the following command at your command prompt:</p>
+                <pre><code class='r'>&gt; myString &lt;- "Hello, World!"
+&gt; print ( myString)
+[1] "Hello, World!"</code></pre>
+                <p>Here first statement defines a string variable myString, where we assign a string "Hello, World!" and then next statement print() is being used to print the value stored in variable
+                        myString.</p>
+                <h3>R Script File</h3>
+                <hr />
+                <p>Usually, you will do your programming by writing your programs in script files and then you execute those scripts at your command prompt with the help of R interpreter called
+                        Rscript. So let's start with writing following code in a text file called test.R</p>
+                <pre><code class='r'># Hello World
+myString &lt;- "Hello, World!"
+print ( myString)</code></pre>
+                <p>You can save the above code in a file helloWorld.R and execute it at the command prompt as given below. You can also do that within the R-Studio if you want to avoid the hassles of
+                        setting up the path.</p>
+                <pre><code class='r'>$ Rscript test.R 
+[1] "Hello, World!"</code></pre>
+                <h2>Data Types</h2>
+                <hr />
+                <p>Like most scripting languages, variables in R are not hard typed. You do not declare a variable to be limited to a given data type. The variables in R are assigned with R-Objects
+                        and the data type of the R-object becomes the data type of the variable. There are many types of R-objects. The frequently used ones are:</p>
+                <ul>
+                        <li>Vectors</li>
+                        <li> Lists</li>
+                        <li> Matrices</li>
+                        <li> Arrays</li>
+                        <li> Factors</li>
+                        <li> Data Frames</li>
+                </ul>
+                <p>The simplest of these objects is the vector object and there are six data types of these atomic vectors, also termed as six classes of vectors. The other R-Objects are built upon
+                        the atomic vectors.</p>
+                <ul>
+                        <li>Logical (TRUE / FALSE)</li>
+                        <li> Numeric (1, 2, 33.44)</li>
+                        <li> Integer (1L, -100L, 0L</li>
+                        <li> Complex (4 + 10i))</li>
+                        <li> Character ("1", "examples", 'of', "characters")</li>
+                        <li> Raw (A raw sequence of bytes.)</li>
+                </ul>
+                <pre><code class='r'>v &lt;- TRUE 
+print(class(v))
+[1] "logical" 
+
+v &lt;- 23.5
+print(class(v))
+[1] "numeric"
+
+v &lt;- 2L
+print(class(v))
+[1] "integer"
+
+v &lt;- 2+5i
+print(class(v))
+[1] "complex"
+
+v &lt;- "TRUE"
+print(class(v))
+[1] "character"
+
+v &lt;- charToRaw("Convert Characters to RAW")
+print(class(v))
+[1] "raw"</code></pre>
+                <h2>Variable</h2>
+                <hr />
+                <p>A valid variable name consists of letters, numbers and the dot or underline characters. The variable name starts with a letter or the dot not followed by a number.</p>
+                <pre><code class='r'>var_name2. # Valid Has letters, numbers, dot and underscore
+var_name% # Invalid Has the character '%'. Only dot(.) and underscore allowed.
+2var_name # Invalid Starts with a number
+.var_name # Valid Can start with a dot(.) but the dot(.)should not be followed by a number.
+var.name # Valid Variable name can contain a dot(.)
+.2var_name # Invalid The starting dot is followed by a number making it invalid.
+_var_name # Invalid Starts with _ which is not valid</code></pre>
+                <p>The variables can be assigned values using leftward, rightward and equal to operator.</p>
+                <pre><code class='r'># Assignment using equal operator.
+var.1 = c(0,1,2,3)
+
+# Assignment using leftward operator.
+var.2 <- c("learn","R")
+
+# Assignment using rightward operator.   
+c(TRUE,1) -> var.3
+
+cat ("var.1 is ", var.1 ,"\n")
+cat ("var.2 is ", var.2 ,"\n")
+cat ("var.3 is ", var.3 ,"\n")</code></pre>
+                <h3>print() / cat()</h3>
+                <hr />
+                <p>We can view the contents of a variable using the print or cat functions. Print takes a single parameter while cat takes multiple parameters and concatenates them all.</p>
+                <pre><code class='r'>print("Hello World")
+[1] "Hello World"
+
+cat("Hello", "World")
+Hello world</code></pre>
+                <h3>ls() / rm()</h3>
+                <hr />
+                <p>R does not provide for namespaces. (You can import certain packages to enforce namespaces). For example, a variable declared in an if block is also available after you come out of
+                        the block. It is very easy to lose track of the variables available at a given point. R provides for two very useful functions to deal with this.</p>
+                <p>ls() gives a list of variables defined at a given time. And, if you want, you can also delete a variable from the memory using the rm()</p>
+                <h2>Operators</h2>
+                <hr />
+                <p>R is quite rich in operators it provides. Not be as rich as Perl - but, the operators in R are taylored towards handling chunks of data. By default all the operators when applied on
+                        vectors perform the operation on individual corresponding elements. Operators in R can be classified into 5 major types:</p>
+                <h3>Arithmetic</h3>
+                <hr />
+                <p>R defines these arithmetic operators +, -, *, /, %%, %/%, ^</p>
+                <p>The meaning of +, -, *, /, ^ is the same as in most other languages. That does not need any clarification. The %% and %/% are more interesting. Both are related to integer division.
+                        One gives the quotient and the other gives the remainder</p>
+                <pre><code class='r'>&gt; # / performs the usual division
+&gt; c(4, 2, 5.5, 6.5) / c(2, 4, 2.5, 3)
+[1] 2.000000 0.500000 2.200000 2.166667
+
+&gt; # %% gives the remainder. Note that both the operands could be non integers. 
+&gt; # But the operator ensures integer division.
+&gt; c(4, 2, 5.5, 6.5) %% c(2, 4, 2.5, 3)
+[1] 0.0 2.0 0.5 0.5
+
+&gt; # %/% gives the quotient. Note that both the operands could be non integers. 
+&gt; # But the operator ensures integer division.
+&gt; c(4, 2, 5.5, 6.5) %/% c(2, 4, 2.5, 3)
+[1] 2 0 2 2</code></pre>
+                <h3>Relational</h3>
+                <hr />
+                <p>R defines the usual relational operators: &lt;, &gt;, =&lt;, &gt;=, ==, !=</p>
+                <p>They mean almost what they would mean in any other language. But, as mentioned above, the operators work on individual elements in the vector and produce another vector of boolean
+                        elements that stand for the result of each individual comparison. For example:</p>
+                <pre><code class='r'>&gt; c(4, 2, 5.5, 6.5) &lt; c(2, 4, 2.5, 3)
+[1] FALSE  TRUE FALSE FALSE</code></pre>
+                <h3>Logical</h3>
+                <hr />
+                <p>R defines all the usual logical operators: &amp;, |, !, &amp;&amp; and ||</p>
+                <p>The operators &amp;, | and ! do just what one would expect - operate on individual elements of the operand vectors and produce another boolean vector as result. But the &amp;&amp;
+                        and || work differently - They just operate on the first elements of the vectors and return a single boolean value based on that.</p>
+                <h3>Assignment</h3>
+                <hr />
+                <p>There are two types of assignments in R. Left assignment and Right assignment.</p>
+                <pre><code class='r'>&gt; a &lt;- c(1,2,3)
+&gt; a
+[1] 1 2 3
+&gt; c(3,4,5,6) -&gt; a
+&gt; a
+[1] 3 4 5 6</code></pre>
+                <p>You can also use &lt;&lt;-, -&gt;&gt; and ofcourse = There are subtle differences between these - we will check them out down the line.</p>
+                <h3>Miscellaneous</h3>
+                <hr />
+                <p>R also provides other operators :, %in% and %*%</p>
+                <pre><code class='r'>print(2:8) 
+[1] 2 3 4 5 6 7 8
+
+print(8 %in% 1:10) 
+[1] TRUE
+print(12 %in% 1:10)
+[1] FALSE</code></pre>
+                <p>These are not limited to numbers. They work as well on other data types.</p>
+                <h2>Code Flow</h2>
+                <hr />
+                <p>Line most programming languages, R provides code flow support using if/else blocks and for/while loops. No developer would need a detailed explanation about these. The below code
+                        snippets give an overview of how it is used in R code.</p>
+                <h3>if / else / else if</h3>
+                <hr />
+                <pre><code class='r'>output &lt;- 'blank'
+number &lt;- 10
+
+if(number &gt; 10){
+    report &lt;- "Greater than 10"
+}else if (number &lt; 10){
+    report &lt;- "Less than 10"
+}else{
+    report &lt;- 'Equal to 10'
+}
+print(report)
+
+[1] Equal to 10</code></pre>
+                <h3>for loops</h3>
+                <hr />
+                <p>We have versatile for loops in R. It provides ways of looping through the various data structures like vectors, lists, matrix, arrays.</p>
+                <pre><code class='r'>vec &lt;- c(1,3,4,6,9)
+for (v in vec) {
+    print(v)
+}
+
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5</code></pre>
+                <p>You can do the same with other data structures as well. Also the collection can be generated dynamically in the command:</p>
+                <pre><code class='r'>for ( i in 1:10 ){
+    print (i)
+}
+
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10</code></pre>
+                <h3>While Loops</h3>
+                <hr />
+                <p>While loops provide a more generic and more powerful mechanism to loop. The While loops in R are quite similar to most other languages:</p>
+                <pre><code class='r'>&gt; x &lt;- 0
+&gt; while(x &lt; 10){
++   cat('Value of x: ',x)
++   print("X is still less than 10")
++   # add one to x
++   x &lt;- x+1
++ }
+Value of x:  0[1] "X is still less than 10"
+Value of x:  1[1] "X is still less than 10"
+Value of x:  2[1] "X is still less than 10"
+Value of x:  3[1] "X is still less than 10"
+Value of x:  4[1] "X is still less than 10"
+Value of x:  5[1] "X is still less than 10"
+Value of x:  6[1] "X is still less than 10"
+Value of x:  7[1] "X is still less than 10"
+Value of x:  8[1] "X is still less than 10"
+Value of x:  9[1] "X is still less than 10"
+&gt;</code></pre>
+                <p>While loops also provide for break and next if you want to cut short through the loop at any point.</p>
+                <h2>Matrices</h2>
+                <hr />
+                <p>Matrix is a very useful data structure in R. A lot of data processing and machine learning computations involve Matrices. So it is important that we understand this well.</p>
+                <p>As one would expect, the Matrix is a two dimensional data structure consisting of rows and columns.</p>
+                <h3>Creating a Matrix</h3>
+                <hr />
+                <p>Matrix can be defined using the finction matrix(). The first/required argument to this function is the vector that should be cast into a matrix. The matrix() function splits the
+                        vector into a matrix based on the parameters passed in.</p>
+                <pre><code class='r'>&gt; matrix(1:20, nrow=4)
+        [,1] [,2] [,3] [,4] [,5]
+[1,]    1    5    9   13   17
+[2,]    2    6   10   14   18
+[3,]    3    7   11   15   19
+[4,]    4    8   12   16   20</code></pre>
+                <p>By default, the values are split along the columns. But, we can make it flow along rows by setting the byrow parameter.</p>
+                <pre><code class='r'>&gt; matrix(1:20, byrow=TRUE, nrow=4)
+        [,1] [,2] [,3] [,4] [,5]
+[1,]    1    2    3    4    5
+[2,]    6    7    8    9   10
+[3,]   11   12   13   14   15
+[4,]   16   17   18   19   20</code></pre>
+                <p>OR</p>
+                <pre><code class='r'>&gt; matrix(1:20, byrow=T, nrow=4)
+        [,1] [,2] [,3] [,4] [,5]
+[1,]    1    2    3    4    5
+[2,]    6    7    8    9   10
+[3,]   11   12   13   14   15
+[4,]   16   17   18   19   20
+&gt;</code></pre>
+                <p>Another way to create a matrix from vectors is to bind two or more vectors of same size. This can be done using rbind() or cbind().</p>
+                <pre><code class='r'>&gt; rbind(1:5, 2:6)
+        [,1] [,2] [,3] [,4] [,5]
+[1,]    1    2    3    4    5
+[2,]    2    3    4    5    6
+&gt; 
+&gt; cbind(1:5, 2:6)
+        [,1] [,2]
+[1,]    1    2
+[2,]    2    3
+[3,]    3    4
+[4,]    4    5
+[5,]    5    6
+&gt;</code></pre>
+                <p>In this case, the names of the individual vectors are assigned as matrix labels.</p>
+                <pre><code class='r'>&gt; v1 &lt;- c(1:4)
+&gt; v2 &lt;- c(4:1)
+&gt; rbind(v1,v2)
+    [,1] [,2] [,3] [,4]
+v1    1    2    3    4
+v2    4    3    2    1
+&gt; cbind(v1,v2)
+        v1 v2
+[1,]  1  4
+[2,]  2  3
+[3,]  3  2
+[4,]  4  1
+&gt;</code></pre>
+                <h3>Labels</h3>
+                <hr />
+                <p>It makes a lot of sense to label the rows and columns so that the code and graphs look a lot more meaningful. We can do that using the methods like colnames and rownames. Consider
+                        the below example that depicts the sale of bikes by different brands.</p>
+                <p>First define the two vectors</p>
+                <pre><code class='r'>&gt; honda &lt;- c(10, 14, 12, 13, 11)
+&gt; honda
+[1] 10 14 12 13 11
+&gt; yamaha &lt;- c(12, 13, 14, 11, 10)
+&gt; yamaha
+[1] 12 13 14 11 10</code></pre>
+                <p>Now combine into a single vector that can be split to create a matrix.</p>
+                <pre><code class='r'>&gt; sales &lt;- c(honda, yamaha)
+&gt; sales
+[1] 10 14 12 13 11 12 13 14 11 10</code></pre>
+                <p>Next, split the vector into a matrix.</p>
+                <pre><code class='r'>&gt; sales.matrix &lt;- matrix(sales, byrow=T, nrow=2)
+&gt; sales.matrix
+        [,1] [,2] [,3] [,4] [,5]
+[1,]   10   14   12   13   11
+[2,]   12   13   14   11   10</code></pre>
+                <p>Finally, use the functions colnames and rownames to add labels to the matrix.</p>
+                <pre><code class='r'>&gt; colnames(sales.matrix) &lt;- c("2013", "2014", "2015", "2016", "2017")
+&gt; rownames(sales.matrix) &lt;- c("Honda", "Yamaha")
+&gt; sales.matrix
+        2013 2014 2015 2016 2017
+Honda    10   14   12   13   11
+Yamaha   12   13   14   11   10
+&gt;</code></pre>
+                <h3>Matrix Arithmetic</h3>
+                <hr />
+                <p>Just like vectors, the arithmetic operations on the metrices work on the individual elements.</p>
+                <pre><code class='r'>&gt; mat &lt;- matrix(1:20, byrow = T, nrow=5)</code></pre>
+                <p>Scalar multiplication results in multiplication on each element.</p>
+                <pre><code class='r'>&gt; mat * 2
+        [,1] [,2] [,3] [,4]
+[1,]    2    4    6    8
+[2,]   10   12   14   16
+[3,]   18   20   22   24
+[4,]   26   28   30   32
+[5,]   34   36   38   40</code></pre>
+                <p>Scalar division results in division of each element</p>
+                <pre><code class='r'>&gt; mat / 2
+        [,1] [,2] [,3] [,4]
+[1,]  0.5    1  1.5    2
+[2,]  2.5    3  3.5    4
+[3,]  4.5    5  5.5    6
+[4,]  6.5    7  7.5    8
+[5,]  8.5    9  9.5   10</code></pre>
+                <p>Similarly, the exponent method works on each element.</p>
+                <pre><code class='r'>&gt; mat ^2
+        [,1] [,2] [,3] [,4]
+[1,]    1    4    9   16
+[2,]   25   36   49   64
+[3,]   81  100  121  144
+[4,]  169  196  225  256
+[5,]  289  324  361  400</code></pre>
+                <p>You can also get an inverse of a matrix that results in inverse of each element.</p>
+                <pre><code class='r'>&gt; 1/mat
+            [,1]       [,2]       [,3]       [,4]
+[1,] 1.00000000 0.50000000 0.33333333 0.25000000
+[2,] 0.20000000 0.16666667 0.14285714 0.12500000
+[3,] 0.11111111 0.10000000 0.09090909 0.08333333
+[4,] 0.07692308 0.07142857 0.06666667 0.06250000
+[5,] 0.05882353 0.05555556 0.05263158 0.05000000</code></pre>
+                <p>Logical operations result in a matrix of boolean values.</p>
+                <pre><code class='r'>&gt; mat &gt; 15
+        [,1]  [,2]  [,3]  [,4]
+[1,] FALSE FALSE FALSE FALSE
+[2,] FALSE FALSE FALSE FALSE
+[3,] FALSE FALSE FALSE FALSE
+[4,] FALSE FALSE FALSE  TRUE
+[5,]  TRUE  TRUE  TRUE  TRUE</code></pre>
+                <p>You can also filter the matrix elements to get a vector output.</p>
+                <pre><code class='r'>&gt; mat[mat &gt; 15]
+[1] 17 18 19 16 20</code></pre>
+                <p>Just like scalar addition, you can use the operations on two matrices to get result on individual elements.</p>
+                <pre><code class='r'>&gt; mat + mat
+        [,1] [,2] [,3] [,4]
+[1,]    2    4    6    8
+[2,]   10   12   14   16
+[3,]   18   20   22   24
+[4,]   26   28   30   32
+[5,]   34   36   38   40
+&gt; mat * mat
+        [,1] [,2] [,3] [,4]
+[1,]    1    4    9   16
+[2,]   25   36   49   64
+[3,]   81  100  121  144
+[4,]  169  196  225  256
+[5,]  289  324  361  400
+&gt; mat / mat
+        [,1] [,2] [,3] [,4]
+[1,]    1    1    1    1
+[2,]    1    1    1    1
+[3,]    1    1    1    1
+[4,]    1    1    1    1
+[5,]    1    1    1    1
+&gt; mat ^ mat
+                [,1]         [,2]         [,3]         [,4]
+[1,] 1.000000e+00 4.000000e+00 2.700000e+01 2.560000e+02
+[2,] 3.125000e+03 4.665600e+04 8.235430e+05 1.677722e+07
+[3,] 3.874205e+08 1.000000e+10 2.853117e+11 8.916100e+12
+[4,] 3.028751e+14 1.111201e+16 4.378939e+17 1.844674e+19
+[5,] 8.272403e+20 3.934641e+22 1.978420e+24 1.048576e+26
+&gt;</code></pre>
+                <p>Matrix dot product is denoted by %*%</p>
+                <pre><code class='r'>&gt; mat %*% t(mat)
+        [,1] [,2] [,3] [,4] [,5]
+[1,]   30   70  110  150  190
+[2,]   70  174  278  382  486
+[3,]  110  278  446  614  782
+[4,]  150  382  614  846 1078
+[5,]  190  486  782 1078 1374
+&gt;</code></pre>
+                <p>The data operations like sum and mean are implemented by functions like colSums, colMeans, rowSums, rowMeans, sum</p>
+                <pre><code class='r'>&gt; colSums(sales.matrix)
+2013 2014 2015 2016 2017 
+    22   27   26   24   21 
+
+&gt; colMeans(sales.matrix)
+2013 2014 2015 2016 2017 
+11.0 13.5 13.0 12.0 10.5 
+
+&gt; rowSums(sales.matrix)
+    Honda Yamaha 
+    60     60 
+
+&gt; rowMeans(sales.matrix)
+    Honda Yamaha 
+    12     12 
+
+&gt; sum(sales.matrix)
+[1] 120
+&gt;</code></pre>
+                <p>Data slicing and indexing are required for any data processing. They are implemented as follows</p>
+                <pre><code class='r'>&gt; mat[1,]
+[1] 1 2 3 4
+
+&gt; mat[1,3:4]
+[1] 3 4
+
+&gt; mat[1:3,1:3]
+        [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    5    6    7
+[3,]    9   10   11
+
+&gt; mat[,3:4]
+        [,1] [,2]
+[1,]    3    4
+[2,]    7    8
+[3,]   11   12
+[4,]   15   16
+[5,]   19   20
+&gt;</code></pre>
+                <h2>Built-in Data Sets</h2>
+                <hr />
+                <p>R provides several built in data sets. They have reasonable size and accuracy and help us in rapid prototyping and also in using standard values in regular code</p>
+                <p>R provides these datasets in form of Data Frames. Here are a few examples</p>
+                <h3>States:</h3>
+                <hr />
+                <pre><code class='r'>&gt; state.abb
+    [1] "AL" "AK" "AZ" "AR" "CA" "CO" "CT" "DE" "FL" "GA" "HI" "ID" "IL" "IN" "IA" "KS" "KY" "LA" "ME" "MD" "MA" "MI" "MN" "MS" "MO" "MT" "NE" "NV" "NH"
+[30] "NJ" "NM" "NY" "NC" "ND" "OH" "OK" "OR" "PA" "RI" "SC" "SD" "TN" "TX" "UT" "VT" "VA" "WA" "WV" "WI" "WY"
+&gt; state.area
+    [1]  51609 589757 113909  53104 158693 104247   5009   2057  58560  58876   6450  83557  56400  36291  56290  82264  40395  48523  33215  10577   8257
+[22]  58216  84068  47716  69686 147138  77227 110540   9304   7836 121666  49576  52586  70665  41222  69919  96981  45333   1214  31055  77047  42244
+[43] 267339  84916   9609  40815  68192  24181  56154  97914
+&gt;
+&gt; head(state.x77)
+            Population Income Illiteracy Life Exp Murder HS Grad Frost   Area
+Alabama          3615   3624        2.1    69.05   15.1    41.3    20  50708
+Alaska            365   6315        1.5    69.31   11.3    66.7   152 566432
+Arizona          2212   4530        1.8    70.55    7.8    58.1    15 113417
+Arkansas         2110   3378        1.9    70.66   10.1    39.9    65  51945
+California      21198   5114        1.1    71.71   10.3    62.6    20 156361
+Colorado         2541   4884        0.7    72.06    6.8    63.9   166 103766</code></pre>
+                <h3>WorldPhones:</h3>
+                <hr />
+                <pre><code class='r'>&gt; WorldPhones
+        N.Amer Europe Asia S.Amer Oceania Africa Mid.Amer
+1951  45939  21574 2876   1815    1646     89      555
+1956  60423  29990 4708   2568    2366   1411      733
+1957  64721  32510 5230   2695    2526   1546      773
+1958  68484  35218 6662   2845    2691   1663      836
+1959  71799  37598 6856   3000    2868   1769      911
+1960  76036  40341 8220   3145    3054   1905     1008
+1961  79831  43173 9053   3338    3224   2005     1076
+&gt;</code></pre>
+                <p>There are many other data sets.</p>
+                <table>
+                        <tr>
+                                <th>Dataset</th>
+                                <th>Contents</th>
+                        </tr>
+                        <tr>
+                                <td>AirPassengers</td>
+                                <td>Monthly Airline Passenger Numbers 1949-1960</td>
+                        </tr>
+                        <tr>
+                                <td>BJsales</td>
+                                <td>Sales Data with Leading Indicator</td>
+                        </tr>
+                        <tr>
+                                <td>BJsales.lead (BJsales)</td>
+                                <td>Sales Data with Leading Indicator</td>
+                        </tr>
+                        <tr>
+                                <td>BOD</td>
+                                <td>Biochemical Oxygen Demand</td>
+                        </tr>
+                        <tr>
+                                <td>CO2</td>
+                                <td>Carbon Dioxide Uptake in Grass Plants</td>
+                        </tr>
+                        <tr>
+                                <td>ChickWeight</td>
+                                <td>Weight versus age of chicks on different diets</td>
+                        </tr>
+                        <tr>
+                                <td>DNase</td>
+                                <td>Elisa assay of DNase</td>
+                        </tr>
+                        <tr>
+                                <td>EuStockMarkets</td>
+                                <td>Daily Closing Prices of Major European Stock Indices, 1991-1998</td>
+                        </tr>
+                        <tr>
+                                <td>Formaldehyde</td>
+                                <td>Determination of Formaldehyde</td>
+                        </tr>
+                        <tr>
+                                <td>HairEyeColor</td>
+                                <td>Hair and Eye Color of Statistics Students</td>
+                        </tr>
+                        <tr>
+                                <td>Harman23.cor</td>
+                                <td>Harman Example 2.3</td>
+                        </tr>
+                        <tr>
+                                <td>Harman74.cor</td>
+                                <td>Harman Example 7.4</td>
+                        </tr>
+                        <tr>
+                                <td>Indometh</td>
+                                <td>Pharmacokinetics of Indomethacin</td>
+                        </tr>
+                        <tr>
+                                <td>InsectSprays</td>
+                                <td>Effectiveness of Insect Sprays</td>
+                        </tr>
+                        <tr>
+                                <td>JohnsonJohnson</td>
+                                <td>Quarterly Earnings per Johnson & Johnson Share</td>
+                        </tr>
+                        <tr>
+                                <td>LakeHuron</td>
+                                <td>Level of Lake Huron 1875-1972</td>
+                        </tr>
+                        <tr>
+                                <td>LifeCycleSavings</td>
+                                <td>Intercountry Life-Cycle Savings Data</td>
+                        </tr>
+                        <tr>
+                                <td>Loblolly</td>
+                                <td>Growth of Loblolly pine trees</td>
+                        </tr>
+                        <tr>
+                                <td>Nile</td>
+                                <td>Flow of the River Nile</td>
+                        </tr>
+                        <tr>
+                                <td>Orange</td>
+                                <td>Growth of Orange Trees</td>
+                        </tr>
+                        <tr>
+                                <td>OrchardSprays</td>
+                                <td>Potency of Orchard Sprays</td>
+                        </tr>
+                        <tr>
+                                <td>PlantGrowth</td>
+                                <td>Results from an Experiment on Plant Growth</td>
+                        </tr>
+                        <tr>
+                                <td>Puromycin</td>
+                                <td>Reaction Velocity of an Enzymatic Reaction</td>
+                        </tr>
+                        <tr>
+                                <td>Seatbelts</td>
+                                <td>Road Casualties in Great Britain 1969-84</td>
+                        </tr>
+                        <tr>
+                                <td>Theoph</td>
+                                <td>Pharmacokinetics of Theophylline</td>
+                        </tr>
+                        <tr>
+                                <td>Titanic</td>
+                                <td>Survival of passengers on the Titanic</td>
+                        </tr>
+                        <tr>
+                                <td>ToothGrowth</td>
+                                <td>The Effect of Vitamin C on Tooth Growth in Guinea Pigs</td>
+                        </tr>
+                        <tr>
+                                <td>UCBAdmissions</td>
+                                <td>Student Admissions at UC Berkeley</td>
+                        </tr>
+                        <tr>
+                                <td>UKDriverDeaths</td>
+                                <td>Road Casualties in Great Britain 1969-84</td>
+                        </tr>
+                        <tr>
+                                <td>UKgas</td>
+                                <td>UK Quarterly Gas Consumption</td>
+                        </tr>
+                        <tr>
+                                <td>USAccDeaths</td>
+                                <td>Accidental Deaths in the US 1973-1978</td>
+                        </tr>
+                        <tr>
+                                <td>USArrests</td>
+                                <td>Violent Crime Rates by US State</td>
+                        </tr>
+                        <tr>
+                                <td>USJudgeRatings</td>
+                                <td>Lawyers' Ratings of State Judges in the US Superior Court</td>
+                        </tr>
+                        <tr>
+                                <td>USPersonalExpenditure</td>
+                                <td>Personal Expenditure Data</td>
+                        </tr>
+                        <tr>
+                                <td>UScitiesD</td>
+                                <td>Distances Between European Cities and Between US Cities</td>
+                        </tr>
+                        <tr>
+                                <td>VADeaths</td>
+                                <td>Death Rates in Virginia (1940)</td>
+                        </tr>
+                        <tr>
+                                <td>WWWusage</td>
+                                <td>Internet Usage per Minute</td>
+                        </tr>
+                        <tr>
+                                <td>WorldPhones</td>
+                                <td>The World's Telephones</td>
+                        </tr>
+                        <tr>
+                                <td>ability.cov</td>
+                                <td>Ability and Intelligence Tests</td>
+                        </tr>
+                        <tr>
+                                <td>airmiles</td>
+                                <td>Passenger Miles on Commercial US Airlines, 1937-1960</td>
+                        </tr>
+                        <tr>
+                                <td>airquality</td>
+                                <td>New York Air Quality Measurements</td>
+                        </tr>
+                        <tr>
+                                <td>anscombe</td>
+                                <td>Anscombe's Quartet of 'Identical' Simple Linear Regressions</td>
+                        </tr>
+                        <tr>
+                                <td>attenu</td>
+                                <td>The Joyner-Boore Attenuation Data</td>
+                        </tr>
+                        <tr>
+                                <td>attitude</td>
+                                <td>The Chatterjee-Price Attitude Data</td>
+                        </tr>
+                        <tr>
+                                <td>austres</td>
+                                <td>Quarterly Time Series of the Number of Australian Residents</td>
+                        </tr>
+                        <tr>
+                                <td>beaver1 (beavers)</td>
+                                <td>Body Temperature Series of Two Beavers</td>
+                        </tr>
+                        <tr>
+                                <td>beaver2 (beavers)</td>
+                                <td>Body Temperature Series of Two Beavers</td>
+                        </tr>
+                        <tr>
+                                <td>cars</td>
+                                <td>Speed and Stopping Distances of Cars</td>
+                        </tr>
+                        <tr>
+                                <td>chickwts</td>
+                                <td>Chicken Weights by Feed Type</td>
+                        </tr>
+                        <tr>
+                                <td>co2</td>
+                                <td>Mauna Loa Atmospheric CO2 Concentration</td>
+                        </tr>
+                        <tr>
+                                <td>crimtab</td>
+                                <td>Student's 3000 Criminals Data</td>
+                        </tr>
+                        <tr>
+                                <td>discoveries</td>
+                                <td>Yearly Numbers of Important Discoveries</td>
+                        </tr>
+                        <tr>
+                                <td>esoph</td>
+                                <td>Smoking, Alcohol and (O)esophageal Cancer</td>
+                        </tr>
+                        <tr>
+                                <td>euro</td>
+                                <td>Conversion Rates of Euro Currencies</td>
+                        </tr>
+                        <tr>
+                                <td>euro.cross (euro)</td>
+                                <td>Conversion Rates of Euro Currencies</td>
+                        </tr>
+                        <tr>
+                                <td>eurodist</td>
+                                <td>Distances Between European Cities and Between US Cities</td>
+                        </tr>
+                        <tr>
+                                <td>faithful</td>
+                                <td>Old Faithful Geyser Data</td>
+                        </tr>
+                        <tr>
+                                <td>fdeaths (UKLungDeaths)</td>
+                                <td>Monthly Deaths from Lung Diseases in the UK</td>
+                        </tr>
+                        <tr>
+                                <td>freeny</td>
+                                <td>Freeny's Revenue Data</td>
+                        </tr>
+                        <tr>
+                                <td>freeny.x (freeny)</td>
+                                <td>Freeny's Revenue Data</td>
+                        </tr>
+                        <tr>
+                                <td>freeny.y (freeny)</td>
+                                <td>Freeny's Revenue Data</td>
+                        </tr>
+                        <tr>
+                                <td>infert</td>
+                                <td>Infertility after Spontaneous and Induced Abortion</td>
+                        </tr>
+                        <tr>
+                                <td>iris</td>
+                                <td>Edgar Anderson's Iris Data</td>
+                        </tr>
+                        <tr>
+                                <td>iris3</td>
+                                <td>Edgar Anderson's Iris Data</td>
+                        </tr>
+                        <tr>
+                                <td>islands</td>
+                                <td>Areas of the World's Major Landmasses</td>
+                        </tr>
+                        <tr>
+                                <td>ldeaths (UKLungDeaths)</td>
+                                <td>Monthly Deaths from Lung Diseases in the UK</td>
+                        </tr>
+                        <tr>
+                                <td>lh</td>
+                                <td>Luteinizing Hormone in Blood Samples</td>
+                        </tr>
+                        <tr>
+                                <td>longley</td>
+                                <td>Longley's Economic Regression Data</td>
+                        </tr>
+                        <tr>
+                                <td>lynx</td>
+                                <td>Annual Canadian Lynx trappings 1821-1934</td>
+                        </tr>
+                        <tr>
+                                <td>mdeaths (UKLungDeaths)</td>
+                                <td>Monthly Deaths from Lung Diseases in the UK</td>
+                        </tr>
+                        <tr>
+                                <td>morley</td>
+                                <td>Michelson Speed of Light Data</td>
+                        </tr>
+                        <tr>
+                                <td>mtcars</td>
+                                <td>Motor Trend Car Road Tests</td>
+                        </tr>
+                        <tr>
+                                <td>nhtemp</td>
+                                <td>Average Yearly Temperatures in New Haven</td>
+                        </tr>
+                        <tr>
+                                <td>nottem</td>
+                                <td>Average Monthly Temperatures at Nottingham, 1920-1939</td>
+                        </tr>
+                        <tr>
+                                <td>npk</td>
+                                <td>Classical N, P, K Factorial Experiment</td>
+                        </tr>
+                        <tr>
+                                <td>occupationalStatus</td>
+                                <td>Occupational Status of Fathers and their Sons</td>
+                        </tr>
+                        <tr>
+                                <td>precip</td>
+                                <td>Annual Precipitation in US Cities</td>
+                        </tr>
+                        <tr>
+                                <td>presidents</td>
+                                <td>Quarterly Approval Ratings of US Presidents</td>
+                        </tr>
+                        <tr>
+                                <td>pressure</td>
+                                <td>Vapor Pressure of Mercury as a Function of Temperature</td>
+                        </tr>
+                        <tr>
+                                <td>quakes</td>
+                                <td>Locations of Earthquakes off Fiji</td>
+                        </tr>
+                        <tr>
+                                <td>randu</td>
+                                <td>Random Numbers from Congruential Generator RANDU</td>
+                        </tr>
+                        <tr>
+                                <td>rivers</td>
+                                <td>Lengths of Major North American Rivers</td>
+                        </tr>
+                        <tr>
+                                <td>rock</td>
+                                <td>Measurements on Petroleum Rock Samples</td>
+                        </tr>
+                        <tr>
+                                <td>sleep</td>
+                                <td>Student's Sleep Data</td>
+                        </tr>
+                        <tr>
+                                <td>stack.loss (stackloss)</td>
+                                <td>Brownlee's Stack Loss Plant Data</td>
+                        </tr>
+                        <tr>
+                                <td>stack.x (stackloss)</td>
+                                <td>Brownlee's Stack Loss Plant Data</td>
+                        </tr>
+                        <tr>
+                                <td>stackloss</td>
+                                <td>Brownlee's Stack Loss Plant Data</td>
+                        </tr>
+                        <tr>
+                                <td>state.abb (state)</td>
+                                <td>US State Facts and Figures</td>
+                        </tr>
+                        <tr>
+                                <td>state.area (state)</td>
+                                <td>US State Facts and Figures</td>
+                        </tr>
+                        <tr>
+                                <td>state.center (state)</td>
+                                <td>US State Facts and Figures</td>
+                        </tr>
+                        <tr>
+                                <td>state.division (state)</td>
+                                <td>US State Facts and Figures</td>
+                        </tr>
+                        <tr>
+                                <td>state.name (state)</td>
+                                <td>US State Facts and Figures</td>
+                        </tr>
+                        <tr>
+                                <td>state.region (state)</td>
+                                <td>US State Facts and Figures</td>
+                        </tr>
+                        <tr>
+                                <td>state.x77 (state)</td>
+                                <td>US State Facts and Figures</td>
+                        </tr>
+                        <tr>
+                                <td>sunspot.month</td>
+                                <td>Monthly Sunspot Data, from 1749 to "Present"</td>
+                        </tr>
+                        <tr>
+                                <td>sunspot.year</td>
+                                <td>Yearly Sunspot Data, 1700-1988</td>
+                        </tr>
+                        <tr>
+                                <td>sunspots</td>
+                                <td>Monthly Sunspot Numbers, 1749-1983</td>
+                        </tr>
+                        <tr>
+                                <td>swiss</td>
+                                <td>Swiss Fertility and Socioeconomic Indicators (1888) Data</td>
+                        </tr>
+                        <tr>
+                                <td>treering</td>
+                                <td>Yearly Treering Data, -6000-1979</td>
+                        </tr>
+                        <tr>
+                                <td>trees</td>
+                                <td>Girth, Height and Volume for Black Cherry Trees</td>
+                        </tr>
+                        <tr>
+                                <td>uspop</td>
+                                <td>Populations Recorded by the US Census</td>
+                        </tr>
+                        <tr>
+                                <td>volcano</td>
+                                <td>Topographic Information on Auckland's Maunga Whau Volcano</td>
+                        </tr>
+                        <tr>
+                                <td>warpbreaks</td>
+                                <td>The Number of Breaks in Yarn during Weaving</td>
+                        </tr>
+                        <tr>
+                                <td>women</td>
+                                <td>Average Heights and Weights for American Women</td>
+                        </tr>
+                </table>
+                <h2>Data Frames</h2>
+                <hr />
+                <p>All data in vectors and matrices is enforced to a single data type. But Data Frames let you overcome this limitation. A data frame can contain several elements of different types.
+                        An example of R Data Frame can be seen here:</p>
+                <pre><code class='r'>&gt; WorldPhones
+        N.Amer Europe Asia S.Amer Oceania Africa Mid.Amer
+1951  45939  21574 2876   1815    1646     89      555
+1956  60423  29990 4708   2568    2366   1411      733
+1957  64721  32510 5230   2695    2526   1546      773
+1958  68484  35218 6662   2845    2691   1663      836
+1959  71799  37598 6856   3000    2868   1769      911
+1960  76036  40341 8220   3145    3054   1905     1008
+1961  79831  43173 9053   3338    3224   2005     1076
+&gt;</code></pre>
+                <h3>Creating Data Frame</h3>
+                <hr />
+                <p>A new data frame object can be created using the function data.frame()</p>
+                <pre><code class='r'>&gt; empty &lt;- data.frame() # empty data frame
+&gt; vector.1 &lt;- 1:10 # vector of integers
+&gt; vector.2 &lt;- letters[1:10] # vector of strings
+&gt; df &lt;- data.frame(column.1=vector.1,column.2=vector.2)
+&gt; 
+&gt; df
+    column.1 column.2
+1         1        a
+2         2        b
+3         3        c
+4         4        d
+5         5        e
+6         6        f
+7         7        g
+8         8        h
+9         9        i
+10       10        j
+&gt;</code></pre>
+                <h3>Importing and Exporting Data</h3>
+                <hr />
+                <p>You can export and import the data frame to a CSV file. This is useful for saving the context of a data operation.</p>
+                <pre><code class='r'>&gt; write.csv(df, file='mydata.csv')     # Save the data frame to CSV file
+&gt;</code></pre>
+                <p>You can load the contents from the CSV file as below</p>
+                <pre><code class='r'>&gt; d2 &lt;- read.csv('mydata.csv')         # Load the data frame from CSV file
+&gt; d2
+    X column.1 column.2
+1   1        1        a
+2   2        2        b
+3   3        3        c
+4   4        4        d
+5   5        5        e
+6   6        6        f
+7   7        7        g
+8   8        8        h
+9   9        9        i
+10 10       10        j</code></pre>
+                <p>Please note that there is a difference in what we saved and what we read from the file. The row numbers are also saved in the CSV and then loaded as an independent column when
+                        reading from the CSV.</p>
+                <h2>Analyzing Data Frames</h2>
+                <hr />
+                <p>While analyzing the data, it is very useful if we can have an initial idea about the kind of data present in the data frame - the columns, the data type, max/min/mean values for
+                        numbers, etc. R provides a good set of utilities to make this job simpler. Let us try to understand the data frame states.x77</p>
+                <h3>Head / Tail</h3>
+                <hr />
+                <p>The data frame is too big to be viewed manually. We can get a very basic glimpse of the data in there by using the head.</p>
+                <pre><code class='r'>&gt; head(state.x77)
+            Population Income Illiteracy Life Exp Murder HS Grad Frost   Area
+Alabama          3615   3624        2.1    69.05   15.1    41.3    20  50708
+Alaska            365   6315        1.5    69.31   11.3    66.7   152 566432
+Arizona          2212   4530        1.8    70.55    7.8    58.1    15 113417
+Arkansas         2110   3378        1.9    70.66   10.1    39.9    65  51945
+California      21198   5114        1.1    71.71   10.3    62.6    20 156361
+Colorado         2541   4884        0.7    72.06    6.8    63.9   166 103766
+&gt;</code></pre>
+                <p>Or you can use tail to get the last 6 elements</p>
+                <pre><code class='r'>&gt; tail(state.x77)
+                Population Income Illiteracy Life Exp Murder HS Grad Frost  Area
+Vermont              472   3907        0.6    71.64    5.5    57.1   168  9267
+Virginia            4981   4701        1.4    70.08    9.5    47.8    85 39780
+Washington          3559   4864        0.6    71.72    4.3    63.5    32 66570
+West Virginia       1799   3617        1.4    69.48    6.7    41.6   100 24070
+Wisconsin           4589   4468        0.7    72.48    3.0    54.5   149 54464
+Wyoming              376   4566        0.6    70.29    6.9    62.9   173 97203
+&gt;</code></pre>
+                <p>Please note that 6 is just the default value for number of rows in head and tail. You can always override it using the second parameter</p>
+                <pre><code class='r'>&gt; head(mtcars, 3)
+                mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4     21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+&gt; 
+&gt; tail(mtcars, 3)
+                mpg cyl disp  hp drat   wt qsec vs am gear carb
+Ferrari Dino  19.7   6  145 175 3.62 2.77 15.5  0  1    5    6
+Maserati Bora 15.0   8  301 335 3.54 3.57 14.6  0  1    5    8
+Volvo 142E    21.4   4  121 109 4.11 2.78 18.6  1  1    4    2
+&gt;</code></pre>
+                <h3>Summary and Structure</h3>
+                <hr />
+                <p>R also provides two more utility functions that help you understand the data</p>
+                <pre><code class='r'>&gt; #Structure
+&gt; str(state.x77)
+    num [1:50, 1:8] 3615 365 2212 2110 21198 ...
+    - attr(*, "dimnames")=List of 2
+    ..$ : chr [1:50] "Alabama" "Alaska" "Arizona" "Arkansas" ...
+    ..$ : chr [1:8] "Population" "Income" "Illiteracy" "Life Exp" ...
+&gt; 
+&gt; summary(state.x77)
+    Population        Income       Illiteracy       Life Exp         Murder          HS Grad          Frost             Area       
+    Min.   :  365   Min.   :3098   Min.   :0.500   Min.   :67.96   Min.   : 1.400   Min.   :37.80   Min.   :  0.00   Min.   :  1049  
+    1st Qu.: 1080   1st Qu.:3993   1st Qu.:0.625   1st Qu.:70.12   1st Qu.: 4.350   1st Qu.:48.05   1st Qu.: 66.25   1st Qu.: 36985  
+    Median : 2838   Median :4519   Median :0.950   Median :70.67   Median : 6.850   Median :53.25   Median :114.50   Median : 54277  
+    Mean   : 4246   Mean   :4436   Mean   :1.170   Mean   :70.88   Mean   : 7.378   Mean   :53.11   Mean   :104.46   Mean   : 70736  
+    3rd Qu.: 4968   3rd Qu.:4814   3rd Qu.:1.575   3rd Qu.:71.89   3rd Qu.:10.675   3rd Qu.:59.15   3rd Qu.:139.75   3rd Qu.: 81163  
+    Max.   :21198   Max.   :6315   Max.   :2.800   Max.   :73.60   Max.   :15.100   Max.   :67.30   Max.   :188.00   Max.   :566432  
+&gt;</code></pre>
+                <h3>Counts</h3>
+                <hr />
+                <p>There is another set of functions that help us understand the meaning of the information contained in the data frame</p>
+                <pre><code class='r'>&gt; ncol(df)
+[1] 8
+&gt; nrow(df)
+[1] 50
+&gt; 
+&gt; colnames(df)
+[1] "Population" "Income"     "Illiteracy" "Life Exp"   "Murder"     "HS Grad"    "Frost"      "Area"      
+&gt; rownames(df)
+    [1] "Alabama"        "Alaska"         "Arizona"        "Arkansas"       "California"     "Colorado"       "Connecticut"    "Delaware"       "Florida"       
+[10] "Georgia"        "Hawaii"         "Idaho"          "Illinois"       "Indiana"        "Iowa"           "Kansas"         "Kentucky"       "Louisiana"     
+[19] "Maine"          "Maryland"       "Massachusetts"  "Michigan"       "Minnesota"      "Mississippi"    "Missouri"       "Montana"        "Nebraska"      
+[28] "Nevada"         "New Hampshire"  "New Jersey"     "New Mexico"     "New York"       "North Carolina" "North Dakota"   "Ohio"           "Oklahoma"      
+[37] "Oregon"         "Pennsylvania"   "Rhode Island"   "South Carolina" "South Dakota"   "Tennessee"      "Texas"          "Utah"           "Vermont"       
+[46] "Virginia"       "Washington"     "West Virginia"  "Wisconsin"      "Wyoming"       
+&gt;</code></pre>
+                <h3>Filter Data</h3>
+                <hr />
+                <p>You can also filter the data to get a subset of what is available in the data frame. For example, if we want to pull out only those cars that have 5 gears:</p>
+                <pre><code class='r'>&gt; mtcars[mtcars$gear == 5, ]
+                mpg cyl  disp  hp drat    wt qsec vs am gear carb
+Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.7  0  1    5    2
+Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.9  1  1    5    2
+Ford Pantera L 15.8   8 351.0 264 4.22 3.170 14.5  0  1    5    4
+Ferrari Dino   19.7   6 145.0 175 3.62 2.770 15.5  0  1    5    6
+Maserati Bora  15.0   8 301.0 335 3.54 3.570 14.6  0  1    5    8
+&gt;</code></pre>
+                <p>We can also use logical operators on the condition out there. For example, if we want an additional criteria that the car should also have 4 cylinders, we can do this:</p>
+                <pre><code class='r'>&gt; mtcars[mtcars$gear == 5 &amp; mtcars$cyl &gt; 4, ]
+                mpg cyl disp  hp drat   wt qsec vs am gear carb
+Ford Pantera L 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4
+Ferrari Dino   19.7   6  145 175 3.62 2.77 15.5  0  1    5    6
+Maserati Bora  15.0   8  301 335 3.54 3.57 14.6  0  1    5    8
+&gt;</code></pre>
+                <p>We can also perform statistical operations on this data:</p>
+                <pre><code class='r'>&gt; mean(mtcars[mtcars$hp &gt; 100 &amp; mtcars$wt &gt; 2.5, ]$mpg)
+[1] 16.86364
+&gt;</code></pre>
+                <h2>Indexing Data Frames</h2>
+                <hr />
+                <p>By indexing, we can obtain subsets of the given dataframe. Often we need to add new rows and columns to the given data frame. R provides some functions to enable this functionality.
+                        R provides two methods - cbind and rbind to do this.</p>
+                <h3>Add Row</h3>
+                <hr />
+                <p>Lets first check out the row bind functionality. To start with, pick up two parts of the mtcars dataset.</p>
+                <pre><code class='r'>&gt; df1 = mtcars[1:5, 1:5]
+&gt; df1
+                    mpg cyl disp  hp drat
+Mazda RX4         21.0   6  160 110 3.90
+Mazda RX4 Wag     21.0   6  160 110 3.90
+Datsun 710        22.8   4  108  93 3.85
+Hornet 4 Drive    21.4   6  258 110 3.08
+Hornet Sportabout 18.7   8  360 175 3.15
+&gt; 
+&gt; df2 = mtcars[6, 1:5]
+&gt; df2
+            mpg cyl disp  hp drat
+Valiant 18.1   6  225 105 2.76</code></pre>
+                <p>Now, we can join these using rbind</p>
+                <pre><code class='r'>&gt; df &lt;- rbind(df1, df2)
+&gt; df
+                    mpg cyl disp  hp drat
+Mazda RX4         21.0   6  160 110 3.90
+Mazda RX4 Wag     21.0   6  160 110 3.90
+Datsun 710        22.8   4  108  93 3.85
+Hornet 4 Drive    21.4   6  258 110 3.08
+Hornet Sportabout 18.7   8  360 175 3.15
+Valiant           18.1   6  225 105 2.76
+&gt;</code></pre>
+                <h3>Add Column</h3>
+                <hr />
+                <p>Similarly, we can also join columns using the cbind command.</p>
+                <pre><code class='r'>&gt; df1 &lt;- mtcars[1:5, 1:5]
+&gt; df2 &lt;- mtcars[1:5, 6:7]
+&gt; 
+&gt; df1
+                    mpg cyl disp  hp drat
+Mazda RX4         21.0   6  160 110 3.90
+Mazda RX4 Wag     21.0   6  160 110 3.90
+Datsun 710        22.8   4  108  93 3.85
+Hornet 4 Drive    21.4   6  258 110 3.08
+Hornet Sportabout 18.7   8  360 175 3.15
+&gt; df2
+                        wt  qsec
+Mazda RX4         2.620 16.46
+Mazda RX4 Wag     2.875 17.02
+Datsun 710        2.320 18.61
+Hornet 4 Drive    3.215 19.44
+Hornet Sportabout 3.440 17.02
+&gt;</code></pre>
+                <p>Now, we can merge these using the rbind method</p>
+                <pre><code class='r'>&gt; cbind(df1, df2)
+                    mpg cyl disp  hp drat    wt  qsec
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02
+&gt;</code></pre>
+                <p>Ofcourse, for the cbind and rbind to work properly, the other dimension should match correctly. For example, while appending rows using rbind, the columns should match properly and
+                        vice-versa.</p>
+                <h2>Lists</h2>
+                <hr />
+                <p>Lists are the objects which contain elements of different types like numbers, strings, vectors, data frames and another list inside it. A list can also contain a matrix or even
+                        function as its elements. List is created using list() function. Lists are typically used for organizing data rather than processing it.</p>
+                <h3>Creating a List</h3>
+                <hr />
+                <p>Lists are created using the list() function. Following is an example to create a list containing strings, numbers, vectors and a logical values.</p>
+                <pre><code class='r'># Create a list containing strings, numbers, vectors and a logical
+# values.
+&gt; list_data &lt;- list(mtcars[1:5,], c('A', 'Sample', 'Vector'), c(21,32,11), TRUE, 51.23, 119.1)
+&gt; list_data
+[[1]]
+                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+
+[[2]]
+[1] "A"      "Sample" "Vector"
+
+[[3]]
+[1] 21 32 11
+
+[[4]]
+[1] TRUE
+
+[[5]]
+[1] 51.23
+
+[[6]]
+[1] 119.1
+
+&gt;</code></pre>
+                <p>As you can see, each item in the list is associated with an index number that is shown as [[1]], [[2]]. We can also assign names to these elements.</p>
+                <h3>Naming List Elements</h3>
+                <hr />
+                <p>The list elements can be given names and they can be accessed using these names.</p>
+                <pre><code class='r'>&gt; # Create a list containing a vector, a matrix and a list.
+&gt; list_data &lt;- list(df = mtcars[1:5,], vec1 = c('A', 'Sample', 'Vector'), vec2 = c(21,32,11), bln = TRUE, num1 = 51.23, num2 = 119.1)
+&gt; list_data
+$df
+                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+
+$vec1
+[1] "A"      "Sample" "Vector"
+
+$vec2
+[1] 21 32 11
+
+$bln
+[1] TRUE
+
+$num1
+[1] 51.23
+
+$num2
+[1] 119.1
+
+&gt;</code></pre>
+                <p>You can check for the names in a list using</p>
+                <pre><code class='r'>&gt; names(list_data)
+[1] "df"   "vec1" "vec2" "bln"  "num1" "num2"</code></pre>
+                <p>Now we can also assign names to these objects</p>
+                <pre><code class='r'>&gt; names(list_data) &lt;- c("Data Frame", "Vector 1", "Vector 2", "Boolean", "Number 1", "Number 2")
+&gt;</code></pre>
+                <p>This updates the names of the list elements</p>
+                <pre><code class='r'>&gt; list_data
+$`Data Frame`
+                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+
+$`Vector 1`
+[1] "A"      "Sample" "Vector"
+
+$`Vector 2`
+[1] 21 32 11
+
+$Boolean
+[1] TRUE
+
+$`Number 1`
+[1] 51.23
+
+$`Number 2`
+[1] 119.1
+
+&gt;</code></pre>
+                <h3>Accessing List Elements</h3>
+                <hr />
+                <p>Elements of the list can be accessed by the index of the element in the list. In case of named lists it can also be accessed using the names.</p>
+                <pre><code class='r'>&gt; list_data[1]
+$`Data Frame`
+                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+
+&gt; 
+
+&gt; list_data[1]
+$`Data Frame`
+                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+
+&gt; 
+&gt; list_data$`Vector 1`
+[1] "A"      "Sample" "Vector"
+&gt;</code></pre>
+                <h3>Manipulating List Elements</h3>
+                <hr />
+                <p>We can add, delete and update list elements as shown below. We can add only at the end of a list. But we can update/delete any element.</p>
+                <pre><code class='r'>&gt; list_data[4] &lt;- NULL
+&gt; list_data
+$`Data Frame`
+                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+
+$`Vector 1`
+[1] "A"      "Sample" "Vector"
+
+$`Vector 2`
+[1] 21 32 11
+
+$`Number 1`
+[1] 51.23
+
+$`Number 2`
+[1] 119.1
+
+&gt;</code></pre>
+                <h3>Merging Lists</h3>
+                <hr />
+                <p>You can merge many lists into one list by placing all the lists inside one list() function.</p>
+                <pre><code class='r'># Create two lists.
+list1 &lt;- list(1,2,3)
+list2 &lt;- list("Sun","Mon","Tue")
+
+# Merge the two lists.
+merged.list &lt;- c(list1,list2)
+
+# Print the merged list.
+merged.list
+
+[[1]]
+[1] 1
+
+[[2]]
+[1] 2
+
+[[3]]
+[1] 3
+
+[[4]]
+[1] "Sun"
+
+[[5]]
+[1] "Mon"
+
+[[6]]
+[1] "Tue"</code></pre>
+                <h3>Converting List to Vector</h3>
+                <hr />
+                <p>A list can be converted to a vector so that the elements of the vector can be used for further manipulation. All the arithmetic operations on vectors can be applied after the list
+                        is converted into vectors. To do this conversion, we use the unlist() function. It takes the list as input and produces a vector.</p>
+                <pre><code class='r'>&gt; list1 &lt;- list(1:5)
+&gt; list1
+[[1]]
+[1] 1 2 3 4 5
+
+&gt; 
+&gt; list2 &lt;-list(10:14)
+&gt; list2
+[[1]]
+[1] 10 11 12 13 14
+
+&gt; 
+&gt; v1 &lt;- unlist(list1)
+&gt; v2 &lt;- unlist(list2)
+&gt; 
+&gt; v1
+[1] 1 2 3 4 5
+&gt; v2
+[1] 10 11 12 13 14
+&gt; 
+&gt; result &lt;- v1+v2
+&gt; result
+[1] 11 13 15 17 19
+&gt;</code></pre>
+                <h2>File IO</h2>
+                <hr />
+                <p>R deals with data. So it has functions for various aspects of data processing. But how does it get this data? Reading from in input file is a very important aspect of data
+                        processing. R provides simple functions for reading and writing data to various file formats.</p>
+                <h3>File Dump</h3>
+                <hr />
+                <p>R allows you to dump data into a file. Such file can be read only in R</p>
+                <pre><code class='r'>&gt; df = mtcars
+&gt; save(file = "file.out", compress = T, list = c("df"))
+&gt;</code></pre>
+                <p>This saves the contents of df into file.out. The same can be loaded back from the file using the load method</p>
+                <pre><code class='r'>&gt; load(file = "file.out")
+&gt; head(df, 3)
+                mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4     21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+&gt;</code></pre>
+                <p>Note the parameter compress=T . Obviously this results in a compressed output file. If you check out the generated file, it is an illegible binary file. You have an option to use
+                        ascii=T, that generates a file with ASCII content.</p>
+                <h3>Dump Everything</h3>
+                <hr />
+                <p>There is an extension of this method that lets you dump everything in the memory. You can specify the file name else, it is saved to ".RData"</p>
+                <pre><code class='r'>&gt; save.image()
+&gt;</code></pre>
+                <p>You can also set ascii and compress. The load method does not change. It just picks data from the specified file and sets the variables in the memory.</p>
+                <pre><code class='r'>&gt; load(".RData")
+&gt;</code></pre>
+                <h3>CSV File</h3>
+                <hr />
+                <p>You can also save the file in form of a CSV</p>
+                <pre><code class='r'>&gt; head(df)
+                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+&gt;
+&gt; write.csv(df, file="df.csv")
+&gt; df = read.csv("df.csv")
+&gt; head(df)
+                    X  mpg cyl disp  hp drat    wt  qsec vs am gear carb
+1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+&gt;</code></pre>
+                <p>Note here that on reading the CSV file, the row names are treated as the first column in the dataframe.</p>
+                <h3>Table</h3>
+                <hr />
+                <pre><code class='r'>&gt; head(df)
+                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+&gt; 
+&gt; write.table(df, "df.table")
+&gt; 
+&gt; head(read.table("df.table"))
+                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+&gt;</code></pre>
+
+        </div>
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="vendor/highlight/highlight.pack.js"></script>
+        <script src="scripts/blog.js"></script>
+</body>
+
+</html>

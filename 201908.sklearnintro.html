@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>The Sklearn library</title>
+    <meta name="description" content="A Quick Introduction Machine Learning with SkLearn">
+    <meta name="keywords" content="AI, Machine Learning, Python, Sklearn">
+
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Vikas K. Solegaonkar">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+    <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="body">
+
+        <h1>The Sklearn library</h1>
+        <hr />
+
+        <p>The SciKitLearn library has a chunk of ready implementations of most basic Machine Learning algorithms. Most of the Machine Learning libraries are based on the principle of "concept-heavy
+            and code-lite'. Once we understand the concepts well, the syntax of implementation is quite simple. ScikitLearn offers ready configurable classes for most of the algorithms. We just
+            instantiate and then "fit" the model to the training data and then verify with the test data. All this can be achieved in just a couple of lines of code.</p>
+        <p>Scikit-learn was initially developed by David Cournapeau as a Google summer of code project in 2007. Later Matthieu Brucher joined the project and started to use it as apart of his thesis
+            work. In 2010 INRIA got involved and the first public release (v0.1 beta) was published in late January 2010. It is licensed under a permissive simplified BSD license and is distributed
+            under many Linux distributions, encouraging academic and commercial use.</p>
+        <p>SkLearn provides a range of supervised and unsupervised learning algorithms via a consistent interface in Python. We just need to instantiate the appropriate model, with the appropriate
+            configuration (mapping the hyper-parameters). The library takes care of producing an efficient implementation for training and using the trained model. This allows us to focus on the core
+            aspects of the machine learning, rather than the routine implementation of the standard algorithms.</p>
+        <p>The library is built upon the SciPy (Scientific Python) that must be installed before you can use scikit-learn. This stack that includes:</p>
+        <ul>
+            <li>NumPy: Base n-dimensional array package</li>
+            <li> SciPy: Fundamental library for scientific computing</li>
+            <li> Matplotlib: Comprehensive 2D/3D plotting</li>
+            <li> IPython: Enhanced interactive console</li>
+            <li> Sympy: Symbolic mathematics</li>
+            <li> Pandas: Data structures and analysis</li>
+        </ul>
+        <p>Extensions or modules for SciPy care conventionally named SciKits. As such, the module provides learning algorithms and is named scikit-learn. The vision for the library is a level of
+            robustness and support required for use in production systems. This means a deep focus on concerns such as easy of use, code quality, collaboration, documentation and performance. Although
+            the interface is Python, c-libraries are leverage for performance such as numpy for arrays and matrix operations, LAPACK, LibSVM and the careful use of cython</p>
+
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlight/highlight.pack.js"></script>
+    <script src="scripts/blog.js"></script>
+</body>
+
+</html>

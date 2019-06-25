@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <title>The NumPy library</title>
+        <meta name="description" content="A Quick Introduction NumPy">
+        <meta name="keywords" content="Python, NumPy">
+
+        <meta http-equiv="x-ua-compatible" content="IE=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="author" content="Vikas K. Solegaonkar">
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+        <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+        <div id="body">
+
+                <h1>The NumPy library</h1>
+                <hr />
+                <p><a href="http://www.numpy.org/">NumPy</a> is the most important library in any computational task in Python. It combines the ease and flexibility of scripting with very high
+                        performance. It is the most basic library used in any analytics or machine learning task in Python. Anyone interested in doing some real work in Machine Learning (not just
+                        talking about it), must be conversant with this library.</p>
+                <p>This is just a top level overview of the library. A developer should make all attempts to master this library. Unfortunately their documentation is not so good. There is a limit to
+                        tutorials and videos. I would recommend <a href="https://amzn.to/2n7LIPP">NumPy Cookbook - by Ivan Idris</a> for someone who is genuinely interested in mastering the code.</p>
+                <h2>Arrays</h2>
+                <hr />
+                <p>The numpy array (ndarray) is the basic building block of all numpy computations. The ndarray provides a lot of features for computation. It provides for a multidimensional array. It
+                        is a table of elements. It could be any data type. But numpy requires that all the elements have the same data type. In most applications, we use arrays of numbers, and
+                        occasionally binary.</p>
+                <p>It does not throw an error if you do provide different types. NumPy just forces them all into one type. They why not just let it do the job? It's a good practice not to mess around
+                        with these implementation specific details. Hence it is always a good idea to ensure consistency in the data types.</p>
+                <p>Since these arrays are multidimensional, they are indexed using a tuple of positive integers - each for one dimension. In NumPy, these dimensions are called axes.</p>
+                <h3>Fields</h3>
+                <hr />
+                <p>The implementation of ndarray is quite different from the standard Python Array. Before we dive into the functionality, let us look into the fields inside the ndarray.</p>
+                <p>For this, let us create a dummy numpy array. The section below deals with various different ways of creating a numpy array. For now, let us just use one of them to get a simple two
+                        dimensional array.</p>
+                <pre><code class='python'>&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; a = np.arange(15).reshape(3, 5)
+&gt;&gt;&gt; a
+array([[ 0,  1,  2,  3,  4],
+        [ 5,  6,  7,  8,  9],
+        [10, 11, 12, 13, 14]])</code></pre>
+                <h4>ndarray.ndim</h4>
+                <hr />
+                <p>The number of axes (dimensions) of the array.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a.ndim
+2</code></pre>
+                <h4>ndarray.shape</h4>
+                <hr />
+                <p>The actual dimensions of the array. This is a tuple of integers indicating the size of the array in each dimension. For a matrix with n rows and m columns, shape will be (n,m). The
+                        length of the shape tuple is therefore the number of axes, ndim.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a.shape
+(3, 5)</code></pre>
+                <h4>ndarray.size</h4>
+                <hr />
+                <p>The total number of elements of the array. This is equal to the product of the elements of shape.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a.size
+15</code></pre>
+                <h4>ndarray.dtype</h4>
+                <hr />
+                <p>This is an object describing the type of the elements in the array. One can create or specify dtype's using standard Python types. Additionally NumPy provides types of its own.
+                        numpy.int32, numpy.int16, and numpy.float64 are some examples.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a.dtype.name
+'int64'</code></pre>
+                <h4>ndarray.itemsize</h4>
+                <hr />
+                <p>The size in bytes of each element of the array. For example, an array of elements of type float64 has itemsize 8 (=64/8), while one of type complex32 has itemsize 4 (=32/8). It is
+                        equivalent to ndarray.dtype.itemsize.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a.itemsize
+8</code></pre>
+                <h4>ndarray.data</h4>
+                <hr />
+                <p>the buffer containing the actual elements of the array. Normally, we won’t need to use this attribute because we will access the elements in an array using indexing facilities.</p>
+                <h2>Array Creation</h2>
+                <hr />
+                <p>There are two primary ways of creating a NumPy array object.</p>
+                <h3>From Python Data Types</h3>
+                <hr />The np.array() constructor can digest any Python list / tuple to generate a new array object.
+                <pre><code class='python'>&gt;&gt;&gt; a = np.array([2,3,4])
+&gt;&gt;&gt; a
+array([2, 3, 4])</code></pre>
+                <p>OR</p>
+                <pre><code class='python'>&gt;&gt;&gt; b = np.array([1.2, 3.5, 5.1])
+&gt;&gt;&gt; b.dtype
+dtype('float64')</code></pre>
+                <p>There is a difference between passing in a tuple / array and passing in multiple elements (trying to imply an array).</p>
+                <pre><code class='python'>&gt;&gt;&gt; a = np.array(1,2,3,4)    # WRONG
+&gt;&gt;&gt; a = np.array([1,2,3,4])  # RIGHT</code></pre>
+                <p>The array transforms sequences of sequences into two-dimensional arrays, sequences of sequences of sequences into three-dimensional arrays, and so on.</p>
+                <pre><code class='python'>&gt;&gt;&gt; b = np.array([(1.5,2,3), (4,5,6)])
+&gt;&gt;&gt; b
+array([[ 1.5,  2. ,  3. ],
+        [ 4. ,  5. ,  6. ]])</code></pre>
+                <p>By default, it picks the data type to be the broadest type that fits all the elements. We can also provide a data type explicitly. In such a case, all the elements are force-cast to
+                        the provided data type.</p>
+                <pre><code class='python'>&gt;&gt;&gt; c = np.array( [ [1,2], [3,4] ], dtype=complex )
+&gt;&gt;&gt; c
+array([[ 1.+0.j,  2.+0.j],
+        [ 3.+0.j,  4.+0.j]])</code></pre>
+                <h3>From NumPy Utility Functions</h3>
+                <hr />
+                <p>There are some arrays that are used in many situations - either as initializers, or actual values to be utilized in the computation. For example, vectors with all 0's, all 1's,
+                        identity vectors, etc are repeatedly used in computation. Hence NumPy provides utility methods for that.</p>
+                <p>To create a multidimensional array of all 0's</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.zeros( (3,4) )
+array([[ 0.,  0.,  0.,  0.],
+        [ 0.,  0.,  0.,  0.],
+        [ 0.,  0.,  0.,  0.]])</code></pre>
+                <p>Or we can create an array of all 1's</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.ones( (2,3,4), dtype=np.int16 )                # dtype can also be specified
+array([[[ 1, 1, 1, 1],
+        [ 1, 1, 1, 1],
+        [ 1, 1, 1, 1]],
+        [[ 1, 1, 1, 1],
+        [ 1, 1, 1, 1],
+        [ 1, 1, 1, 1]]], dtype=int16)</code></pre>
+                <p>We can also generate the identity matrix using the eye() method.</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.eye(2) # unit 2x2 matrix; "eye" represents "I"
+array([[ 1.,  0.],
+        [ 0.,  1.]])</code></pre>
+                <p>Or we can also create an array of uninitialized (junk) values</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.empty( (2,3) )                                 # uninitialized, output may vary
+array([[  3.73603959e-262,   6.02658058e-154,   6.55490914e-260],
+        [  5.30498948e-313,   3.14673309e-307,   1.00000000e+000]])</code></pre>
+                <p>We can also generate random values using the np.rand() method</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.random.random((2,3))
+array([[ 0.53579825,  0.93607836,  0.19139396],
+        [ 0.61408155,  0.75616037,  0.92643963]])
+array([[  3.73603959e-262,   6.02658058e-154,   6.55490914e-260],
+        [  5.30498948e-313,   3.14673309e-307,   1.00000000e+000]])</code></pre>
+                <p>Numpy allows us to create an array from a range of values. This is similar to the range() method of core Python. But this is a lot faster.</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.arange( 10, 30, 5 )
+array([10, 15, 20, 25])
+&gt;&gt;&gt; np.arange( 0, 2, 0.3 )                 # it accepts float arguments
+array([ 0. ,  0.3,  0.6,  0.9,  1.2,  1.5,  1.8])</code></pre>
+                <p>We have a potential problem out here. When we use floating point arguments for the arange, the output may not be exactly as one would guess. This is because of the finite floating
+                        point precision. Hence we prefer to use linespec that suggests the number of values between the end points.</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.linspace( 0, 2, 9 )                   # 9 numbers in range 0 and 2.
+array([ 0.  ,  0.25,  0.5 ,  0.75,  1.  ,  1.25,  1.5 ,  1.75,  2.  ])</code></pre>
+                <h3>Custom Values</h3>
+                <hr />
+                <p>The examples above used standard trivial values to fill the elements of the array. At times, the job is not so simple. NumPy also helps us generate an array based on a sequence of
+                        values provided by a function.</p>
+                <pre><code class='python'>&gt;&gt;&gt; def f(x,y):
+...     return 10*x+y
+...
+&gt;&gt;&gt; np.fromfunction(f,(5,4),dtype=int)
+array([[ 0,  1,  2,  3],
+        [10, 11, 12, 13],
+        [20, 21, 22, 23],
+        [30, 31, 32, 33],
+        [40, 41, 42, 43]])</code></pre>
+                <h2>Basic Operations</h2>
+                <hr />
+                <p>Of course, NumPy provides tons of methods for different kinds of operations on arrays. NumPy flows fluidly over scalar as well as matrix methods. That simplifies the syntax to a
+                        great extent, making the code very intuitive and easy to read.</p>
+                <h3>Scalar Functions</h3>
+                <hr />
+                <p>Scalar operations like arithmetic operations apply directly to individual elements. We can check these out below. Let us start with creating two different arrays of size 4.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a = np.array( [20,30,40,50] )
+&gt;&gt;&gt; a
+array([20, 30, 40, 50])
+&gt;&gt;&gt; b = np.arange( 4 )
+&gt;&gt;&gt; b
+array([0, 1, 2, 3])</code></pre>
+                <p>Any scalar operation on the array is distributed over all the elements. For example:</p>
+                <pre><code class='python'>&gt;&gt;&gt; b + 2
+array([12, 23, 34, 45])</code></pre>
+                <p>This is not limited to the plain algebraic of addition and subtraction. It can be extended to various others</p>
+                <pre><code class='python'>&gt;&gt;&gt; 10*np.sin(a)
+array([ 9.12945251, -9.88031624,  7.4511316 , -2.62374854])
+
+&gt;&gt;&gt; a&lt;35
+array([ True, True, False, False])</code></pre>
+                <p>Similarly, scalar operations on two arrays apply to corresponding elements.</p>
+                <pre><code class='python'>&gt;&gt;&gt;  a * b
+array([0, 30, 80, 150])
+
+&gt;&gt;&gt; a / b
+array([ 0.        ,  0.05      ,  0.06666667,  0.075     ])
+
+&gt;&gt;&gt; a // b
+array([0, 0, 0, 0], dtype=int32)</code></pre>
+                <p>This is not limited to these basic arithmetics. It can be extended to other operations as well.</p>
+                <pre><code class='python'>&gt;&gt;&gt; b ** a
+array([    1,    20,   900, 64000], dtype=int32)
+
+&gt;&gt;&gt; b += a
+&gt;&gt;&gt; b
+array([10, 21, 32, 43])</code></pre>
+                <p>Note that a * b leads to multiplication of the corresponding elements of the two arrays. Not a dot product. NumPy provides other methods for handling linear algebra operations.</p>
+                <h3>Unary Operations</h3>
+                <hr />
+                <p>Simple unary operations are available for NumPy arrays.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a = np.random.random((2,3))
+&gt;&gt;&gt; a
+array([[ 0.18626021,  0.34556073,  0.39676747],
+        [ 0.53881673,  0.41919451,  0.6852195 ]])
+&gt;&gt;&gt; a.sum()
+2.5718191614547998
+&gt;&gt;&gt; a.min()
+0.1862602113776709
+&gt;&gt;&gt; a.max()
+0.6852195003967595</code></pre>
+                <h3>Linear Algebra</h3>
+                <hr />
+                <p>Linear algebra defines some operations on metrices. Dot product, matrix inverse are commonly used in AI. NumPy provides a good solution for commonly used matrix operations.</p>
+                <p>As we saw above, A * B calculates the product by multiplying corresponding elements. In order to calculate the dot product, we can use either of the two</p>
+                <pre><code class='python'>&gt;&gt;&gt; A = np.array( [[1,1],
+...             [0,1]] )
+&gt;&gt;&gt; B = np.array( [[2,0],
+...             [3,4]] )
+&gt;&gt;&gt; A @ B          # Works only for Python Version &gt; 3.5
+array([[5, 4],
+        [3, 4]])
+&gt;&gt;&gt; A.dot(B)                    
+array([[5, 4],
+        [3, 4]])</code></pre>
+                <p>We can get a matrix transpose by swapping the rows and columns of all elements in a for loop. But NumPy helps us get a matrix transpose. This is a lot faster than the loop.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a = np.array([[1.0, 2.0], [3.0, 4.0]])
+&gt;&gt;&gt; a.transpose()
+array([[ 1.,  3.],
+        [ 2.,  4.]])</code></pre>
+                <p>Identifying a matrix inverse is a massive task. NumPy offers methods that help speed it up to a great extent.</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.linalg.inv(a)
+array([[-2. ,  1. ],
+        [ 1.5, -0.5]])</code></pre>
+                <p>We can also solve the equation A @ x = y to find the value of x.</p>
+                <pre><code class='python'>&gt;&gt;&gt; y = np.array([[5.], [7.]])
+&gt;&gt;&gt; np.linalg.solve(a, y)
+array([[-3.],
+        [ 4.]])</code></pre>
+                <p>Another major computationally expensive task is computation of the Eigen Vectors. NumPy provides a single command solution for it.</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.linalg.eig(j)
+(array([ 0.+1.j,  0.-1.j]), array([[ 0.70710678+0.j        ,  0.70710678-0.j        ],
+        [ 0.00000000-0.70710678j,  0.00000000+0.70710678j]]))</code></pre>
+                <h2>Array Indexing</h2>
+                <hr />
+                <p>An array is meaningless without a good indexing strategy. NumPy offers a good range of techniques to index into the arrays and perform quick computations.</p>
+                <p>Let us use this array to understand the various indexing strategies</p>
+                <pre><code class='python'>&gt;&gt;&gt; a = np.arange(10)**3
+&gt;&gt;&gt; a
+array([  0,   1,   8,  27,  64, 125, 216, 343, 512, 729])</code></pre>
+                <p>The most common forms of indexing - find single value using the numerical index, get a slice of the data, etc are quite common.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a[2]
+8
+&gt;&gt;&gt; a[2:5]
+array([ 8, 27, 64])</code></pre>
+                <h3>Multidimensional Arrays</h3>
+                <hr />
+                <p>This gets more interesting with multidimensional arrays</p>
+                <pre><code class='python'>&gt;&gt;&gt; def f(x,y):
+...     return 10*x+y
+...
+&gt;&gt;&gt; b = np.fromfunction(f,(5,4),dtype=int)
+&gt;&gt;&gt; b
+array([[ 0,  1,  2,  3],
+        [10, 11, 12, 13],
+        [20, 21, 22, 23],
+        [30, 31, 32, 33],
+        [40, 41, 42, 43]])</code></pre>
+                <p>We can index over the row and column by passing in two values</p>
+                <pre><code class='python'>&gt;&gt;&gt; b[2,3]
+23
+&gt;&gt;&gt; b[0:5, 1]                       # each row in the second column of b
+array([ 1, 11, 21, 31, 41])
+&gt;&gt;&gt; b[ : ,1]                        # equivalent to the previous example
+array([ 1, 11, 21, 31, 41])
+&gt;&gt;&gt; b[1:3, : ]                      # each column in the second and third row of b
+array([[10, 11, 12, 13],
+        [20, 21, 22, 23]])</code></pre>
+                <p>The thumb rule is that when we provide fewer indices than required, the missing indices are assumed to be the full range.</p>
+                <h3>Negative Indices</h3>
+                <hr />
+                <p>Just like core python, negative indices imply reverse flow from the end of the array.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a = np.arange(10)**3</code></pre>
+                <pre><code class='python'>&gt;&gt;&gt; a[:6:2] = -1000    # equivalent to a[0:6:2] = -1000; from start to position 6, exclusive, set every 2nd element to -1000
+&gt;&gt;&gt; a
+array([-1000,     1, -1000,    27, -1000,   125,   216,   343,   512,   729])
+&gt;&gt;&gt; a[ : :-1]                                 # reversed a
+array([  729,   512,   343,   216,   125, -1000,    27, -1000,     1, -1000])</code></pre>
+                <h3>Iteration</h3>
+                <hr />
+                <p>A natural expectation from an array is the ability to iterate on the data. NumPy provides for many interesting ways of doing that.</p>
+                <p>For one dimensional arrays, iteration is similar to the native Python arrays</p>
+                <pre><code class='python'>&gt;&gt;&gt; a = np.arange(10)**3
+&gt;&gt;&gt; for i in a:
+...     print(i**(1/3.))
+1.0
+2.0
+3.0
+4.0
+5.0
+6.0
+7.0
+8.0
+9.0</code></pre>
+                <p>For multidimensional arrays, we can iterate on a dimension at a time.</p>
+                <pre><code class='python'>&gt;&gt;&gt; b = np.array([[ 0,  1,  2,  3],
+...                 [10, 11, 12, 13],
+...                 [20, 21, 22, 23],
+...                 [30, 31, 32, 33],
+...                 [40, 41, 42, 43]])
+&gt;&gt;&gt; for row in b:
+...     print(row)
+...
+[0 1 2 3]
+[10 11 12 13]
+[20 21 22 23]
+[30 31 32 33]
+[40 41 42 43]</code></pre>
+                <p>Or there is another interesting way of doing that.</p>
+                <pre><code class='python'>&gt;&gt;&gt; for element in b.flat:
+...     print(element)
+...
+0
+1
+.
+.
+43</code></pre>
+                <h2>Array Shape</h2>
+                <hr />
+                <h2>Array Shape</h2>
+                <hr />
+                <p>As one can intuitively imagine, the shape of an array is the number of elements along each axis. The code below generates an array out of random numbers</p>
+                <pre><code class='python'>&gt;&gt;&gt; a = np.floor(10*np.random.random((3,4)))
+&gt;&gt;&gt; a
+array([[ 2.,  8.,  0.,  6.],
+        [ 4.,  5.,  1.,  1.],
+        [ 8.,  9.,  3.,  6.]])</code></pre>
+                <p>We can check out the shape of this array using field shape</p>
+                <pre><code class='python'>&gt;&gt;&gt; a.shape
+(3, 4)</code></pre>
+                <h3>Reshape</h3>
+                <hr />
+                <p>NumPy adds an interesting method that can be used to 'reshape' the array. We can just assign the new shape. It will work only if the number of elements remains constant.</p>
+                <p>Let's check this out. First create an array of size 12</p>
+                <pre><code class='python'>&gt;&gt;&gt; a = np.arange(12)
+&gt;&gt;&gt; a.shape
+(12,)</code></pre>
+                <p>Now let's try to reshape it</p>
+                <pre><code class='python'>&gt;&gt;&gt; a.reshape(3,4)
+array([[ 0,  1,  2,  3],
+        [ 4,  5,  6,  7],
+        [ 8,  9, 10, 11]])</code></pre>
+                <p>But we have to take care that the number of elements is conserved. We cannot do this</p>
+                <pre><code class='python'>&gt;&gt;&gt; a.reshape(4,4)
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+&lt;ipython-input-3-6181417a0036&gt; in &lt;module&gt;()
+----&gt; 1 a.reshape(4,4)
+
+ValueError: cannot reshape array of size 10 into shape (4,4)</code></pre>
+                <h3>Change Dimensions</h3>
+                <hr />
+                <p>The reshape method can also pull down an array to a single dimension. But we need to be careful here.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a.reshape(1,12)
+array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11]])</code></pre>
+                <p>Note the double [[ and ]] brackets out there. When we specify reshape to 1,12 - we still get a two dimensional array. Just that it has only one row. If we want a single dimensional
+                        array, we should do the following:</p>
+                <pre><code class='python'>&gt;&gt;&gt; a.reshape(12,)
+array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11])</code></pre>
+                <p>The comma after 12 is not required. But a good practice. Because it can be extended to higher dimensions - we can also pull down a 3 dimensional array to 2 dimensions.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a.reshape(3,2,2).reshape(3,4,)
+array([[ 0,  1,  2,  3],
+        [ 4,  5,  6,  7],
+        [ 8,  9, 10, 11]])</code></pre>
+                <p>NumPy provides a very simple method - flatten - to reduce to a single dimensional array. Functionally it does exactly what reshape does. But a lot faster.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a.flatten()
+array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11])</code></pre>
+                <h2>Stack &amp; Split</h2>
+                <hr />
+                <p>As we work with data in NumPy arrays, we often need to club two data sets, or break a given data set into multiple parts. We could do this by indexing and slicing the arrays. But
+                        NumPy provides many more efficient ways of doing the job.</p>
+                <h3>Stacking Two Arrays</h3>
+                <hr />
+                <p>To check out the functionality for stacking, let us use these two arrays:</p>
+                <pre><code class='python'>&gt;&gt;&gt; a = np.floor(10*np.random.random((2,2)))
+&gt;&gt;&gt; a
+array([[ 4.,  2.],
+        [ 3.,  6.]])
+&gt;&gt;&gt; b = np.floor(10*np.random.random((2,2)))
+&gt;&gt;&gt; b
+array([[ 2.,  8.],
+        [ 2.,  1.]])</code></pre>
+                <p>NumPy provides us two different methods for stacking the arrays - horizontal stacking and vertical stacking. To stack them horizontally, we can use hstack</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.hstack((a,b))
+array([[ 4.,  2.,  2.,  8.],
+        [ 3.,  6.,  2.,  1.]])</code></pre>
+                <p>Here, the size of each row increases. If we want to increase the number of rows - append along columns, we can use vstack</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.vstack((a,b))
+array([[ 4., 28.],
+        [ 3.,  6.],
+        [ 2.,  8.],
+        [ 2.,  1.]])</code></pre>
+                <p>Note that hstack and vstack work on two dimensions only. If the array has more dimensions, it will consider the first two.</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.vstack((np.floor(10*np.random.random((2,2,2))), np.floor(10*np.random.random((2,2,2)))))
+array([[[ 2.,  7.],
+        [ 8.,  3.]],
+
+        [[ 9.,  3.],
+        [ 4.,  0.]],
+
+        [[ 7.,  4.],
+        [ 1.,  4.]],
+
+        [[ 9.,  6.],
+        [ 0.,  2.]]])</code></pre>
+                <p>Note here that the innermost dimension is not touched.</p>
+                <h3>Splitting Arrays</h3>
+                <hr />
+                <p>Just as we need to stack arrays together, we also need to split the data into multiple arrays. NumPy provides very useful functionality for splitting arrays.</p>
+                <pre><code class='python'>&gt;&gt;&gt; a = np.floor(10*np.random.random((2,12)))
+&gt;&gt;&gt; a
+array([[ 4.,  0.,  2.,  9.,  2.,  5.,  0.,  1.,  4.,  6.,  1.,  6.],
+        [ 0.,  1.,  6.,  4.,  0.,  2.,  7.,  1.,  0.,  9.,  7.,  8.]])</code></pre>
+                <p>We can split it along the rows using the hsplit function. Let's try out an example.</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.hsplit(a,3)   # Split a into 3
+[array([[ 4.,  0.,  2.,  9.],
+        [ 0.,  1.,  6.,  4.]]), array([[ 2.,  5.,  0.,  1.],
+        [ 0.,  2.,  7.,  1.]]), array([[ 4.,  6.,  1.,  6.],
+        [ 0.,  9.,  7.,  8.]])]</code></pre>
+                <p>Note that this generated a Python array of 3 NumPy arrays. Each inner array is 4x2. Thus, the single array of 12x2 was split into 3 arrays of 4x2.</p>
+                <p>We can also use vsplit to split it along the columns:</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.vsplit(a,2)   # Split a into 2
+[array([[ 4.,  0.,  2.,  9.,  2.,  5.,  0.,  1.,  4.,  6.,  1.,  6.]]),
+    array([[ 0.,  1.,  6.,  4.,  0.,  2.,  7.,  1.,  0.,  9.,  7.,  8.]])]</code></pre>
+                <p>NumPy also allows us to specify the exact column where we want to split it (instead of specifying the number of pieces required).</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.hsplit(a,(3,4))   # Split a after the third and the fourth column
+[array([[ 4.,  0.,  2.],
+        [ 0.,  1.,  6.]]), array([[ 9.],
+        [ 4.]]), array([[ 2.,  5.,  0.,  1.,  4.,  6.,  1.,  6.],
+        [ 0.,  2.,  7.,  1.,  0.,  9.,  7.,  8.]])]</code></pre>
+                <p>Note here, that it generated three arrays of unequal shapes. As specified in the input, the first array was built with data up to third column. The second array had data between the
+                        third and fourth columns (only the fourth column). And the third array had the remaining data.</p>
+                <p>We can do the same with vsplit</p>
+                <pre><code class='python'>&gt;&gt;&gt; np.hsplit(a.reshape(3,8), (2,3))
+[array([[ 4.,  0.],
+        [ 4.,  6.],
+        [ 0.,  2.]]), array([[ 2.],
+        [ 1.],
+        [ 7.]]), array([[ 9.,  2.,  5.,  0.,  1.],
+        [ 6.,  0.,  1.,  6.,  4.],
+        [ 1.,  0.,  9.,  7.,  8.]])]</code></pre>
+                <h2>Views &amp; Copies</h2>
+                <hr />
+                <p>When we modify data, we should carefully look at what we want to modify and what we end up modifying. Do we want to modify the original data or a copy? We have use-cases for both,
+                        and NumPy provides for both. Hence it is important to understand what is a copy and what is just another view of the original data.</p>
+                <p>There are times when we just need another reference, sometimes we need a shallow copy so that we can manipulate the view on the same data. And there are times when we need a fresh
+                        new copy, so that we can mess with it without troubling the main data.</p>
+                <p>Apart from knowing how to do it, it is also important that we keep memory and processor implications in mind.</p>
+                <h3>Assignment</h3>
+                <hr />
+                <p>Simple assignment does not make a copy of the object. Assignment only creates a copy of reference to the same object.</p>
+                <p>Consider the example below:</p>
+                <pre><code class='python'>&gt;&gt;&gt; a = np.arange(12)
+&gt;&gt;&gt; b = a            # no new object is created</code></pre>
+                <p>Here b and a are not different. Both refer to the same object.</p>
+                <pre><code class='python'>&gt;&gt;&gt; b is a           # a and b are two names for the same ndarray object
+True</code></pre>
+                <p>Since they refer to the same object, modification to one of them will be seen in the other. Let's check this out.</p>
+                <pre><code class='python'>&gt;&gt;&gt; b.shape = 3,4    # changes the shape of a
+&gt;&gt;&gt; a.shape
+(3, 4)</code></pre>
+                <h3>Function Parameters</h3>
+                <hr />
+                <p>This is an important aspect to note in any language. When we pass a parameter to a function, some languages make a copy of the variable being passed in, while others just pass a
+                        reference. Python belongs to the latter. Any mutable parameter is passed as a reference - without creating a copy. Thus, any update to the variable within the function will
+                        also affect the parameter.</p>
+                <p>Let's check this out. First define a function that prints the object id - the unique object identifier.</p>
+                <pre><code class='python'>&gt;&gt;&gt; def f(x):
+...     print(id(x))
+...</code></pre>
+                <p>Now we can compare the id of the parameter inside and outside the function. </p>
+                <pre><code class='python'>&gt;&gt;&gt; id(a)                           # id is a unique identifier of an object
+2196416171104
+&gt;&gt;&gt; f(a)
+2196416171104</code></pre>
+                <p>The id's match - that means the same object is seen inside and outside the function.</p>
+                <h3>View or Shallow Copy</h3>
+                <hr />
+                <p>NumPy has a concept of Views. View of an array is another object that is created out of the array using the method view().</p>
+                <pre><code class='python'>&gt;&gt;&gt; c = a.view()</code></pre>
+                <p>This is not an assignment. c refers to a different object.</p>
+                <pre><code class='python'>&gt;&gt;&gt; c is a
+False</code></pre>
+                <p>In fact, c contains a reference to a</p>
+                <pre><code class='python'>&gt;&gt;&gt; c.base is a                        # c is a view of the data owned by a
+True</code></pre>
+                <p>All the array manipulation methods work equally well on the views. If we want to identify if the given object is an array or a view, we can check out the flags:</p>
+                <pre><code class='python'>&gt;&gt;&gt; c.flags.owndata
+False
+&gt;&gt;&gt; a.flags.owndata
+True</code></pre>
+                <p>Both a and c refer to the same data. But other attributes like shape are local to each.</p>
+                <pre><code class='python'>&gt;&gt;&gt; c.shape = 2,6                      # a's shape doesn't change
+&gt;&gt;&gt; a.shape
+(3, 4)</code></pre>
+                <p>But since the data shared between them, changing the data of one will impact the other as well.</p>
+                <pre><code class='python'>&gt;&gt;&gt; c[0,4] = 1234                      # a's data changes
+&gt;&gt;&gt; a
+array([[   0,    1,    2,    3],
+        [1234,    5,    6,    7],
+        [   8,    9,   10,   11]])</code></pre>
+                <p>Note that since we had changed the shape of c, the c[0,4] field shows up as a[1,0]. But both refer to the same data.</p>
+                <p>Similarly, when we slice an array, we effectively get a view to it.</p>
+                <pre><code class='python'>&gt;&gt;&gt; s = a[ : , 1:3]     # spaces added for clarity; could also be written "s = a[:,1:3]"
+&gt;&gt;&gt; s[:] = 10           # s[:] is a view of s. Note the difference between s=10 and s[:]=10
+&gt;&gt;&gt; a
+array([[   0,   10,   10,    3],
+        [1234,   10,   10,    7],
+        [   8,   10,   10,   11]])</code></pre>
+                <p>Thus, a view gives us another object that refers to the same base data. This is also called a shallow copy.</p>
+                <h3>Deep Copy</h3>
+                <hr />
+                <p>Finally, if we want a deep copy, NumPy provides a method copy(). </p>
+                <pre><code class='python'>&gt;&gt;&gt; d = a.copy()                          # a new array object with new data is created</code></pre>
+                <p>This creates another array with a copy of the base data.</p>
+                <pre><code class='python'>&gt;&gt;&gt; d is a
+False</code></pre>
+                <p>Copy does not return a view. It is a real array object with its own data.</p>
+                <pre><code class='python'>&gt;&gt;&gt; d.flags.owndata
+True</code></pre>
+                <p>Now let us try to modify the data in d</p>
+                <pre><code class='python'>&gt;&gt;&gt; d[0,0] = 9999
+&gt;&gt;&gt; d
+array([[9999 ,   10,   10,    3],
+        [1234,   10,   10,    7],
+        [   8,   10,   10,   11]])</code></pre>
+                <p>But this does not affect the data in a</p>
+                <pre><code class='python'>&gt;&gt;&gt; a
+array([[   0,   10,   10,    3],
+        [1234,   10,   10,    7],
+        [   8,   10,   10,   11]])</code></pre>
+                <p>That is because d has no relation with a.</p>
+
+        </div>
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="vendor/highlight/highlight.pack.js"></script>
+        <script src="scripts/blog.js"></script>
+</body>
+
+</html>
