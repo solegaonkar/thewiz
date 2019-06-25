@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Introduction to Computer Vision</title>
+    <meta name="description" content="Learn the basics of Computer Vision; the concepts and mathematical representations.">
+    <meta name="keywords" content="AWS,AI,Machine Learning,Cloud,SageMaker">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Vikas K. Solegaonkar">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+    <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="body">
+        <h1>Introduction to Computer Vision</h1>
+        <hr />
+        <p>With the latest developments in Big data, we are not short of the data or infrastructure we need to train an AI model. Now, algorithmic developments are pushing the testing errors of
+            intelligent systems to converge to Bayes optimal error. With these developments, computer vision has taken a great momentum.</p>
+        <p>Computer vision deals with algorithms and applications of concepts of Machine Learning to processing images.</p>
+        <p>Here is an overview of some important algorithmic concepts in computer vision</p>
+        <h2>What is an Image?</h2>
+        <hr />
+        <p>Our eyes are a major source of information for us. Every moment, our eyes receive optical signals from the surroundings and process them to give us a good idea about our surroundings. In
+            order to process images, we need to understand what is light and how our eyes perceive it and how our mind processes it.</p>
+        <h3>Light</h3>
+        <hr />
+        <p>What is light? Physically, light is an electromagnetic wave. Now what is that? As proved by Micheal Faraday, electrical and magnetic fields are tightly coupled to each other. A changing
+            magnetic field creates an electrical field and a changing electrical field creates a magnetic field. When there is no matter to absorb either of them, this oscillation continues and
+            generates an electromagnetic oscillation or electromagnetic wave. The frequency of these oscillations can vary based on various factors at its origin. Humans have tapped a very wide range
+            of frequencies in the electromagnetic waves - ranging from 1Hz to 10<sup>24</sup>Hz. They have also determined the speed of these electromagnetic waves to be around 2.997 x
+            10<sup>5</sup>km/s. This is the speed in vacuum. It reduces when they pass through atmosphere and other different kinds of medium.</p>
+        <p>When sunlight(or any other source of light or energy) excites the surface of matter, it reflects/emits electromagnetic waves if a frequency corresponding to it's surface. Not all these
+            electromagnetic waves are visible to our eyes. What we perceive as light is a very narrow range of frequencies in the entire electromagnetic spectrum. These are the 7 colors - Violet,
+            Indigo, Blue, Green, Yellow, Orange and Red - ranging from 8x10<sup>15</sup> to 4x10<sup>15</sup></p>
+        <h3>Perception of Light</h3>
+        <hr />
+        <p>When this narrow range - light - falls on the retina in our eyes, it generate impulses in the auditory nerve - that causes the perception of sight. In fact, our eyes do not see all these
+            colors. We can sense only three colors - Red, Green and Blue. When Yellow light falls on the retina, it partially triggers the Red and Green sensors. Based on the relative amplitude of
+            these, our mind perceives the result as yellow and so on.</p>
+        <p>Another important aspect of light perception is the brightness. More the energy content, brighter is the light. When the energy content is low, the perception of color fades out leaving a
+            perception of black. In face, humans are more sensitive to brightness than to the color. This is because the brightness is used to identify edges in the perceived image. An edge is a curve
+            that marks a drastic change in the brightness of the image. Using these edges, our mind constructs a shape and tries to compare it with the different shapes it knows - to make a guess
+            about the object it sees.</p>
+        <p>This understanding is important in order to create an efficient model for light. When we understand the physiology of perception, we can save only the important part, ignoring the redundant
+            aspects.</p>
+        <h3>Software Model</h3>
+        <hr />
+        <p>Knowing these limitations of the human perception of light, there is no reason to waste our computational resources on the redundant aspects of images. An image in software is a set of
+            three 2D arrays - each corresponding to the Red, Green and Blue values of each pixel in the image (typically one byte per color). Thus, we have R/G/B defined in range of values 0-255 -
+            creating 3 bytes per pixel.</p>
+        <p>In fact, there is a lot of redundancy in these RGB arrays For example, in any image, there is very little change in the consecutive pixels. The drastic change occurs only on the edges.
+            Also, since the major information content lies in the brightness rather than colors, we can allocate more memory to the brightness and reduce the memory wasted on individual colors. Many
+            such tweaks are used to compress the image into the various standard formats like jpg, gif, png - they are all based on similar principles. We have many open source implementations that
+            convert the image across different formats. But, most image processing algorithms are implemented as processing of these RGB arrays.</p>
+        <h2>Computer Vision</h2>
+        <hr />
+        <p>
+            <p>We have all seen Facebook, Google Photos and high end mobile phones that can identify faces and people in the photographs. How does that work? In fact They have already beaten humans in
+                this task. How do they manage this? </p>
+            <p>Image processing was infact one of the first candidates for machine learning problems. A simple image of 4096x4096 pixels has 2^24 pixels. That is 3 * 2^24 bytes of data. Comparing two
+                images would mean comparing 3 * 2^24 bytes with 3 * 2^24 bytes - that would mean 9 * 2^48 bytes. And for facebook to compare all the images that it has, this could be really huge. How
+                do they manage it?</p>
+            <p>Well how do we compare two images? Do we compare pixels? Certainly not. Yet we can identify a person in one corner of an image and compare it with a person in another corner of another
+                image. How does that work? As opposed to languages, data in an image is localized. The first thing we identify in an image is the edges. And for identifying edges, we do not need to
+                check the entire image. Edges are localized and do not require processing the entire image at a time. This is done using Convolution Neural Networks - that processes parts of the image
+                at a time.</p>
+            <p>Detecting edges, identifying shapes, etc are elementary aspects of vision. There is a lot more to images, that is unsolved. The image below is commonly quoted in this respect.</p>
+            <p>This image contains a lot more than just shapes and people. It portrays an amazing aspect of a unique personality. That is what makes this image special. We can understand it because we
+                have seen this person. We already have a lot of information about the person and what he is doing. How can our machine identify and point out that this image is different from many
+                other images it has?</p>
+            <p>Such questions remain open, waiting for the next breakthrough in machine learning.</p>
+            <div class='center'><img class="img-responsive" src='img/obama_prank1.jpg' /></div>
+        </p>
+        <h2>Edge Detection</h2>
+        <hr />
+        <p>When we look around, the first thing we tend to do is to identify objects around us - based on the shape and sizes. And how do we identify the shapes and sizes? By identifying the edges in
+            the image. An edge is a point or a line that marks a drastic change in the colors or brightness. Whenever we look around, an edge is the first thing we notice. </p>
+        <p>If we want to build an application that "sees" and identifies objects, we too need to start from the edges. Although it is a trivial task for our eyes, it is not so simple in a software
+            application. The image that a software application processes is a long array of bytes - could be a few mega bytes. How do we parse this long array to identify edges in such an image? And
+            how do we decide if two objects in two images are the same? How do we identify that the two photographs show the same person? Humans have absolutely no problem doing that?</p>
+        <p>For many years, researchers have worked on this problem and provided us with many different ways of working identifying the edges and then attempting to get the shapes. But none of them did
+            anything meaningful enough to go beyond the laboratories.</p>
+        <p>However, with recent developments in neural networks and deep learning, these applications have already reached the masses. Face recognition is a fabulous application of concepts that
+            started with edge detection and computer vision. Today's computer vision has surpassed most boundaries of our imagination. But their core continues to be edge detection.</p>
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlight/highlight.pack.js"></script>
+    <script src="scripts/blog.js"></script>
+</body>
+
+</html>

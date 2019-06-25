@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Introduction to Natural Language Processing</title>
+    <meta name="description" content="Learn the core intuition behind Natural Language Processing">
+    <meta name="keywords" content="NLP,AI,Machine Learning,Natural Language Processing">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Vikas K. Solegaonkar">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+    <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="body">
+        <h1>Introduction to Natural Language Processing</h1>
+        <hr />
+        <p>Since ages, our work is bound to human languages. We always wanted to automate a lot of this work. But we always faced a big obstacle - human languages. Nobody could come up with a logical
+            algorithm that could contain a language like English.</p>
+        <p>The developments in machine learning provided us a new way of handling this problem. And today, Natural Language Processing has taken us far ahead of what we had imagined. We still have a
+            long way to go. But things are moving really fast. Here are some of the important concepts of NLP.</p>
+        <h2>Logical Speech?</h2>
+        <hr />
+        <p>There is almost no logic to any language that humans speak. Most of our languages have evolved over time - based on convenience and random acceptance. (Only exception is Sansrit that was
+            formally created and finalized before it could be used). One can never produce an algorithm that can map an English sentence to its meaning. Yet, the mind has absolutely no problem doing
+            this job! How does it manage this?</p>
+        <p>NLP is a science of trying to understand the mind's way of understanding a language and producing sentences. Essentially, language cannot work with a point in time sample. That is, a word
+            by itself does not carry much meaning in any languge. Its meaning is in relation to the words before it. Recurrent Neural Networks are used to correlate words in relation to previous
+            words.</p>
+        <p>But, the fact is just a few words is not enough. The meaning of a word is in relation to the sentence, and the sentences before and the events that occured before and the events that
+            happened years ago... that could go trace to the big bang itself! The meaning of anything that we say today can be entirely different in the context of an event in the past.</p>
+        <p>We have made a huge progress in this domain but it is far from completion. We are yet to guess how we can identify sarcasm, implied messages, etc. These require a lot of background
+            knowledge about the subject of discussion. Yet, there is a lot that we have achieved. Let us look at the major concepts that enabled us to get things thus far.</p>
+        <h2>Word Vector</h2>
+        <hr />
+        <p>Machines are good at numbers. If we want them to learn a language, we must map it to numbers. But that is so simple. Do we assign numbers to alphabets? Or words? Or sentences? If we somehow
+            do assign them numbers, what would it mean to add or subtract these numbers? Would these operations be valid? Why do we need them after all?</p>
+        <p>Let's look at this in some more detail. All the machine learning we saw before was based on minimizing the difference between the real and calculated output. All the TensorFlow and PyTorch
+            and SageMaker and the millions of lines of code that has gone into this domain is essentially trying to reduce this "error function" - that maps the difference between the real and
+            calculated outputs.</p>
+        <p>Great, but what is the difference between words? How do we calculate the error and how do we minimize it? In order to achieve this, we need a mathematical representation for words. We
+            should map the words as vectors in an n-dimensional space - such that the similar words are close to each other. Only then can we think of using our typical algorithms on a natural
+            language.</p>
+        <p>Wow! Now that is an interesting concept. The next obvious question is how do I do it? Very few had the tenacity to just count all the words in English language. Now you are telling me to
+            map each of these words into an n-dimensional space, while ensuring such constraints! How would you do that? There is a simple technique for going about this.</p>
+        <p>It is based on the assumption that if two words are similar, they are replaceable. </p>
+        <p>That sounds quite intuitive. Now, let's formalize this statement. The context of a word (that appears in a sentence) can be defined as the set of n words before and after that word. When we
+            scan a massive data set of different types of literature; we see many different words - in different contexts. Using this, we can generate a map of each word along with the different
+            context's in which it appears; along with the reverse map of each context along with the different words that appear in that context.</p>
+        <p>Thus, each context has a set of words that it can contain. These words are similar. We can now push this similarity into the contexts (the context is made of words after all) - to identify
+            similar contexts. Iteratively, this can help us generate a vector for each word.</p>
+        <p>The accuracy of this representation naturally depends upon the number of dimensions in the vector - that depends upon the number of words we include in the context.</p>
+        <h2>Stemming</h2>
+        <hr />
+        <p>When we read words in a sentence, our mind analyses the words in two different ways. The root of the word and the grammatical modification. Both are important and either has its value in
+            identifying the meaning of the sentence as a whole. Stemming is the first part of the process - identifying root of the word. This is an important step in identifying the word vector.</p>
+        <h3>The Concept</h3>
+        <hr />
+        <p>There are different ways of stemming a word. Different approaches and different algorithms have been suggested for this. The fundamental and most commonly used approach was suggested by <a
+                href="https://tartarus.org/martin/index.html">Martin Porter</a>, also called as the <a href="https://pdfs.semanticscholar.org/ca20/32154c90c85e3aac3ece5d94fd8e6cad71ce.pdf">Porter
+                Stemming Algorithm<a />. Like most of AI algorithms, this algorithm is not a recent development. (It was proposed way back in early 1980's). But its relevance and utility showed up
+                only recently when we got the requisite processing power and training data.</p>
+        <p>Porter Stemming is quite simple once we understand the concept and implications. Consider the word "cheer". It has different grammatical modifications:</p>
+        <pre><code class='python'>cheer
+cheers
+cheered
+cheering</code></pre>
+        <p>Did I miss any?</p>
+        <p>All of these are derived from the root "cheer". Porter's stemming algorithm tries to identify this, and correlate the root with the word.</p>
+        <p>The simplest and most intuitive way might be to look for the common suffixes. For example, if W1 is "cheer" and W2 is "cheering", we can correlate them based on the suffix "ing". So a
+            simple way of doing this job is to remove look for the common suffixes and strip them off to get the root word. But that does not always work.</p>
+        <p>For example, "relate" and "relating" - has the extra "e". Things get even worse in some other words such as "index" and "indices". Or words like "Wand" and "Wander" have no relation with
+            each other, but seem to be related because of the "er" suffix. English language is full of exceptions! So what is the way out? The brute force way of course, is to code the whole
+            dictionary. Can we do something better?</p>
+        <p>The Porter algorithm tries to tackle this problem.</p>
+        <h3>The Algorithm</h3>
+        <hr />
+        <p>To understand the algorithm, we need to brush up some basics - vowels and consonants. Vowels are a, e, i, o, u and also the y following a consonant. Anything else is a consonant. A word is
+            a sequence of sounds. And each sound is defined by a set of consecutive consonants followed by a set of consecutive vowels - example (thr)(ee) is one sound. whereas (g)(o)(d) has two
+            sounds. Size of a word is defined by the number of sounds rather than characters.</p>
+        <p>Thus, any word can be depicted as depicted by [C](VC)m[V] - where C is a set of consecutive consonants and V is a set of consecutive vowels. The first C and last V are optional. The size of
+            such a word is defined by the number m. With this in place, we develop rules for stemming in the form</p>
+        <pre><code class='python'>(condition) S1 -> S2</code></pre>
+        <p>With this in place, the Porter Stemming algorithm provides the following set of rules:</p>
+        <pre><code class='python'>Step 1a
+ SSES -> SS 
+ IES -> I 
+ ties -> ti
+ SS -> SS 
+ S -> 
+
+Step 1b
+ (m>0) EED -> EE 
+ (*v*) ED -> 
+ (*v*) ING -></code></pre>
+        <p>If the second or third of the rules in Step 1b is successful, then:</p>
+        <pre><code class='python'>AT -> ATE 
+ BL -> BLE 
+ IZ -> IZE</code></pre>
+        <p>This is followed by Step 1c</p>
+        <pre><code class='python'>(*v*) Y -> I</code></pre>
+        <p>Thus, the step 1 strips the plurals and past participles. The following steps deal with adjectives and adverbs.</p>
+        <pre><code class='python'>Step 2
+ (m>0) ATIONAL -> ATE 
+ (m>0) TIONAL -> TION 
+ (m>0) ENCI -> ENCE 
+ (m>0) ANCI -> ANCE 
+ (m>0) IZER -> IZE 
+ (m>0) ABLI -> ABLE 
+ (m>0) ALLI -> AL 
+ (m>0) ENTLI -> ENT 
+ (m>0) ELI -> E 
+ (m>0) OUSLI -> OUS 
+ (m>0) IZATION -> IZE 
+ (m>0) ATION -> ATE 
+ (m>0) ATOR -> ATE 
+ (m>0) ALISM -> AL 
+ (m>0) IVENESS -> IVE 
+ (m>0) FULNESS -> FUL 
+ (m>0) OUSNESS -> OUS 
+ (m>0) ALITI -> AL 
+ (m>0) IVITI -> IVE 
+ (m>0) BILITI -> BLE</code></pre>
+        <pre><code class='python'>Step 3
+ (m>0) ICATE -> IC
+ (m>0) ATIVE -> 
+ (m>0) ALIZE -> AL 
+ (m>0) ICITI -> IC 
+ (m>0) ICAL -> IC 
+ (m>0) FUL -> 
+ (m>0) NESS -></code></pre>
+        <pre><code class='python'>Step 4
+ (m>1) AL -> 
+ (m>1) ANCE -> 
+ (m>1) ENCE -> 
+ (m>1) ER -> 
+ (m>1) IC -> 
+ (m>1) ABLE -> 
+ (m>1) IBLE -> 
+ (m>1) ANT -> 
+ (m>1) EMENT -> 
+ (m>1) MENT -> 
+ (m>1) ENT -> 
+ (m>1 and (*S or *T)) ION -> 
+ (m>1) OU -> 
+ (m>1) ISM -> 
+ (m>1) ATE -> 
+ (m>1) ITI -> 
+ (m>1) OUS -> 
+ (m>1) IVE -> 
+ (m>1) IZE -></code></pre>
+        <p>These four steps take care of removing all the suffixes. But we need to clean up a bit more to obtain the roots.</p>
+        <h3>Implementation</h3>
+        <hr />
+        <p>The algorithm above is pretty complex, and implementing it in code is a scary thought! Don't worry. People have already done most of it.</p>
+        <p><a href="https://tartarus.org/martin/PorterStemmer/">Here</a> is a list of links to implementations in various different languages. With this in place, let us look at a Python script for
+            stemming a word.</p>
+        <pre><code class='python'>pip install stemming</code></pre>
+        <pre><code class='python'>from stemming.porter2 import stem
+stem("clarification")</code></pre>
+        <p>That is all! As always, the process of stemming is concept heavy-code lite.</p>
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlight/highlight.pack.js"></script>
+    <script src="scripts/blog.js"></script>
+</body>
+
+</html>

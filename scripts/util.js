@@ -87,11 +87,18 @@ add = function (type, info) {
         html = "<" + type + ">" + text + "</" + type + ">";
     }
     content = content + html;
-    $("#html").val("<!DOCTYPE html><html><head><title>" + $("#title").val() 
-                   + '</title><meta name="description" content="' + $("#description").val() 
-                   + '"><meta name="keywords" content="' + $("#keywords").val() 
-                   + '"><script src="../scripts/index.js"></script></head><body><h1>' + $("#title").val() 
-                   + '</h1><hr/>' + content + '</body><script>loadPageFormat();</script></html>');
+    $("#html").val("<!DOCTYPE html><html><head><title>" 
+        + $("#title").val() 
+        + '</title><meta name="description" content="' 
+        + $("#description").val() 
+        + '"><meta name="keywords" content="' 
+        + $("#keywords").val() 
+        + '"><meta http-equiv="x-ua-compatible" content="IE=edge"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="author" content="Vikas K. Solegaonkar"><link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="stylesheet" href="vendor/highlight/styles/default.css"><link href="css/blog-post.css" rel="stylesheet"></head><body><div id="body"><h1>' 
+        + $("#title").val() 
+        + '</h1><hr/>' 
+        + content 
+        + '</div><script src="vendor/jquery/jquery.min.js"></script><script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script><script src="vendor/highlight/highlight.pack.js"></script><script src="scripts/blog.js"></script></body></html>');
+
     $("#blog").html(content);
     $("#content").val(content);
     $('pre code').each(function (i, block) {
