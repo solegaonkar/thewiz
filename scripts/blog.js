@@ -1,4 +1,4 @@
-(function() {var cx = '001416028576861424674:j9osquukerm';var gcse = document.createElement('script');gcse.type = 'text/javascript';gcse.async = true;gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gcse, s);})();
+(function() {var cx = '001416028576861424674:idwrcpies6m';var gcse = document.createElement('script');gcse.type = 'text/javascript';gcse.async = true;gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gcse, s);})();
 
 var showList = ['.ai-blog', '.cloud-blog', '.code-blog', '.architecture-blog'];
 var blogList = ['.ai-blog', '.cloud-blog', '.code-blog', '.architecture-blog'];
