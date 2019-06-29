@@ -42,3 +42,4 @@
 201905.computervision.html
 201905.fr.html
 201905.nlp.html
+201906.ea.html
