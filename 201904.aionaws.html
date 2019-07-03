@@ -54,33 +54,33 @@
             information that would require significant manual effort.</p>
         <p>Python code that detects the various entities in a given text string looks like this</p>
         <pre><code class='python'>import boto3
-        client = boto3.client('comprehend')
-        response = client.batch_detect_entities(
-            TextList=[
-                'string',
-            ],
-            LanguageCode='en'|'es'|'fr'|'de'|'it'|'pt'
-        )</code></pre>
+client = boto3.client('comprehend')
+response = client.batch_detect_entities(
+    TextList=[
+        'string',
+    ],
+    LanguageCode='en'|'es'|'fr'|'de'|'it'|'pt'
+)</code></pre>
         <h2>Amazon Polly</h2>
         <hr />
         <p>Amazon Polly cloud based service that converts text to speech. We can use it to make applications more engaging and accessible. It supports multiple languages and includes a variety of
             lifelike voices.</p>
         <p>AWS takes care of most of the job here. For a developer, it is just a few lines of code:</p>
         <pre><code class='python'>import boto3
-        
-        polly_client = boto3.Session(
-                        aws_access_key_id=,                     
-            aws_secret_access_key=,
-            region_name='us-west-2').client('polly')
-        
-        # Aditi specializes in Indian English.
-        response = polly_client.synthesize_speech(VoiceId='Aditi',
-                        OutputFormat='mp3', 
-                        Text = 'Provide the text here. Polly will speak it for you.')
-        
-        file = open('speech.mp3', 'w')
-        file.write(response['AudioStream'].read())
-        file.close()</code></pre>
+
+polly_client = boto3.Session(
+                aws_access_key_id=,                     
+    aws_secret_access_key=,
+    region_name='us-west-2').client('polly')
+
+# Aditi specializes in Indian English.
+response = polly_client.synthesize_speech(VoiceId='Aditi',
+                OutputFormat='mp3', 
+                Text = 'Provide the text here. Polly will speak it for you.')
+
+file = open('speech.mp3', 'w')
+file.write(response['AudioStream'].read())
+file.close()</code></pre>
         <h2>Rekognition</h2>
         <hr />
         <p>Amazon Rekognition can be used to add image and video analysis to applications. For any given image or video the Rekognition API can identify objects, people, text, scenes, and activities.
@@ -89,61 +89,61 @@
         <p>Amazon Rekognition makes images and stored videos searchable so that we can discover objects and scenes that appear within them.</p>
         <p>A sample application using Rekognition API for facial recognition would look like this:</p>
         <pre><code class='python'>import boto3
-        
-        if __name__ == "__main__":
-            bucket='bucket'
-            collectionId='Sample Collection'
-            threshold = 40
-            maxFaces=3
-            faceId='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
-        
-            client=boto3.client('rekognition')
-            response=client.search_faces(CollectionId=collectionId,
-                                        FaceId=faceId,
-                                        FaceMatchThreshold=threshold,
-                                        MaxFaces=maxFaces)
-                                
-            faceMatches=response['FaceMatches']
-            print('Matched faces')
-            for match in faceMatches:
-                    print('Matching FaceId:' + match['Face']['FaceId'])
-                    print('Face Similarity: ' + "{:.3f}".format(match['Similarity']) + "%")</code></pre>
+
+if __name__ == "__main__":
+    bucket='bucket'
+    collectionId='Sample Collection'
+    threshold = 40
+    maxFaces=3
+    faceId='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+
+    client=boto3.client('rekognition')
+    response=client.search_faces(CollectionId=collectionId,
+                                FaceId=faceId,
+                                FaceMatchThreshold=threshold,
+                                MaxFaces=maxFaces)
+                        
+    faceMatches=response['FaceMatches']
+    print('Matched faces')
+    for match in faceMatches:
+        print('Matching FaceId:' + match['Face']['FaceId'])
+        print('Face Similarity: ' + "{:.3f}".format(match['Similarity']) + "%")</code></pre>
         <h2>Transcribe</h2>
         <hr />
         <p>The Amazon Transcribe service can be used to recognize speech in audio files and convert it to text. It can identify the individual speakers in an audio clip. We can use it to convert audio
             to text and to create applications that incorporate the content of audio files, for example, adding subtitles to a movie, or noting the minutes of a meeting.</p>
         <p>A simple Python application that uses Amazon Transcribe to analyze an audio clip looks like this</p>
         <pre><code class='python'>import time
-        import boto3
-        transcribe = boto3.client('transcribe')
-        job_name = "job name"
-        job_uri = "https://S3 endpoint/test-transcribe/sample_audio.wav"
-        transcribe.start_transcription_job(
-            TranscriptionJobName=job_name,
-            Media={'MediaFileUri': job_uri},
-            MediaFormat='wav',
-            LanguageCode='en-US'
-        )
-        while True:
-            status = transcribe.get_transcription_job(TranscriptionJobName=job_name)
-            if status['TranscriptionJob']['TranscriptionJobStatus'] in ['COMPLETED', 'FAILED']:
-                break
-            print("Not ready yet...")
-            time.sleep(5)
-        print(status)</code></pre>
+import boto3
+transcribe = boto3.client('transcribe')
+job_name = "job name"
+job_uri = "https://S3 endpoint/test-transcribe/sample_audio.wav"
+transcribe.start_transcription_job(
+    TranscriptionJobName=job_name,
+    Media={'MediaFileUri': job_uri},
+    MediaFormat='wav',
+    LanguageCode='en-US'
+)
+while True:
+    status = transcribe.get_transcription_job(TranscriptionJobName=job_name)
+    if status['TranscriptionJob']['TranscriptionJobStatus'] in ['COMPLETED', 'FAILED']:
+        break
+    print("Not ready yet...")
+    time.sleep(5)
+print(status)</code></pre>
         <h2>Translate</h2>
         <hr />
         <p>Amazon Translate uses advanced machine learning technologies to provide high-quality translation on demand. We can use it to translate unstructured text documents or to build applications
             that work in multiple languages. (Not all languages are supported as yet).</p>
         <p>A simple Python script that uses Amazon Translate would look like this:</p>
         <pre><code class='python'>import boto3
-        
-        translate = boto3.client(service_name='translate', region_name='us-west-2', use_ssl=True)
-        result = translate.translate_text(Text="Translate this English sentence into French", 
-                    SourceLanguageCode="en", TargetLanguageCode="fr")
-        print('TranslatedText: ' + result.get('TranslatedText'))
-        print('SourceLanguageCode: ' + result.get('SourceLanguageCode'))
-        print('TargetLanguageCode: ' + result.get('TargetLanguageCode'))</code></pre>
+
+translate = boto3.client(service_name='translate', region_name='us-west-2', use_ssl=True)
+result = translate.translate_text(Text="Translate this English sentence into French", 
+            SourceLanguageCode="en", TargetLanguageCode="fr")
+print('TranslatedText: ' + result.get('TranslatedText'))
+print('SourceLanguageCode: ' + result.get('SourceLanguageCode'))
+print('TargetLanguageCode: ' + result.get('TargetLanguageCode'))</code></pre>
         <h2>Amazon Lex</h2>
         <hr />
         <p>Amazon Lex is a complete service that can build a conversational interfaces from the Web Console. The conversations can use text as well as voice. It provides us the deep learning engine
