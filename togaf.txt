@@ -1,0 +1,5 @@
+20190601.ea.html
+20190701.introductiontoadm.html
+20190702.adaptadm.html
+20190703.architecturalgovernance.html
+20190704.architecturescope.html

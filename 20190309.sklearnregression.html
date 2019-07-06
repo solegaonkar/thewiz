@@ -326,26 +326,26 @@ data.head()</code></pre>
             available data. These help us develop a mental picture of the data. In a real case study, we would work on a small sample set of the available data. But in this case, we can use the entire
             data set. Let us start with age</p>
         <pre><code class='python'>plt.scatter(data["age"], data["charges"], alpha=0.5)</code></pre>
-        <div class='center'><img src='img/insurance_scatter_age.png' /></div>
+        <div class='center'><img class="image" src='img/insurance_scatter_age.png' /></div>
         <p>There is some correlation between the age and the expenditure. Similarly, we can try for all other fields.</p>
         <h4>Sex</h4>
         <pre><code class='python'>plt.scatter(data["sex"], data["charges"], alpha=0.5)</code></pre>
-        <div class='center'><img src='img/insurance_scatter_sex.png' /></div>
+        <div class='center'><img class="image" src='img/insurance_scatter_sex.png' /></div>
         <h4>BMI</h4>
         <pre><code class='python'>plt.scatter(data["bmi"], data["charges"], alpha=0.5)</code></pre>
-        <div class='center'><img src='img/insurance_scatter_bmi.png' /></div>
+        <div class='center'><img class="image" src='img/insurance_scatter_bmi.png' /></div>
         <h4>Children</h4>
         <pre><code class='python'>plt.scatter(data["children"], data["charges"], alpha=0.5)</code></pre>
-        <div class='center'><img src='img/insurance_scatter_children.png' /></div>
+        <div class='center'><img class="image" src='img/insurance_scatter_children.png' /></div>
         <h4>Smoker</h4>
         <pre><code class='python'>plt.scatter(data["smoker"], data["charges"], alpha=0.5)</code></pre>
-        <div class='center'><img src='img/insurance_scatter_smoker.png' /></div>
+        <div class='center'><img class="image" src='img/insurance_scatter_smoker.png' /></div>
         <h4>North-South</h4>
         <pre><code class='python'>plt.scatter(data["north_south"], data["charges"], alpha=0.5)</code></pre>
-        <div class='center'><img src='img/insurance_scatter_northsouth.png' /></div>
+        <div class='center'><img class="image" src='img/insurance_scatter_northsouth.png' /></div>
         <h4>East-West</h4>
         <pre><code class='python'>plt.scatter(data["east_west"], data["charges"], alpha=0.5)</code></pre>
-        <div class='center'><img src='img/insurance_scatter_eastwest.png' /></div>
+        <div class='center'><img class="image" src='img/insurance_scatter_eastwest.png' /></div>
         <p>We can note in each of these plots that there is some correlation between the field and the charges. Thus, each field is important. But some are less important than the others. The region
             and sex have only a minor impact.</p>
         <h2>Regression</h2>

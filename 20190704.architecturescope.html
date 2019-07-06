@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TOGAF - The Architecture Scope</title>
+    <meta name="description" content="Details of the Process for Scoping the Architecture">
+    <meta name="keywords" content="TOGAF,ADM,Enterprise,Architecture">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Vikas K. Solegaonkar">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+    <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="body">
+        <h1>TOGAF - The Architecture Scope</h1>
+        <hr />
+        <p>They say, <i>"Work expands to fill the time available to do it"</i>. Similarly, architecture updates expand
+            to scratch all that is available for change. It needs to be restricted. The Architecture Scoping process
+            defines these restrictions.</p>
+        <p>In real life, there are some practical reasons why the scope gets restricted. The organizational authority
+            of the architecture team is limited. They cannot just go on modifying the entire enterprise - even if they
+            feel necessary. One must not forget that the process is to fulfill the stakeholder, their objectives and
+            concerns. A change that is not directly related to it, should not be in scope. And the most important,
+            budget and resources are always scarce. Anything we do is restricted by these. So is any architecture
+            initiative.</p>
+        <p>Another major technical concern is that we have multiple concurrent activities in progress. Each architect
+            should be limited to his "architecture partition", so that we can be sure that there is no duplication or
+            conflict among the individual efforts.</p>
+        <p>When we restrict the scope of an architecture, we need to cater to restricting the four dimensions</p>
+        <h4>Breadth</h4>
+        <hr />
+        <p>This defines the extent of the enterprise and the limited portion of the enterprise that would be affected
+            by this architectural effort. Wider the scope, more its ripples and effects across the enterprise. In such
+            a case, an effective solution could be to split the mega enterprise into smaller manageable enterprises
+            with defined interfaces. These interfaces could be managed among the enterprises by assigning ownership of
+            each interface - where other groups 'subscribe' to changes in the interface.</p>
+        <p>With the growth of interconnectivity and distribution of the enterprise itself, these borders get more and
+            more hazy. Hence it is very important to effectively restraint and control the breadth of the architectural
+            scope.</p>
+        <h4>Depth</h4>
+        <hr />
+        <p>The depth defines the level of extent to which the architecture should be defined. What is the line of
+            demarcation between the architecture and the following activities like system design, engineering and
+            implementation. </p>
+        <p>More the depth of the architecture, more rigid it gets, leaving little scope for change in the lower
+            implementation. On the other hand, a shallow architecture does not serve any real purpose. Hence it is
+            important to define the required depth of the architecture.</p>
+        <h4>Time Period</h4>
+        <hr />
+        <p>Any architecture attempt requires time to implement. What is the time available, and what is the time this
+            architecture would require. This has to be evaluated and restricted. If the required time is too high, it
+            is more likely to fall off the track. In such a case, one could consider splitting it up into intermediate
+            transient architectures. </p>
+        <p>Such aspects need to be identified. To do this, we need to restrict the time period of an architecture
+            effort.</p>
+        <h4>Domain</h4>
+        <hr />
+        <p>An enterprise architecture should contain all four domains - business, data, application and technology.
+            That is fine in theory. But in real life, an architecture effort that impacts all four would be too huge to
+            be meaningful. Hence, it should be restricted in terms of the domains it should touch. </p>
+        <p>It is true that the resources and budgets may restrict the scope in domain. But one must understand the
+            risks involved in doing this. It may generate inconsistency and sometimes lead to a technical debt if we
+            force it too much. </p>
+        <p>Typically, the scope of an architecture is first expressed in terms of breadth, depth, and time. Once these
+            dimensions are understood, a suitable combination of architecture domains can be selected that are
+            appropriate to the problem being addressed.</p>
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlight/highlight.pack.js"></script>
+    <script src="scripts/blog.js"></script>
+</body>
+
+</html>

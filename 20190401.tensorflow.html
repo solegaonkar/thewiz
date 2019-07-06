@@ -114,7 +114,7 @@ t12 = tf.random_uniform([4,5], maxval = 4.0, seed = 1)          # Constant Tenso
         <p>Such laziness (ironically) provides a huge improvement in the processing speed. To understand how, we need to understand the Nodes and Graphs of TensorFlow.</p>
         <h3>Nodes</h3>
         <hr />
-        <div class='center'><img src='img/mlp_one_hidden_layer.png' /></div>
+        <div class='center'><img class="image" src='img/mlp_one_hidden_layer.png' /></div>
         <p>This is the textbook view of a neural network. As we can see, we have several inputs X1 - Xn. These form the first layer of the network. The second (hidden) layer is obtained as a dot
             product of each of these with the weight matrix, followed by the activation function like sigmoid or relu.</p>
         <p>The third layer is just one value that is obtained as a dot product of its weight matrix with the output of the second layer.</p>

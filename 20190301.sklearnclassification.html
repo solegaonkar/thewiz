@@ -37,7 +37,7 @@
             <li>Petal width in cm </li>
             <li>Species</li>
         </ul>
-        <div class='row'><img class="img-responsive col-sm-4" src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Iris_versicolor_3.jpg/220px-Iris_versicolor_3.jpg' /><img
+        <div class='row'><img class="image" class="img-responsive col-sm-4" src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Iris_versicolor_3.jpg/220px-Iris_versicolor_3.jpg' /><img
                 class="img-responsive col-sm-4"
                 src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Kosaciec_szczecinkowaty_Iris_setosa.jpg/220px-Kosaciec_szczecinkowaty_Iris_setosa.jpg' /><img
                 class="img-responsive col-sm-4" src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Iris_virginica.jpg/220px-Iris_virginica.jpg' /></div>
@@ -230,7 +230,7 @@ Name: Species, dtype: int64</code></pre>
         <pre><code class='python'>tmp = data.drop('Id', axis=1)
 g = sns.pairplot(tmp, hue='Species', markers='+')
 plt.show()</code></pre>
-        <div class='center'><img src='img/iris_pair_plot.png' /></div>
+        <div class='center'><img class="image" src='img/iris_pair_plot.png' /></div>
         <p>Note that some combinations give a clear separation of the data into different classes, while others are mixed up. This gives us a hint about which features are enough to do the job. In
             case of a performance issue or an extreme overfitting, we might have to drop certain features to make things work better. Pair plots can easily point out the redundant ones.</p>
         <h3>Violin Plots</h3>
@@ -239,18 +239,18 @@ plt.show()</code></pre>
             length:</p>
         <pre><code class='python'>g = sns.violinplot(y='Species', x='SepalLengthCm', data=data, inner='quartile')
 plt.show()</code></pre>
-        <div class='center'><img src='img/iris_violin_sepal_length.png' /></div>
+        <div class='center'><img class="image" src='img/iris_violin_sepal_length.png' /></div>
         <p>The dotted lines give us an idea about the quartiles (25%, 50% and 75%).</p>
         <p>Similarly, we can check up the violin plots for the other features:</p>
         <pre><code class='python'>g = sns.violinplot(y='Species', x='SepalWidthCm', data=data, inner='quartile')
 plt.show()</code></pre>
-        <div class='center'><img src='img/iris_violin_sepal_width.png' /></div>
+        <div class='center'><img class="image" src='img/iris_violin_sepal_width.png' /></div>
         <pre><code class='python'>g = sns.violinplot(y='Species', x='PetalLengthCm', data=data, inner='quartile')
 plt.show()</code></pre>
-        <div class='center'><img src='img/iris_violin_petal_length.png' /></div>
+        <div class='center'><img class="image" src='img/iris_violin_petal_length.png' /></div>
         <pre><code class='python'>g = sns.violinplot(y='Species', x='PetalWidthCm', data=data, inner='quartile')
 plt.show()</code></pre>
-        <div class='center'><img src='img/iris_violin_petal_width.png' /></div>
+        <div class='center'><img class="image" src='img/iris_violin_petal_width.png' /></div>
         <h2>Classification</h2>
         <hr />
         <p>Having developed an idea about the data available, we can now jump into building the classifier. Based on the analysis of the data and the plots we saw above, we can note that Iris-setosa

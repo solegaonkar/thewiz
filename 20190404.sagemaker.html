@@ -37,29 +37,29 @@
         <p>Open the SageMaker service from the AWS console and navigate to the Notebook Instances. Click on the button "Create Notebook Instance" - to get started. It will prompt for Notebook Instance
             Settings. Give it a good name and choose the ml.m2.instance. That is the lowest and will serve the our purpose for now. We can choose higher ones when working on "real" models. Don't worry
             about the cost. AWS promises us pay per use pricing.</p>
-        <div class='center'><img src='img/sagemaker-create-notebook-1.png' width="100%" /></div>
+        <div class='center'><img class="image" src='img/sagemaker-create-notebook-1.png' width="100%" /></div>
         <p>Leave the rest on the default and move forward.</p>
         <p>Next, we need to create an IAM role for our Notebook. Remember that our data and models need to live in an S3 bucket that we just created. So the Notebook should have an access to that
             bucket. We do not need any other particular privilege for the Notebook.</p>
-        <div class='center'><img src='img/sagemaker-create-notebook-2.png' width="100%" /></div>
+        <div class='center'><img class="image" src='img/sagemaker-create-notebook-2.png' width="100%" /></div>
         <p>Now, we can go ahead and "Create". AWS takes some time to get the Notebook ready. We can see on the console that the Notebook Instance is "Pending"</p>
-        <div class='center'><img src='img/sagemaker-create-notebook-3.png' width="100%" /></div>
+        <div class='center'><img class="image" src='img/sagemaker-create-notebook-3.png' width="100%" /></div>
         <p>Let it work its way, as AWS provisions the underlying instance and prepares it for our purpose. Once it is ready, we can see the console says the Notebook instance is "InService"</p>
-        <div class='center'><img src='img/sagemaker-create-notebook-4.png' width="100%" /></div>
+        <div class='center'><img class="image" src='img/sagemaker-create-notebook-4.png' width="100%" /></div>
         <h3>JupyterLab</h3>
         <hr />
         <p>Once we are ready with a Notebook instance, we can move further to create a JupyterLab. On the Notebook instance console, we can see two links in the Actions column - Open Jupyter and Open
             JupyterLab. Anyone working on AI certainly knows what is a Jupyter Notebook. JupyterLab is just that, with some AWS flavor on it. So, lets click on JupyterLab.</p>
         <p>That opens a pop-up like this:</p>
-        <div class='center'><img src='img/sagemaker-create-notebook-5.png' width="100%" /></div>
+        <div class='center'><img class="image" src='img/sagemaker-create-notebook-5.png' width="100%" /></div>
         <p>It provides several ready to use templates, and also allows us to create our own. At this time, we would like to build our own template. So let us take that way forward. Click on File ->
             New -> Notebook</p>
-        <div class='center'><img src='img/sagemaker-create-notebook-6.png' /></div>
+        <div class='center'><img class="image" src='img/sagemaker-create-notebook-6.png' /></div>
         <p>It will prompt you to choose a Kernel for the Jupyter Notebook that opens. I love Anaconda Python 3. So I choose that. It should be good enough for the purpose of this example. The curious
             can try playing around with the other Kernels.</p>
-        <div class='center'><img src='img/sagemaker-create-notebook-7.png' /></div>
+        <div class='center'><img class="image" src='img/sagemaker-create-notebook-7.png' /></div>
         <p>With this, the familiar Jupyter Notebook shows up. I do not like the "Untitled" Notebooks. So I rename it to something more meaningful.</p>
-        <div class='center'><img src='img/sagemaker-create-notebook-8.png' /></div>
+        <div class='center'><img class="image" src='img/sagemaker-create-notebook-8.png' /></div>
         <h2>Prepare the Data</h2>
         <hr />
         <p>With the framework in place, we can now go ahead with building the model. The first step in any Python code is ofcourse, importing the relevant modules.</p>
@@ -114,7 +114,7 @@ imgplot = plt.imshow(img_reshape, cmap='gray')
 print('This is a {}'.format(label))
 plt.show()</code></pre>
         <p>This shows the output:</p>
-        <div class='center'><img src='img/sagemaker-sample-record-5.png' /></div>
+        <div class='center'><img class="image" src='img/sagemaker-sample-record-5.png' /></div>
         <p>Wow! We have the data to train the model. But this data is not good for our job. We need to play around a bit with the data structures - to make this ready for training our model.</p>
         <p>Having done that, we dump it into our S3 bucket.</p>
         <pre><code class='python'>data_partitions = [('train', train_set), ('validation', valid_set), ('test', test_set)]
@@ -180,9 +180,9 @@ xgb_model.fit(inputs=data_channels,  logs=True)</code></pre>
                                 )</code></pre>
         <p>This deploys the model and generates the Endpoints that can be invoked from our code.</p>
         <p>We can navigate to the SageMaker - Models console. There, we can see our model ready for us.</p>
-        <div class='center'><img src='img/sagemaker-model.png' width="100%" /></div>
+        <div class='center'><img class="image" src='img/sagemaker-model.png' width="100%" /></div>
         <p>We can also check the SageMaker - Endpoint console. Here, we can see the Endpoint waiting for us.</p>
-        <div class='center'><img src='img/sagemaker-endpoint.png' width="100%" /></div>
+        <div class='center'><img class="image" src='img/sagemaker-endpoint.png' width="100%" /></div>
         <h2>Lambda Function</h2>
         <hr />
         <p>The rest is trivial. Once we have the model and endpoint deployed, we can create a Lambda Function that could be invoked via the API Gateway. The Lambda Function could be as simple as this:

@@ -28,7 +28,7 @@
         <p>If we think about the way vision works, the object in one corner of the image has little to do with the other corner of the image. Objects and edges are limited to a small area around the
             edge. Then why process the entire image at the same time? CNN deals with processing the image in a small parts at a time.</p>
         <p>The Convolution Neural Networks are based on the concept of Convolution filter. Now what is a Convolution filter? Below diagram describes it with a small example.</p>
-        <p><img src="img/CNN.png" /></p>
+        <p><img class="image" src="img/CNN.png" /></p>
         <p>Traditional Neural Networks work by crossing the input matrix with a weight matrix of similar size. That leads to heavy matrix multiplication. But CNN eases this task by significantly
             reducing the size to 3/5/7. This slides along the image, working on small blocks at a time. The processing required across the image is quite similar and thus this works very well. Thus,
             as in the case above, if we have an RGB image of 64x64 pixels, we could have three convolution filter of 3x3 (one per layer). That works a lot better than a fully connected dense network.
@@ -125,7 +125,7 @@
         <h4>Pooling Layers</h4>
         <p>Pooling is essentially combining values into one value. We could have average pooling, max pooling, min pooling, etc. Thus a nxn input with pooling of fxf will generate (n/f)x(n/f) output.
             It has no parameters to learn.</p>
-        <p><img src="img/MaxPooling.png" /></p>
+        <p><img class="image" src="img/MaxPooling.png" /></p>
         <p>A typical CNN would have a several pairs of convolutions followed pooling layers.</p>
         <h2>CNN Architectures</h2>
         <hr />
