@@ -1,3 +1,4 @@
+20190705.preliminary.html
 20190704.architecturescope.html
 20190703.architecturalgovernance.html
 20190702.adaptadm.html
