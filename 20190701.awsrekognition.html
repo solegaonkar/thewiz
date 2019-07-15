@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AWS Rekognition</title>
+    <meta name="description" content="An introduction to the AWS Rekognition API">
+    <meta name="keywords" content="AWS,AI,Machine Learning,Natural Language Processing">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Vikas K. Solegaonkar">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+    <link href="css/blog-post.css" rel="stylesheet">
+</head>
+<body>
+    <div id="body"><h1>AWS Rekognition</h1><hr/><p>Amazon Rekognition can be used to add image and video analysis to applications. For any given image or video the Rekognition API can identify objects, people, text, scenes, and activities. It can detect any inappropriate content as well. It provides facial analysis and facial recognition. It can detect, analyze, and compare faces for a wide variety of use cases, including user verification, cataloging, people counting, and public safety.</p><p>Amazon Rekognition makes images and stored videos searchable so that we can discover objects and scenes that appear within them.</p><p>A sample application using Rekognition API for facial recognition would look like this:</p><pre><code class='python'>import boto3
+
+if __name__ == "__main__":
+    bucket='bucket'
+    collectionId='Sample Collection'
+    threshold = 40
+    maxFaces=3
+    faceId='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+
+    client=boto3.client('rekognition')
+    response=client.search_faces(CollectionId=collectionId,
+                                FaceId=faceId,
+                                FaceMatchThreshold=threshold,
+                                MaxFaces=maxFaces)
+                        
+    faceMatches=response['FaceMatches']
+    print 'Matched faces'
+    for match in faceMatches:
+            print 'Matching FaceId:' + match['Face']['FaceId']
+            print 'Face Similarity: ' + "{:.3f}".format(match['Similarity']) + "%"</code></pre>
+
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlight/highlight.pack.js"></script>
+    <script src="scripts/blog.js"></script>
+</body>
+
+</html>

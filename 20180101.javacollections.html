@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Java Collections Framework</title>
+    <meta name="description" content="Introduction to some important concepts of Java Collections Framework">
+    <meta name="keywords" content="Java">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Vikas K. Solegaonkar">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+    <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="body">
+        <h1>Java Collections Framework</h1>
+        <hr />
+
+        <p>The concept of collections is pretty old in the world of programming languages. But the collections framework in Java added a special flavor to it, by providing a perfect abstraction to the
+            functionality that allowed the developers to easily focus on the development tasks instead of wasting time on implementing stuff from first principles. Java language provides several
+            different types of collections - each with its own special utilities. Each is meant for a particular use case. It is important for developers to understand these concepts very well so that
+            they can appropriately use the features provided by the collections framework.</p>
+        <p>The collections framework is based out of the java.util package. It defines an interface java.util.Iterable which is extended by java.util.Collection. This forms the base class of the
+            collections framework. There is another interface in the java.util package. It is the java.util.Map. Although this does not inherit from the Collection or Iterable interfaces, it is
+            considered as a part of the collections framework. Because it provides many meaningful features that often go along with the other collections. This blog gives you an overview of the
+            different types of collections that Java provides.</p>
+        <h2>Important Interfaces</h2>
+        <hr />
+        <p>The Java collections framework consists of several interfaces and their implementations. Here are some of the most important interfaces that define the collections framework.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html'>Iterable</a></h4>
+        <hr />
+        <p>Iterable makes an object a valid target for a for-each loop. It has a method iterator() that returns the Iterator object that can be used for iterating over the Iterable - using the
+            hasNext() and getNext() methods. This is the base interface for the collections in Java - because it enables the user to iterate through the elements in the collection.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html'>Collection</a></h4>
+        <hr />
+        <p>This is the root interface of the entire collections hierarchy. As the name suggests, it enables the object to hold a collection of elements. It exports methods to add, remove elements; to
+            check the size or to check if a given elements is already a part of the collection. Ofcourse it also provides for iterating over the elements. Collection also exports method to extract all
+            its elements into a java array.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/List.html'>List</a></h4>
+        <hr />
+        <p>This interface defines an ordered collection. List does not prevent duplicate elements. Apart from the inherited collection methods, List enables accessing elements based on their index.
+        </p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/Set.html'>Set</a></h4>
+        <hr />
+        <p>A set is a collection with no duplicates. Duplicate need not mean identical. Any two objects o1 and o2 are considered duplicate if o1.equals(o2) returns true. It is expected that the return
+            value of the equals method does not change while the elements are in the set. Else the behavior is not predictable.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html'>Queue</a></h4>
+        <hr />
+        <p>This interface provides for a collection tailored to hold elements prior to processing. Typically they are sequenced in a particular order (not necessarily FIFO) - depending upon the
+            particular implementation of the queue. The Queue provides for two sets of method to add and get elements from the queue. One set throws an exception when it reaches the end - add(Element
+            e), remove(), element(). The other does not throw an exception, but returns a special value to denote the end - offer(Element e), poll(), peek(). Most queues provide FIFO. But that is not
+            a requirement. Priority queues and stacks are also Queues in Java.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/Map.html'>Map</a></h4>
+        <hr />
+        <p>This interface provides an object that maps keys to values. A Map interface provides three views to its data - a set of keys, a collection of values and set of key-value mappings. Caution
+            is required if the Keys are mutable. The behavior of a map is not defined if the value of an object is changed in a manner that affects comparisons while the object is a key in the map. A
+            special case of this prohibition is that it is not permissible for a map to contain itself as a key. While it is permissible for a map to contain itself as a value, extreme caution is
+            advised: the equals and hashCode methods are no longer well defined on such a map. Some map operations which perform recursive traversal of the map may fail with an exception for
+            self-referential instances where the map directly or indirectly contains itself. This includes the clone(), equals(), hashCode() and toString() methods. Implementations may optionally
+            handle the self-referential scenario, however most current implementations do not do so.</p>
+        <h2>Sub Interfaces</h2>
+        <hr />
+        <p>There are several sub-interfaces that add value to the above four. These are detailed below.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/SortedSet.html'>SortedSet</a></h4>
+        <hr />
+        <p>This interface additionally provides for ordering on its elements - as per the natural order or the defined comparator. All the elements in this set must implement the Comparable interface,
+            or must be accepted by the specified comparator. SortedSet provides for additional methods to access the sorted elements (first(), last(), headSet(E toElement), subSet(E fromElement, E
+            toElement), tailSet(E fromElement)).</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/NavigableSet.html'>NavigableSet</a></h4>
+        <hr />
+        <p>The NavigableSet extends the SortedSet. It provides additional functionality to navigate through the elements - access random elements in the set, etc.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/BlockingQueue.html'>BlockingQueue</a></h4>
+        <hr />
+        <p>BlockingQueue is a Queue that additionally supports operations that wait for the queue to become non-empty when retrieving an element, and wait for space to become available in the queue
+            when storing an element. Apart from the 6 access methods of Queue, a BlockingQueue provides 4 more methods that either block (put(e), take()) or time out (offer(e, time, unit), poll(time,
+            unit)) on reaching the end. Of course, this should be Thread Safe and provide consistent memory.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/BlockingDeque.html'>BlockingDeque</a></h4>
+        <hr />
+        <p>This interface extends the BlockingQueue as well as the DQueue interfaces. It combines the synchronization methods of BlockingQueue with the bidirectional methods of Dequeue.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html'>Deque</a></h4>
+        <hr />
+        <p>This interface defines a Queue that can take in elements from either end. It provides 12 additional methods to add and remove from either end and to use this 3 methods for using it as a
+            stack - addFirst(e), offerFirst(e), addLast(e), offerLast(e), removeFirst(), pollFirst(), removeLast(), pollLast(), getFirst(), peekFirst(), getLast(), peekLast(), push(e), pop(), peek()
+        </p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/TransferQueue.html'>TransferQueue</a></h4>
+        <hr />
+        <p>This interface provides a BlockingQueue in which producers may wait for consumers to receive elements. A TransferQueue may also be queried, via hasWaitingConsumer(). TransferQueue may be
+            capacity bounded. If so, an attempted transfer operation may initially block waiting for available space, and/or subsequently block waiting for reception by a consumer. Note that in a
+            queue with zero capacity, such as SynchronousQueue, put and transfer are effectively synonymous.</p>
+        <h4><a href="https://docs.oracle.com/javase/8/docs/api/java/util/SortedMap.html">SortedMap</a></h4>
+        <hr />
+        <p>This interface provides a Map that further with keys ordered according to the natural ordering of its keys, or by a Comparator typically provided at sorted map creation time. This order is
+            reflected when iterating over the sorted map's collection views (returned by the entrySet, keySet and values methods). Several additional operations are provided to take advantage of the
+            ordering.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentMap.html'>ConcurrentMap</a></h4>
+        <hr />
+        <p>This interface is used for providing thread safety and atomicity guarantees. It provides for additional methods that enable a timeout, wait, etc in case of a conflict.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/NavigableMap.html'>NavigableMap</a></h4>
+        <hr />
+        <p>This interface provides for a SortedMap extended with navigation methods returning the closest matches for given search targets. This has methods to access and traverse the entries in
+            ascending as well as descending order.</p>
+
+        <h2>Implementations of List</h2>
+        <hr />
+        <p>Java provides several implementations of the List Interface - each tailored for a particular design requirement.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html'>ArrayList</a></h4>
+        <hr />
+        <p>This class provides the most commonly used List. Each ArrayList instance has a capacity. The capacity is the size of the array used to store the elements in the list. It is always at least
+            as large as the list size. As elements are added to an ArrayList, its capacity grows automatically. The details of the growth policy are not specified beyond the fact that adding an
+            element has constant time cost. An application can increase the capacity of an ArrayList instance before adding a large number of elements using the ensureCapacity operation. This may
+            reduce the amount of incremental reallocation.</p>
+        <p>It is Not Thread Safe. There are no guarantees about how it will behave on concurrent access. Its fail-fast behavior is not guaranteed.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CopyOnWriteArrayList.html'>CopyOnWriteArrayList</a></h4>
+        <hr />
+        <p>As the name suggests, this class implements the List interface. Any write to this set triggers a new copy of the entire List. Although this sounds crazy, it is extremely useful when there
+            is a heavy load of concurrent reads and very few writes onto a small List. In such a scenario, the concurrrent reads can continue without any block. You can be certain that its iterator
+            will never through a ConcurrentModificationException. Ofcourse it is Thread Safe. But you should note that any mutative operations are expensive.</p>
+        <h4><a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html">LinkedList</a></h4>
+        <hr />
+        <p>This class provides a doubly-linked list implementation of the List as well as the Deque interface. It implements all optional list operations, and permits all elements (including null).
+            All of the operations perform as could be expected for a doubly-linked list. Operations that index into the list will traverse the list from the beginning or the end, whichever is closer
+            to the specified index - hence its read performance is relatively slow. But, the linked list provide for quick inserts. It is Not Thread Safe. There are no guarantees about how it will
+            behave on concurrent access. Its fail-fast behavior is not guaranteed.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html'>Vector</a></h4>
+        <hr />
+        <p>The Vector class implements a growable array of objects. It tries to optimize storage management by maintaining a capacity and a capacityIncrement. The capacity is always at least as large
+            as the vector size; it is usually larger because as components are added to the vector, the vector's storage increases in chunks the size of capacityIncrement. An application can increase
+            the capacity of a vector before inserting a large number of components; this reduces the amount of incremental reallocation. It is Not Thread Safe. There are no guarantees about how it
+            will behave on concurrent access. Its fail-fast behavior is not guaranteed. We all grew up learning the difference between the Vector and ArrayList is that Vector is thread safe. But the
+            Java 8 documentation declares it is not so anymore. Moreover it discourages the use of Vector.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/Stack.html'>Stack</a></h4>
+        <hr />
+        <p>This class represents a last-in-first-out (LIFO) stack of objects. It extends the Vector, additionally providing methods that make it a stack. (peek(), push(E element), pop()). JDK
+            documentation discourages the use of Stack saying "a more complete and consistent set of LIFO stack operations is provided by the Deque interface and its implementations, which should be
+            used in preference to this class." It is Not Thread Safe. There are no guarantees about how it will behave on concurrent access. Its fail-fast behavior is not guaranteed.</p>
+
+        <h2>Implementations of Queue</h2>
+        <hr />
+        <p>Java provides several implementations of the Queue Interface - each tailored for a particular design requirement.</p>
+        <h4><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentLinkedQueue.html">ConcurrentLinkedQueue</a></h4>
+        <hr />
+        <p>This class provides an unbounded thread-safe FIFO queue based on linked nodes. Iterators of this queue are Thread Safe. It provides for memory consistency. But bulk operations may not be
+            atomic.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html'>PriorityQueue</a></h4>
+        <hr />
+        <p>This class provides a queue that is not FIFO. The elements are ordered based on the priority defined by the natural order or comparison. This class does not permit null elements. A priority
+            queue relying on natural ordering also does not permit insertion of non-comparable objects (doing so results in ClassCastException). It provides O(log(n)) time for the enqueuing and
+            dequeuing methods (offer, poll, remove() and add); linear time for the remove(Object) and contains(Object) methods; and constant time for the retrieval methods (peek, element, and size).
+            It is Not Thread Safe. Multiple threads should not access a PriorityQueue instance concurrently if any of the threads modifies the queue. Instead, use the thread-safe PriorityBlockingQueue
+            class.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/LinkedBlockingDeque.html'>LinkedBlockingDeque</a></h4>
+        <hr />
+        <p>This class provides an optionally-bounded blocking deque based on linked nodes. The optional capacity bound constructor argument serves as a way to prevent excessive expansion. The
+            capacity, if unspecified, is equal to Integer.MAX_VALUE. Linked nodes are dynamically created upon each insertion unless this would bring the deque above capacity.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ArrayBlockingQueue.html'>ArrayBlockingQueue</a></h4>
+        <hr />
+        <p>This class is a provides a blocking queue backed by an array. The size is fixed and cannot change after it is created. The constructor has an optional parameter for fairness. If this is set
+            to true, it treats waiting threads fairly - granting access in FIFO order. This reduces variability and avoids starvation. But adds overheads and hence reduces throughput.</p>
+        <h4><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/PriorityBlockingQueue.html">Priority Blocking Queue</a></h4>
+        <hr />
+        <p>This class provides an unbounded blocking queue orders elements and supplies blocking retrieval operations. It is logically unbounded, attempted additions will fail only due to resource
+            exhaustion (causing OutOfMemoryError). The priority applies only to the queue methods. The Iterator does not guarantee any particular order. Also, it makes no guarantees about the ordering
+            of elements with equal priority.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/SynchronousQueue.html'>SynchronousQueue</a></h4>
+        <hr />
+        <p>This class provides a unique implementation of BlockingQueue with zero capacity. That is, a write should wait for the corresponding read and viceversa. This is very useful in synchronizing
+            between two independent threads. Optionally, you can add fairness policy for the waiting threads.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/LinkedTransferQueue.html'>LinkedTransferQueue</a></h4>
+        <hr />
+        <p>This class provides an unbounded TransferQueue based on linked nodes. Memory consistency effects: As with other concurrent collections, actions in a thread prior to placing an object into a
+            LinkedTransferQueue happen-before actions subsequent to the access or removal of that element from the LinkedTransferQueue in another thread.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/DelayQueue.html'>DelayQueue</a></h4>
+        <hr />
+        <p>This class provides additional functionality to an unbounded blocking queue. You can add a delay to its elements. Sn element can only be taken when its delay has expired. The head of the
+            queue is that Delayed element whose delay expired furthest in the past. If no delay has expired there is no head and poll will return null. Expiration occurs when an element's
+            getDelay(TimeUnit.NANOSECONDS) method returns a value less than or equal to zero. Even though unexpired elements cannot be removed using take or poll, they are otherwise treated as normal
+            elements. For example, the size method returns the count of both expired and unexpired elements. This queue does not permit null elements.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html'>ArrayDeque</a></h4>
+        <hr />
+        <p>This class provides a resizable-array based implementation of the Deque interface. It does not have capacity restrictions. They are Not Thread Safe.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentLinkedDeque.html'>ConcurrentLinkedDeque</a></h4>
+        <hr />
+        <p>This class provides an unbounded concurrent deque based on linked nodes. It is Thread Safe and the Iterators are weakly consistent.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/LinkedBlockingDeque.html'>LinkedBlockingDeque</a></h4>
+        <hr />
+        <p>This class provides an optionally-bounded blocking deque based on linked nodes. The Linked nodes are dynamically created upon each insertion.</p>
+
+        <h2>Implementations of Set</h2>
+        <hr />
+        <p>Java provides several implementations of the Set Interface - each tailored for a particular design requirement.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CopyOnWriteArraySet.html'>CopyOnWriteArraySet</a></h4>
+        <hr />
+        <p>As the name suggests, this class implements the Set interface. Any write to this set triggers a new copy of the entire set. Although this sounds crazy, it is extremely useful when there is
+            a heavy load of concurrent reads and very few writes onto a small data set. In such a scenario, the concurrrent reads can continue without any block. You can be certain that its iterator
+            will never through a ConcurrentModificationException. Ofcourse it is Thread Safe. But you should note that any mutative operations are expensive.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/EnumSet.html'>EnumSet</a></h4>
+        <hr />
+        <p>This class is used specially for working with elements of an enum. The iterator returned by the iterator method traverses the elements in their natural order (the order in which the enum
+            constants are declared). It is Thread Safe The returned iterator is weakly consistent: it will never throw ConcurrentModificationException and it may or may not show the effects of any
+            modifications to the set that occur while the iteration is in progress.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html'>HashSet</a></h4>
+        <hr />
+        <p>This class provides one of the most commonly used set implementations. It is Not Thread Safe. There are no guarantees about how it will behave on concurrent access. Its fail-fast behavior
+            is not guaranteed. It provides constant time performance for access for all elements - because it uses the hash function for accessing the elements rather than comparing each element. It
+            is based on a HashMap.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashSet.html'>LinkedHashSet</a></h4>
+        <hr />
+        <p>This class is similar to the HashSet. Except that it maintains a doubly-linked list running through all of its entries. It is Not Thread Safe. Its fail-fast behavior is not guaranteed.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/TreeSet.html'>TreeSet</a></h4>
+        <hr />
+        <p>This class provides guaranteed log(n) time cost for the basic operations. It is Not Thread Safe. There are no guarantees about how it will behave on concurrent access. Its fail-fast
+            behavior is not guaranteed. It is based on a TreeMap. The iterator returns elements based on their natural ordering (or as per the Comparator). It implements the NavigableSet interface
+            based on a TreeMap.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentSkipListSet.html'>ConcurrentSkipListSet</a></h4>
+        <hr />
+        <p>A scalable concurrent NavigableSet implementation based on a ConcurrentSkipListMap. This implementation provides expected average log(n) time cost for access. It is Thread Safe The returned
+            iterator is weakly consistent. The access to elements is atomic. But bulk access such as size, addAll, removeAll, retainAll, containsAll, equals, and toArray is not guaranteed to be
+            atomic.</p>
+
+        <h2>Implementations of Map</h2>
+        <hr />
+        <p>Java provides several implementations of the Map Interface - each tailored for a particular design requirement</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/jar/Attributes.html'>Attributes</a></h4>
+        <hr />
+        <p>The Attributes class maps Manifest attribute names to associated string values. Valid attribute names are case-insensitive, are restricted to the ASCII characters in the set and cannot
+            exceed 70 characters in length. Attribute values can contain any characters and will be UTF8-encoded when written to the output stream. See the JAR File Specification for more information
+            about valid attribute names and values.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html'>ConcurrentHashMap</a></h4>
+        <hr />
+        <p>This class provides a hash table with full concurrency of retrievals and high expected concurrency for updates. Although all operations are thread-safe, retrieval operations do not entail
+            locking, and there is no support for locking the entire table in a way that prevents all access. Retrieval operations (including get) generally do not block, so may overlap with update
+            operations (including put and remove). Retrievals reflect the results of the most recently completed update operations holding upon their onset. (More formally, an update operation for a
+            given key bears a happens-before relation with any (non-null) retrieval for that key reporting the updated value.) Ofcourse it is Thread Safe.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentSkipListMap.html'>ConcurrentSkipListMap</a></h4>
+        <hr />
+        <p>This class provides a scalable concurrent ConcurrentNavigableMap implementation. The map is sorted according to the natural ordering of its keys, or by a Comparator provided at map creation
+            time, depending on which constructor is used. Iterators and spliterators are weakly consistent. Ascending key ordered views and their iterators are faster than descending ones. All
+            Map.Entry pairs returned by methods in this class and its views represent snapshots of mappings at the time they were produced. They do not support the Entry.setValue method. (Note however
+            that it is possible to change mappings in the associated map using put, putIfAbsent, or replace, depending on exactly which effect you need.) The bulk operations putAll, equals, toArray,
+            containsValue, and clear are not guaranteed to be performed atomically. For example, an iterator operating concurrently with a putAll operation might view only some of the added elements.
+        </p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/EnumMap.html'>EnumMap</a></h4>
+        <hr />
+        <p>This class provides a specialized Map with enum type keys. All of the keys in an enum map must come from a single enum type (could be anonymous). Enum maps are extremely compact and
+            efficient because they are internally represented as arrays. Enum maps are maintained in the natural order of their keys (the order in which the enum constants are declared). This is
+            reflected in the iterators returned by the collections views (keySet(), entrySet(), and values()). It is Not Thread Safe Iterators returned by the collection views are weekly consistent:
+            they will never throw ConcurrentModificationException and they may or may not show the effects of any modifications to the map that occur while the iteration is in progress.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html'>HashMap</a></h4>
+        <hr />
+        <p>This class provides the most commonly used implementation of the Map interface. Its owes its effeciency to the use of Hashcode for organizing the data. It is Not Thread Safe. No guarantees
+            can be made about its behavior when multiple threads access it concurrently.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html'>LinkedHashMap</a></h4>
+        <hr />
+        <p>This class provides a combination of Hash table and linked list implementation of the Map interface. Its iterators have a predictable order. It maintains a doubly-linked list running
+            through all of its entries. This linked list defines the iteration ordering, which is normally the order in which keys were inserted into the map (insertion-order). It is Not Thread Safe.
+            No guarantees can be made about its behavior when multiple threads access it concurrently.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/Hashtable.html'>Hashtable</a></h4>
+        <hr />
+        <p>This class implements a hash table, which maps keys to values. Although it is declared as Thread Safe, its use is discouraged by the JDK documentation - because it is part of legacy code,
+            and just retrofitted to match the Map interface.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html'>Properties</a></h4>
+        <hr />
+        <p>This class provides a set of properties. It is Thread Safe. It provides good functionality to persist into a file - as XML or as key value pairs. Hence it is often used for maintaing
+            configurable information.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/IdentityHashMap.html'>IdentityHashMap</a></h4>
+        <hr />
+        <p>This class implements the Map interface with a hash table, using reference-equality in place of object-equality when comparing keys (and values). This is not a general-purpose Map
+            implementation! It is designed for use only in the rare cases wherein reference-equality semantics are required. It is Not Thread Safe.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html'>TreeMap</a></h4>
+        <hr />
+        <p>This class implements the NavigableMap. It is sorted according to the natural ordering of its keys, or by a Comparator provided at map creation time, depending on which constructor is used.
+            It is Not Thread Safe.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/util/WeakHashMap.html'>WeakHashMap</a></h4>
+        <hr />
+        <p>This class provides a Hash table based implementation of the Map interface, with weak keys. An entry in a WeakHashMap will automatically be removed when its key is no longer in ordinary
+            use. More precisely, the presence of a mapping for a given key will not prevent the key from being discarded by the garbage collector. It is Not Thread Safe. This is useful when you have
+            several transactions on the map and you do not need the data after some time. The WeakHashMap will take care of discarding things for you.</p>
+
+        <h2>Collections &amp; Concurrency</h2>
+        <hr />
+        <p>Please note that most collections, unless specified are not thread safe. They attempt to provide Fail-Fast behavior on a conflict by throwing the Concurrent updates exception. But that is
+            not guaranteed. The JDK documentation warns against designing systems based on that exception. Even among the concurrent collections, the bulk operations may not always be thread safe and
+            consistent.</p>
+        <p>Now what was that? Before we proceed, it is important to understand these concepts of thread safe, fail-fast, atomic, consistent and bulk operations. In collections, mostly thread-safe
+            refers to operations on a particular element in the collection. For example, adding a particular element into the collection, or removing one element, etc. Thread safe for a single
+            operation implies that operations related to a single element are guaranteed to be thread safe. That is if two different threads try to add an element or remove an element from the
+            collection, each is guaranteed to see a consistent state of the data. Note that this does not mean updates to the object in the collection. That may or may not be thread safe as per the
+            implementation of the object itself. Atomic refers to performing several operations as if it is just one operation. For example updating an element in a Map typically involve several steps
+            like locating the value from the key, removing that pair from the Map and adding a new pair with the new Value. For a ConcurrentMap, it is guaranteed that such operations will be atomic -
+            thus no other thread will be able to preempt and corrupt the operation. Bulk operations refer to operations not limited to just one element in the collection. For example, deleting all the
+            elements of the collection or adding a new chunk of elements from another collection, etc. These require several operations on record level. Collections framework does not guarantee
+            atomicity of such bulk operations. If you have multiple threads performing bulk operations on the same collection, it is possible that you get garbage at the end.</p>
+        <p>The most important concept is that of Fail Fast. Given that a collection is not thread safe, and it gets into a situation where two threads try to update the same record at the same time.
+            The collections framework is designed in a way that it tries to identify such a situation and throw an exception as early as possible - thus reducing damage. The JDK documentation does not
+            make any guarantee about this behavior, but promises that the code does make this attempt.</p>
+
+
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlight/highlight.pack.js"></script>
+    <script src="scripts/blog.js"></script>
+</body>
+
+</html>

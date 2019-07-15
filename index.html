@@ -16,16 +16,27 @@
 
 <body>
     <div id="body">
-        <div id="blog">
-            <a hidden href="all.html">View All Blogs Without JavaScript</a>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-dark" onclick="show('ai.json')">Machine Learning</button>
+                    <button class="btn btn-dark" onclick="show('programming.json')">Programming</button>
+                    <button class="btn btn-dark" onclick="show('cloud.json')">Amazon Web Services</button>
+                    <button class="btn btn-dark" onclick="show('togaf.json')">Open Group</button>
+                </div>
+            </div>
         </div>
-        <button class="btn btn-primary btn-full-width" onclick="trail.showMore();">More . . .</button>
+        <hr/>
+        <div id="blog">
+            
+        </div>
+        <button class="btn btn-dark btn-full-width" onclick="blogList.showMore();">More . . .</button>
     </div>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/highlight/highlight.pack.js"></script>
     <script src="scripts/blog.js"></script>
-    <script>initTrail("all");</script>
+    
 </body>
 
 </html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Design Patterns</title>
+    <meta name="description" content="A basic understand of design patterns">
+    <meta name="keywords" content="Programming, Design Patterns">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Vikas K. Solegaonkar">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+    <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="body">
+        <h1>Design Patterns</h1>
+        <hr />
+<p>The world of software development is now nearing a century. Over these years, software industry has seen drastic changes in the technologies and domains. Starting from mechanically operated binary switches to serverless computing on the cloud, it has been a long journey. But some of the core principles have and will remain untouched and unchanged. One of the most important (and also most neglected) one is the importance of a good Design &amp; Architecture.</p><p>Its importance can never be exaggerated. Unfortunately, that is where projects squeeze their time and end up in disaster. Here, we will look into several core principles of design.</p><p>These years have seen some fundamental changes in software development. The complexity of software applications has grown exponentially. The trade-offs between memory, network and processing have changed their base. There was a drastically but asymmetric growth in each of them. Naturally, there were changes in the principles and patterns of design. But not in its importance.</p><p>Before proceeding, we must note and understand an important point. Using Design Patterns does not imply a good design. Just because we have used several patterns does not mean that we can develop highly maintable and reusable code. Certainly not. These patterns can at best, provide a good, tested way of going around a design component. But it is important to understand which pattern is meaningful in a given design. Without this understanding, they are meaningless.</p>
+<h2><a href='20180203.introduction.html' class='link'>Design Patterns</a></h2><hr/>
+<p>Someone made an interesting statement: "The earlier you start coding, the more time you take to complete it!"</p><p>It is so true and we have all seen it so many times in real life. Coding without spending enough time on understanding the requirements well, without spending enough time on framing the architecture properly and without an appropriate design for each component of the system is a sure formula for failure. Yet, so many project make all the efforts to follow this path and are naturally led to disaster.</p><p>The most important part of any architecture or design is to identify and separate out components that are expected to change differently. Identifying these components requires a lot of experience topped up by understanding the domain. This, coupled with an understanding of the current requirements can lead you to a good architecture followed by a good design.</p><p>A good code is possible only when we have a good design. But the converse is not always true. A good code is possible only when the developers understand the spirit of the design as well as that of the language. Choosing the right language to implement and abiding by its spirit, makes the code more efficient, readable and maintainable.</p><p>One of the most important principles that successful designers follow, is that they do not solve all the problems from first principles. That is impossible! It is very important to use time tested solutions to recurring problems. I learnt this the hard way - and that was when I started learning the basics of design patterns.</p><p>Each application is unique in itself. You cannot use the same generic solution everywhere. But, each application is a combination of multiple components - that are present in almost everywhere. The real task of a designer is to identify these components. Once you have identified such components of the main application, you can take up the task of solving them using the generic solutions available from the past. This is easier said than done. Identifying these individual components is not such a trivial task. That is what a good designer needs to master.</p><p>The time tested Design Patterns give us a chunk of predefined problem components and their solutions. They provide an important direction to the thought process. It is like travelling on a defined path, rather than finding our own way in a forest. It is true that, there are times when we have to deviate from the beaten path, and it is important that we should be able to do it. Hence, it is important that we retain that courage and stamina for when it is required; by following the time tested path when it is available.</p><p>These patterns are independent of the semantics of the language we use. Often we spend so much time on the semantics of a language, that we tend to ignore the spirit of design. The design patterns help bridge this gap. They help us use the language in an appropriate way, so that the solution that we get is sturdy and capable of handling more and more changes.</p><p>But, one should be careful. Just because we use a design pattern, it is not necessary that we will get an elegant solution to our problem. If not used correctly, it could even add complexity to the design. Hence it is important to understand each of these patterns and their spirit - so that we can identify and apply them where they should be.</p>
+<p>Each new paradigm of software development brought forth a new set of design principles that replaced the older ones. These were not any better or worse. Just that some are more relevant in the given constraints of the application development. Let us have a brief look at some of the important ones.</p>
+
+<h2>Design Patterns in Functional Programming</h2><hr/><p><a href='20180202.functionaldesignpatterns.html' class='link'>Functional desigh patterns</a> can be classified into Data Structures and Algorithms.</p>
+<ul>
+<li><a href='20180204.falgorithms.html' class='link'>Algorithms</a></li>
+<li><a href='20180205.datastructures.html' class='link'>Data Structures</a></li>
+<li><a href='20180206.search.html' class='link'>Searching</a></li>
+<li><a href='20180207.sorting.html' class='link'>Sorting</a></li>
+<li><a href='20180208.regularexpressions.html' class='link'>Regular Expressions</a></li>
+</ul>
+<h2>Object Oriented Design Patterns</h2><hr/>
+<p><a href='20180209.oopatterns.html' class='link'>Object Oriented Design Patterns</a> can be classified into three main types:</p>
+<h4>Creational Patterns</h4><hr/>
+<ul>
+<li><a href="20180212.oofactorymethod.html" class='link'>Factory method pattern</a> - creates objects without specifying the exact class to create.</li>
+<li><a href="20180213.oosingleton.html" class='link'>Singleton pattern</a> - restricts object creation for a class to only one instance.</li>
+<li><a href="20180214.oobuilder.html" class='link'>Builder pattern</a> - constructs complex objects by separating construction and representation.</li>
+<li><a href="20180215.ooprototype.html" class='link'>Prototype pattern</a> - creates objects by cloning an existing object.</li>
+<li><a href="20180216.ooabstractfactory.html" class='link'>Abstract factory pattern</a> - groups object factories that have a common theme.</li>
+</ul>
+<h4>Structural Patterns</h4><hr/>
+<ul>
+<li><a href="20180217.ooadapter.html" class='link'>Adapter</a> - allows classes with incompatible interfaces to work together by wrapping its own interface around that of an already existing class.</li>
+<li><a href="20180218.oobridge.html" class='link'>Bridge</a> - decouples an abstraction from its implementation so that the two can vary independently.</li>
+<li><a href="20180219.oocomposite.html" class='link'>Composite</a> - composes zero-or-more similar objects so that they can be manipulated as one object.</li>
+<li><a href="20180220.oodecorator.html" class='link'>Decorator</a> - dynamically adds/overrides behaviour in an existing method of an object.</li>
+<li><a href="20180221.oofacade.html" class='link'>Fa&ccedil;ade</a> - provides a simplified interface to a large body of code.</li>
+<li><a href="20180222.ooflyweight.html" class='link'>Flyweight</a> - reduces the cost of creating and manipulating a large number of similar objects.</li>
+<li><a href="20180223.ooproxy.html" class='link'>Proxy</a> - provides a placeholder for another object to control access, reduce cost, and reduce complexity.</li>
+</ul>
+<h4>Behavioral Patterns</h4><hr/>
+<ul>
+<li><a href="20180224.oochainofresponsibility.html" class='link'>Chain of responsibility</a> - delegates commands to a chain of processing objects.</li>
+<li><a href="20180225.oocommand.html" class='link'>Command</a> - creates objects which encapsulate actions and parameters.</li>
+<li><a href="20180226.oointerpreter.html" class='link'>Interpreter</a> - implements a specialized language.</li>
+<li>Iterator - This provides accesses the elements of an object sequentially without exposing its underlying representation. This pattern is redundant because of the elaborate collections framework in almost all recent languages.</li>
+<li><a href="20180227.oomediator.html" class='link'>Mediator</a> - allows loose coupling between classes by being the only class that has detailed knowledge of their methods.</li>
+<li><a href="20180228.oomemento.html" class='link'>Memento</a> - provides the ability to restore an object to its previous state (undo).</li>
+<li><a href="20180229.ooobserver.html" class='link'>Observer</a> - is a publish/subscribe pattern which allows a number of observer objects to see an event.</li>
+<li><a href="20180230.oostate.html" class='link'>State</a> - allows an object to alter its behavior when its internal state changes.</li>
+<li><a href="20180231.oostrategy.html" class='link'>Strategy</a> - allows one of a family of algorithms to be selected on-the-fly at runtime.</li>
+<li><a href="20180232.ootemplate" class='link'>Template</a> method - defines the skeleton of an algorithm as an abstract class, allowing its subclasses to provide concrete behavior.</li>
+<li><a href="20180233.oovisitor.html" class='link'>Visitor</a> - separates an algorithm from an object structure by moving the hierarchy of methods into one object.</li>
+</ul>
+<h4>Concurrency Patterns</h4><hr/>
+<ul>
+<li><a href='concurrencypatterns.html' class='link'>Concurrency Patterns</a></li>
+</ul>
+<h4>Serverless Design Patterns</h4><hr/>
+<ul>
+<li><a href='serverlesspatterns.html' class='link'>Serverless Design Patterns</a></li>
+</ul>
+<p>The list can never be exhaustive. Many more patterns will evolve as the constraints and requirements change. But the fundamental concepts of design and the importance of a good architecture will never vary.</p><h2>Changes in Paradigm</h2><hr/><p>Long long ago, we started with assembly code on microprocessors. Here, everything was restricted. The code size was limited by the ROM size. The processing power was limited by the clock speed and the RAM size. And there was barely any concept of connectivity. The design in those days was focused on reducing the code size and resources - not on reuse. That was possible because the applications were never so complex and redevelopment of modules was hardly a problem.</p><p>Over the years, as the processing power increased, it was possible to increase the complexity of the software. That brought in programming languages. It brought in the concept of reuse of software. Now, it was important to create software modules that could be reused. This changed the requirements of a good design. Another criteria was added to the concept of a good design - reuse. The others like performance were relaxed a bit.</p><p>Over the years, as the processing power and complexity increased further, we had to do more. Just reuse was not enough. It had to be maintainable. What one person developed was maintained and enhanced by another. So we had to develop code that was readable and maintainable and reusable. All this came at a price of performance and that was tolerable.</p><p>This trend followed, and today, most of the applications work on micro-services on the cloud. One barely knows how a functionality is implemented. The code just invokes an API and expects that the job is done. Most of this works over the network. This is a terribly inefficient use of network bandwidth and processing power. But we can afford it because of the amount of complexity, reusability, maintainability we can pack into our application.</p>
+
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlight/highlight.pack.js"></script>
+    <script src="scripts/blog.js"></script>
+</body>
+
+</html>

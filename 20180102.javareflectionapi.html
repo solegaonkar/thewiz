@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Java Collections Framework</title>
+    <meta name="description" content="The Java Reflection API">
+    <meta name="keywords" content="Java">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Vikas K. Solegaonkar">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css">
+    <link href="css/blog-post.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="body">
+        <h1>Java Regular Expressions</h1>
+        <hr />
+
+        <p>Everything in Java is an Object of a Class - including the classes themselves. Any class in Java is an object of java.lang.Class. It is defined its properties and has methods that allow you
+            to work on these properties. This is a very powerful feature of the Java language. It allows your code to work on itself and produce amazing results.</p>
+        <p>This feature of Java language is covered under the Reflection API. Below, you can find few of the important modules of this Reflection API.</p>
+        <h2>Class</h2>
+        <hr />
+        <p><a href='https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html'>Class</a> is the entry point for all reflection operations is java.lang.Class. There are several ways to get a
+            Class depending on whether the code has access to an object, the name of class, a type, or an existing Class.</p>
+        <p>To get the class of an object - the class that is instantiated by the given object, you can use the method getClass()</p>
+        <pre><code class='java'>Class c = object.getClass();</code></pre>
+        <p>For any given class that is defined in the code, you can get the class object by accessing the field class. For example:</p>
+        <pre><code class='java'>Class c = java.util.Date.class</code></pre>
+        <p>If you have the name of the class in a String, you can get the corresponding Class object by using Class.forName() method. For example</p>
+        <pre><code class='java'>String s = "java.util.Date";
+Class c = Class.forName(s);</code></pre>
+        <p>The class Class is quite rich and provides several useful methods for working with the Class objects.</p>
+        <h4>Important Methods</h4>
+        <hr />
+        <p>Some of the common methods are listed here.</p>
+        <table>
+            <tr>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>getSuperclass()</td>
+                <td>Returns the super class for the given class.</td>
+            </tr>
+            <tr>
+                <td>getClasses()</td>
+                <td>Returns all the public classes, interfaces, and enums that are members of the class including inherited members.</td>
+            </tr>
+            <tr>
+                <td>getDeclaredClasses()</td>
+                <td>Returns all of the classes interfaces, and enums that are explicitly declared in this class.</td>
+            </tr>
+            <tr>
+                <td>getDeclaringClass()</td>
+                <td>Returns the Class in which the class was declared. Anonymous Class Declarations will not have a declaring class but will have an enclosing class.</td>
+            </tr>
+            <tr>
+                <td>getEnclosingClass()</td>
+                <td>Returns the immediately enclosing class of the class.</td>
+            </tr>
+            <tr>
+                <td>getDeclaredField(String name)</td>
+                <td>Pick one field by name</td>
+            </tr>
+            <tr>
+                <td>getField(String name)</td>
+                <td>Pick one field by name</td>
+            </tr>
+            <tr>
+                <td>getDeclaredFields()</td>
+                <td>Get an array of Fields</td>
+            </tr>
+            <tr>
+                <td>getFields()</td>
+                <td>Get an array of Fields</td>
+            </tr>
+        </table>
+
+        <h2>Member</h2>
+        <hr />
+        <p>Any class has <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Member.html">Member</a> fields and member functions or methods. These are defined by the interface
+            Member. Using the Java Reflection API, you can dynamically add Members to a given object. Such Members of the class are called Synthetic members. Members of a class have <a
+                href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Modifier.html">Modifiers</a> and <a
+                href="https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/Annotation.html">Annotations</a>. The Member interface defines basic methods for interacting with a member of
+            the class. It has 4 major implementations of this interface - Field, Executable, Method and Constructor</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Field.html'>Field</a></h4>
+        <hr />
+        <p>The fields in a class are represented by the class Field. You can identify the fields in a given class by using the method getFields().</p>
+        <pre><code class='java'>Field[] fields = c.getFields()</code></pre>
+        <p>You can also get a particular field by using its name</p>
+        <pre><code class='java'>Field field = c.getField("fieldName")</code></pre>
+        <p>Just like getField() and getFields(), you have two other methods getDeclaredField() and getDeclaredFields(). These refer fields that are declared within the given class and not
+            inherited. The syntax is similar.</p>
+        <pre><code class='java'>Field[] fields = c.getDeclaredFields()
+Field field = c.getDeclaredField("fieldName")</code></pre>
+        <p>For a given Field object, you can identify the class where it is declared, by using the getDeclaringClass() method.</p>
+        <pre><code class='python'>Field f = c.getDeclaredField("fileName");
+Class c = f.getDeclaringClass();</code></pre>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Executable.html'>Executable</a></h4>
+        <hr />
+        <p>An Executable is a Member of the Class that can be executed. It could be a Method or a Constructor.</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Method.html'>Method</a></h4>
+        <hr />
+        <p>This defines any method in the class. You can get the list of methods in a class using getMethods() and getDeclaredMethods(). These are similar to the getFields() and
+            getDeclaredFields(). You can also access individual methods by name and parameters. The Reflection API also allows you the invoke a given method on an object</p>
+        <h4><a href='https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Constructor.html'>Constructor</a></h4>
+        <hr />
+        <p>Constructor is another type of Executable. It has most features similar to the Method. But instead of invoking the constructor (like the methods), you can trigger the constructor to get
+            a newInstance()</p>
+        <h4>Important Methods</h4>
+        <hr />
+        <p>Some of the common methods on the above classes are listed here.</p>
+        <table>
+            <tr>
+                <th></th>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Member</td>
+                <td>getDeclaringClass()</td>
+                <td>Returns the Class object representing the class or interface that declares the member or constructor represented by this Member.</td>
+            </tr>
+            <tr>
+                <td>Member</td>
+                <td>getModifiers()</td>
+                <td>Returns the Java language modifiers for the member or constructor represented by this Member, as an integer.</td>
+            </tr>
+            <tr>
+                <td>Member</td>
+                <td>getName()</td>
+                <td>Returns the simple name of the underlying member or constructor represented by this Member.</td>
+            </tr>
+            <tr>
+                <td>Member</td>
+                <td>isSynthetic()</td>
+                <td>Returns true if this member was introduced by the compiler; returns false otherwise.</td>
+            </tr>
+            <tr>
+                <td>Field</td>
+                <td>getDeclaringClass()</td>
+                <td>Returns the Class in which the Field was declared.</td>
+            </tr>
+            <tr>
+                <td>Method</td>
+                <td>getDeclaringClass()</td>
+                <td>Returns the Class in which the method was declared.</td>
+            </tr>
+            <tr>
+                <td>Method</td>
+                <td>invoke(Object obj, Object... args)</td>
+                <td>Invokes the underlying method represented by this Method object, on the specified object with the specified parameters.</td>
+            </tr>
+            <tr>
+                <td>Constructor</td>
+                <td>getDeclaringClass()</td>
+                <td>Returns the Class in which the constructor was declared.</td>
+            </tr>
+            <tr>
+                <td>Constructor</td>
+                <td>newInstance(Object... initargs)</td>
+                <td>Uses the constructor represented by this Constructor object to create and initialize a new instance of the constructor's declaring class, with the specified initialization
+                    parameters.</td>
+            </tr>
+        </table>
+
+        <h2>Modifier</h2>
+        <hr />
+        <p>Any class or its members have associated <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Modifier.html">Modifiers</a> like static, public... These influence the
+            behavior of the code. The Reflection API allows you to query and also modify these modifiers. getModifiers() returns an integer representing all the modifiers associated with the
+            object. This number is composed of different flags related to each kind of modifiers. Instead of complicated binary calculations to extract these values, the Reflection API provides
+            you with methods that help you with this task.</p>
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Modifier.ABSTRACT</td>
+                <td>Modifier.isAbstract(int mod)</td>
+                <td>The int value representing the abstract modifier.</td>
+            </tr>
+            <tr>
+                <td>Modifier.FINAL</td>
+                <td>Modifier.isFinal(int mod)</td>
+                <td>The int value representing the final modifier.</td>
+            </tr>
+            <tr>
+                <td>Modifier.INTERFACE</td>
+                <td>Modifier.isInterface(int mod)</td>
+                <td>The int value representing the interface modifier.</td>
+            </tr>
+            <tr>
+                <td>Modifier.NATIVE</td>
+                <td>Modifier.isNative(int mod)</td>
+                <td>The int value representing the native modifier.</td>
+            </tr>
+            <tr>
+                <td>Modifier.PRIVATE</td>
+                <td>Modifier.isPrivate(int mod)</td>
+                <td>The int value representing the private modifier.</td>
+            </tr>
+            <tr>
+                <td>Modifier.PROTECTED</td>
+                <td>Modifier.isProtected(int mod)</td>
+                <td>The int value representing the protected modifier.</td>
+            </tr>
+            <tr>
+                <td>Modifier.PUBLIC</td>
+                <td>Modifier.isPublic(int mod)</td>
+                <td>The int value representing the public modifier.</td>
+            </tr>
+            <tr>
+                <td>Modifier.STATIC</td>
+                <td>Modifier.isStatic(int mod)</td>
+                <td>The int value representing the static modifier.</td>
+            </tr>
+            <tr>
+                <td>Modifier.STRICT</td>
+                <td>Modifier.isStrict(int mod)</td>
+                <td>The int value representing the strictfp modifier.</td>
+            </tr>
+            <tr>
+                <td>Modifier.SYNCHRONIZED</td>
+                <td>Modifier.isSynchronized(int mod)</td>
+                <td>The int value representing the synchronized modifier.</td>
+            </tr>
+            <tr>
+                <td>Modifier.TRANSIENT</td>
+                <td>Modifier.isTransient(int mod)</td>
+                <td>The int value representing the transient modifier.</td>
+            </tr>
+            <tr>
+                <td>Modifier.VOLATILE</td>
+                <td>Modifier.isVolatile(int mod)</td>
+                <td>The int value representing the volatile modifier.</td>
+            </tr>
+        </table>
+        <p>Additionally it provides a method toString(int mod), that returns a string describing the access modifier flags in the specified modifier.</p>
+
+        <p>On the first sight, Reflection may seem to be an esoteric feature that is rarely used. Why would anyone write code to know anything about class he defined! That may be right for small
+            applications where one develops everything end to end. But in a massive real life application, there are a lot of scenarios where this is required. Frameworks like Spring and Hibernate
+            are
+            rooted in Reflection.</p>
+        <h2>References</h2>
+        <hr />
+        <p>This is a top level introduction to the concepts of Java Reflection API. For more details, you can check out the <a href="https://docs.oracle.com/javase/tutorial/reflect/">Java
+                Documentation.</a></p>
+        <p>If you want a detailed analysis, you can check out this book.</p><a
+            href="https://www.amazon.in/Core-Advanced-Java-Black-Book/dp/9386052210/ref=as_li_ss_il?ie=UTF8&qid=1545299366&sr=8-1-spons&keywords=core+and+advanced+java&psc=1&linkCode=li2&tag=solegaonkar07-21&linkId=75a5e87f70b16ee4036b325d38159052&language=en_IN"
+            target="_blank"><img border="0"
+                src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=9386052210&Format=_SL160_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=solegaonkar07-21&language=en_IN"></a><img
+            src="https://ir-in.amazon-adsystem.com/e/ir?t=solegaonkar07-21&language=en_IN&l=li2&o=31&a=9386052210" width="1" height="1" border="0" alt=""
+            style="border:none !important; margin:0px !important;" />
+
+
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlight/highlight.pack.js"></script>
+    <script src="scripts/blog.js"></script>
+</body>
+
+</html>
