@@ -43,8 +43,5 @@
 20190502.cnn.html
 20190503.fr.html
 20190504.nlp.html
-20190601.ea.html
 20190701.awsrekognition.html
-20190701.introductiontoadm.html
-20190702.adaptadm.html
 20190702.awstranscribe.html

@@ -1,3 +1,4 @@
 20190403.aionaws.html
 20190404.sagemaker.html
 20190701.awsrekognition.html
+20190702.awstranscribe.html

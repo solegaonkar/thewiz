@@ -28,5 +28,4 @@
 20180225.oocommand.html
 20180226.oointerpreter.html
 20190101.python.html
-20190102.numpy.html
 20190103.r.html
