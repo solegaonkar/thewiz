@@ -11,8 +11,11 @@ body {
 }
 
 .image-anchor {
-	cursor: pointer;
+  cursor: pointer;
+  width: 30%;
 }
+
+@media (min-width:768px) { .image-anchor { width: 15% !important;} }
 
 .image {
   width: 100%
